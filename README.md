@@ -8,8 +8,6 @@ This repository will contain my work for CS5610 - Web Development with Professor
 
 Links:
 Root to hosted environment on Heroku: https://mackenzie-rebecca-webdev.herokuapp.com/
-Project:
-Assignment:
-
-Stuff here.
+Project: https://mackenzie-rebecca-webdev.herokuapp.com/project/index.html
+Assignment: https://mackenzie-rebecca-webdev.herokuapp.com/assignment/index.html
 
