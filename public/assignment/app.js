@@ -7,5 +7,8 @@
         .controller("LoginController", LoginController);
 
     function LoginController($scope) {
+        function loginUser(user) {
+            console.log(user);
+        }
     }
 })();

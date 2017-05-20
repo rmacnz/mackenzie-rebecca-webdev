@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <script src="app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="app.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
 </head>
@@ -20,7 +20,7 @@
                class="form-control"
                placeholder="password"/>
         {{login}}
-        <a class="btn btn-primary btn-block"
+        <a ng-click="loginUser(login);login={}" class="btn btn-primary btn-block"
            href="profile.html">Login</a>
         <a class="btn btn-success btn-block"
            href="register.html">Register</a>
