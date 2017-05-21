@@ -7,6 +7,8 @@
         .controller("LoginController", LoginController);
 
     function LoginController($scope) {
+        $scope.loginUser = loginUser;
+
         function loginUser(user) {
             console.log(user);
         }

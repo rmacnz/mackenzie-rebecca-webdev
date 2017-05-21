@@ -10,14 +10,27 @@
         $scope.todos = [];
 
         $scope.addNote = addNote;
+        $scope.editTodo = editTodo;
+        $scope.updateTodo = updateTodo;
         $scope.removeTodo = removeTodo;
 
         function addNote(todo) {
-            var newTodo = {title: todo.title};
+            var newTodo = angular.copy(todo);
             $scope.todos.push(newTodo);
         }
 
-        function removeTodo(index) {
+        function editTodo(todo) {
+            $scope.selectedIndex = $scope.todos.indexOf(todo);
+            $scope.todo = angular.copy(todo);
+        }
+
+        function updateTodo(todo) {
+            var newTodo = angular.copy(todo);
+            $scope.todos[$scope.selectedIndex] = newTodo;
+        }
+
+        function removeTodo(todo) {
+            var index = $scope.todos.indexOf(todo);
             $scope.todos.splice(index, 1);
         }
     }
