@@ -6,13 +6,25 @@
         .module("TodoApp", [])
         .controller("TodoListController", TodoListController);
 
-    function TodoListController($scope) {
-        $scope.todos = [];
+    function TodoListController($scope, $http) {
+        init();
 
         $scope.addNote = addNote;
         $scope.editTodo = editTodo;
         $scope.updateTodo = updateTodo;
         $scope.removeTodo = removeTodo;
+
+        function init() {
+            $scope.todos = [];
+            getTodosFromServer();
+        }
+
+        function getTodosFromServer() {
+            $http.get("/api/todo")
+                .then(function(response){
+                    $scope.todos = response.data;
+                });
+        }
 
         function addNote(todo) {
             var newTodo = angular.copy(todo);
@@ -31,7 +43,10 @@
 
         function removeTodo(todo) {
             var index = $scope.todos.indexOf(todo);
-            $scope.todos.splice(index, 1);
+            $http.delete("/api/todo/" + index)
+                .then(function(response){
+                    $scope.todos = response.data;
+                });
         }
     }
 })();
