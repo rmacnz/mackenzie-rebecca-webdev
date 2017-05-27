@@ -12,3 +12,9 @@ Root to hosted environment on Heroku: https://mackenzie-rebecca-webdev.herokuapp
 Project: https://mackenzie-rebecca-webdev.herokuapp.com/project/index.html
 Assignment: https://mackenzie-rebecca-webdev.herokuapp.com/assignment/index.html
 
+Questions about Assignment 2
+1. In widget-heading should the "Text" input field be 3 rows? It doesn't look this way in the example but it seems like that would be a more reasonable input type for long text.
+2. In widget-image where should I navigate to if you click "Upload Image" button?
+3. In widget-image how do I display the width as a percentage (I could just do a text box but this seems like cheating since I only want to be able to input number values).
+4. How do I do the sidebar things?
+
