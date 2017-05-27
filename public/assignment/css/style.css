@@ -2,7 +2,18 @@ input.form-control {
     margin-bottom: 5px;
 }
 
-body {
+body.fixed-top-padding {
     padding-top: 60px;
+}
+
+body.fixed-bot-padding {
     padding-bottom: 60px;
+}
+
+input.tall-input {
+    min-height: 200px;
+}
+
+a.white-link {
+    color: white;
 }

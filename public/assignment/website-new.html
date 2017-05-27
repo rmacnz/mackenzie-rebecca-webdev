@@ -2,9 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New Website</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="fixed-top-padding fixed-bot-padding">
+
+    <nav class="navbar bg-primary navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="nav navbar-brand pull-left">
+                <a href="website-list.html" class="navbar-link white-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="nav navbar-brand">
+                <b>New Website</b>
+            </div>
+            <div class="nav navbar-brand pull-right">
+                <a href="website-list.html" class="navbar-link white-link">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <form class="container">
+        <label for="website-new-name">
+            Name
+        </label>
+        <input type="text" placeholder="Name" id="website-new-name" class="form-control" />
+        <label for="website-new-desc">
+            Description
+        </label>
+        <textarea id="website-new-desc" rows="3" placeholder="Description" class="form-control"></textarea>
+    </form>
+
+
+    <nav class="navbar bg-primary navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="nav navbar-brand pull-right">
+                <a href="profile.html" class="white-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
 </body>
 </html>

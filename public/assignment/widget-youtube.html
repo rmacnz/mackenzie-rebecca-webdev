@@ -2,9 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>YouTube Widget</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="fixed-top-padding fixed-bot-padding">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="nav navbar-brand pull-left">
+            <a href="widget-list.html" class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+        <div class="nav navbar-brand">
+            <b>Widget Edit</b>
+        </div>
+        <div class="nav navbar-brand pull-right">
+            <a href="widget-list.html" class="navbar-link">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<form class="container">
+    <label for="widget-youtube-name">Name</label>
+    <input id="widget-youtube-name" type="text" class="form-control" value="Lorem Ipsum Name"/>
+    <label for="widget-youtube-text">Text</label>
+    <input id="widget-youtube-text" type="text" class="form-control" value="Lorem Ipsum Text"/>
+    <label for="widget-youtube-url">URL</label>
+    <input id="widget-youtube-url" type="url" class="form-control" value="https://www.youtube.com/watch?v=PAkxgIKJxRE&index=10&list=PLKiVb8XBQOxKlLcxtSKlYGKRjDP3M-stp"/>
+    <label for="widget-youtube-width">Size</label>
+    <input id="widget-youtube-width" type="number" class="form-control" value="100%"/>
+    <a class="btn btn-danger  btn-block" href="widget-list.html">Delete</a>
+</form>
+
+<nav class="navbar navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="nav navbar-brand pull-right">
+            <a href="profile.html">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
 
 </body>
 </html>
