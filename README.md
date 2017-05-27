@@ -17,4 +17,6 @@ Questions about Assignment 2
 2. In widget-image where should I navigate to if you click "Upload Image" button?
 3. In widget-image how do I display the width as a percentage (I could just do a text box but this seems like cheating since I only want to be able to input number values).
 4. How do I do the sidebar things?
+5. What should the homepage look like?
+6. How do I do the widget-list page overlapping cogs? What does the triple line thing go to?
 
