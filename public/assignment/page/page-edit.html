@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Widgets</title>
+    <title>Edit Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body class="fixed-top-padding fixed-bot-padding">
 
@@ -17,41 +17,28 @@
             </a>
         </div>
         <div class="nav navbar-brand">
-            <b>Widgets</b>
+            <b>Edit Page</b>
         </div>
         <div class="nav navbar-brand pull-right">
-            <a href="widget-choose.html" class="navbar-link">
-                <span class="glyphicon glyphicon-plus"></span>
+            <a href="page-list.html" class="navbar-link">
+                <span class="glyphicon glyphicon-ok"></span>
             </a>
         </div>
     </div>
 </nav>
 
-<ul class="list-group">
-    <li class="list-group-item">
-        Place some sort of header widget here
-        <a href="widget-heading.html">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        Place some sort of image widget here
-        <a href="widget-image.html">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        Place some sort of youtube widget here
-        <a href="widget-youtube.html">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-        </a>
-    </li>
-</ul>
+<form class="container">
+    <label for="page-new-name">Name</label>
+    <input id="page-new-name" type="text" placeholder="Name" class="form-control" value="Blog Post"/>
+    <label for="page-new-title">Title</label>
+    <input id="page-new-title" type="text" placeholder="Title" class="form-control" value="Lorem Ipsum"/>
+    <a class="btn btn-danger  btn-block" href="page-list.html">Delete</a>
+</form>
 
 <nav class="navbar navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="nav navbar-brand pull-right">
-            <a href="profile.html">
+            <a href="../user/profile.html">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
