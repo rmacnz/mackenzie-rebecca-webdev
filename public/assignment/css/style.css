@@ -17,3 +17,15 @@ input.tall-input {
 a.white-link {
     color: white;
 }
+
+li.list-group-item {
+    border: none;
+}
+
+div.right-border {
+    border-right: 1px solid #ddd;
+}
+
+div.row {
+    height: 100%;
+}
