@@ -26,6 +26,7 @@ div.right-border {
     border-right: 1px solid #ddd;
 }
 
-div.row {
-    height: 100%;
+div.full-height {
+    margin-bottom: -9999px;
+    padding-bottom: 9999px;
 }
