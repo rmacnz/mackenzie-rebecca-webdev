@@ -1,4 +1,4 @@
-input.form-control {
+.form-control {
     margin-bottom: 5px;
 }
 
@@ -29,4 +29,19 @@ div.right-border {
 div.full-height {
     margin-bottom: -9999px;
     padding-bottom: 9999px;
+}
+
+div.sidebar-scroll {
+    position: absolute;
+    top: 40px;
+    bottom: 10px;
+    overflow: scroll;
+    padding-top: 20px;
+    padding-bot: 20px;
+}
+
+@media(min-width: 992px) {
+    .col-md-8 {
+        margin-left: 33%;
+    }
 }
