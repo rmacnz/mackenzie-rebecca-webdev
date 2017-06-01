@@ -2,11 +2,11 @@
     margin-bottom: 5px;
 }
 
-body.fixed-top-padding {
+body.wd-fixed-top-padding {
     padding-top: 60px;
 }
 
-body.fixed-bot-padding {
+body.wd-fixed-bot-padding {
     padding-bottom: 60px;
 }
 
@@ -14,7 +14,7 @@ input.tall-input {
     min-height: 200px;
 }
 
-a.white-link {
+a.wd-white-link {
     color: white;
 }
 
@@ -22,16 +22,7 @@ li.list-group-item {
     border: none;
 }
 
-div.right-border {
-    border-right: 1px solid #ddd;
-}
-
-div.full-height {
-    margin-bottom: -9999px;
-    padding-bottom: 9999px;
-}
-
-div.sidebar-scroll {
+div.wd-sidebar-scroll {
     position: absolute;
     top: 40px;
     bottom: 10px;
