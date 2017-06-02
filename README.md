@@ -13,7 +13,5 @@ Project: https://mackenzie-rebecca-webdev.herokuapp.com/project/index.html
 Assignment: https://mackenzie-rebecca-webdev.herokuapp.com/assignment/index.html
 
 TO DO (ASSIGNMENT 2):
-1. Update "Text" input field in widget-heading page to be 3 rows.
-2. Update all my defined classes to begin with 'wd-' (for webdev)
-3. Fix form in website-new and website-edit since it is going too far to the right for some reason.
+- Fix form in website-new and website-edit since it is going too far to the right for some reason.
 
