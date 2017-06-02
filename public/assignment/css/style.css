@@ -10,10 +10,6 @@ body.wd-fixed-bot-padding {
     padding-bottom: 60px;
 }
 
-input.tall-input {
-    min-height: 200px;
-}
-
 a.wd-white-link {
     color: white;
 }
