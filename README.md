@@ -12,6 +12,3 @@ Root to hosted environment on Heroku: https://mackenzie-rebecca-webdev.herokuapp
 Project: https://mackenzie-rebecca-webdev.herokuapp.com/project/index.html
 Assignment: https://mackenzie-rebecca-webdev.herokuapp.com/assignment/index.html
 
-TO DO (ASSIGNMENT 2):
-- Fix form in website-new and website-edit since it is going too far to the right for some reason.
-
