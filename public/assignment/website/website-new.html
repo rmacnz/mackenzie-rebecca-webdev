@@ -9,26 +9,28 @@
 </head>
 <body class="wd-fixed-top-padding wd-fixed-bot-padding">
 
-    <nav class="navbar bg-primary navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="nav navbar-brand pull-left">
-                <a href="website-list.html" class="navbar-link wd-white-link">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-            </div>
-            <div class="nav navbar-brand">
-                <b>New Website</b>
-            </div>
-            <div class="nav navbar-brand pull-right">
-                <a href="website-list.html" class="navbar-link wd-white-link">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
-            </div>
-        </div>
-    </nav>
-
     <div class="row-fluid">
+
         <div class="col-md-4 hidden-sm hidden-xs wd-sidebar-scroll">
+
+            <nav class="navbar bg-primary navbar-fixed-top wd-navbar-left">
+                <div class="container-fluid">
+                    <div class="nav navbar-brand pull-left">
+                        <a href="website-list.html" class="navbar-link wd-white-link">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                    </div>
+                    <div class="nav navbar-brand">
+                        <b>Websites</b>
+                    </div>
+                    <div class="nav navbar-brand pull-right">
+                        <a href="website-new.html" class="navbar-link wd-white-link">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
             <ul class="list-group">
                 <li class="list-group-item">
                     <a href="../page/page-list.html">
@@ -170,7 +172,21 @@
         </div>
 
         <div class="col-md-8">
-            <form class="container">
+
+            <nav class="navbar bg-primary navbar-fixed-top wd-navbar-right">
+                <div class="container-fluid">
+                    <div class="nav navbar-brand">
+                        <b>New Website</b>
+                    </div>
+                    <div class="nav navbar-brand pull-right">
+                        <a href="website-list.html" class="navbar-link wd-white-link">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <form class="container-fluid wd-form-right">
                 <label for="website-new-name">
                     Name
                 </label>

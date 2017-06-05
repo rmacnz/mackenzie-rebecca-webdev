@@ -64,3 +64,16 @@ div.wd-sidebar-scroll {
     opacity: 0.8;
     z-index: 1;
 }
+
+.wd-navbar-left {
+    width: 33%;
+}
+
+.wd-navbar-right {
+    width: 66%;
+    left: 33%;
+}
+
+form.wd-form-right {
+    width: 100%;
+}
