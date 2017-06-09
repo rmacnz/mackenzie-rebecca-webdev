@@ -16,13 +16,13 @@
             model.website = websiteService.findWebsiteById(model.webId);
         }
 
-        function updateSite(website) {
-            websiteService.updateWebsite(website._id, website);
+        function updateSite() {
+            websiteService.updateWebsite(model.webId, model.website);
             $location.url("/user/" + model.userId + "/website")
         }
 
-        function deleteSite(website) {
-            websiteService.deleteWebsite(website._id);
+        function deleteSite() {
+            websiteService.deleteWebsite(model.webId);
             $location.url("/user/" + model.userId + "/website")
         }
     }

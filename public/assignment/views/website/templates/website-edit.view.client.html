@@ -39,7 +39,7 @@
                     <b>Edit Website</b>
                 </div>
                 <div class="nav navbar-brand pull-right">
-                    <a ng-click="model.updateSite(model.website)" class="navbar-link wd-white-link">
+                    <a ng-click="model.updateSite()" class="navbar-link wd-white-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
@@ -55,7 +55,7 @@
                 Description
             </label>
             <textarea ng-model="model.website.description" id="website-edit-desc" rows="3" placeholder="Description" class="form-control"></textarea>
-            <a ng-click="model.deleteSite(model.website)" class="btn btn-block btn-danger">Delete</a>
+            <a ng-click="model.deleteSite()" class="btn btn-block btn-danger">Delete</a>
         </form>
     </div>
 </div>

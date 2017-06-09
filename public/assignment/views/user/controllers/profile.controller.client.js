@@ -16,8 +16,8 @@
 
 
         // update this user based on the information they entered on the profile page
-        function updateUser(user) {
-            userService.updateUser(user._id, user);
+        function updateUser() {
+            userService.updateUser(model.userId, model.user);
         }
     }
     

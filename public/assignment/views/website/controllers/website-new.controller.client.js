@@ -14,8 +14,8 @@
             model.websiteList = websiteService.findWebsitesByUser(model.userId);
         }
 
-        function createSite(website) {
-            website = websiteService.createWebsite(model.userId, website);
+        function createSite() {
+            website = websiteService.createWebsite(model.userId, model.website);
             model.websiteList = websiteService.findWebsitesByUser(model.userId);
             $location.url("/user/" + model.userId + "/website")
         }
