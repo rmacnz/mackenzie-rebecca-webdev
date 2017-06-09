@@ -51,7 +51,20 @@
         function updateWidget(widgetId, widget) {
             for (var v in widgets) {
                 if (widgets[v]._id === widgetId) {
-                    widgets[v] = widget;
+                    if (widgets[v].widgetType === "HEADING") {
+                        widgets[v].size = widget.size;
+                        widgets[v].text = widget.text;
+                    } else if (widgets[v].widgetType === "IMAGE") {
+                        widgets[v].width = widget.width;
+                        widgets[v].url = widget.url;
+                    } else if (widgets[v].widgetType === "HTML") {
+                        widgets[v].text = widget.text;
+                    } else if (widgets[v].widgetType === "YOUTUBE") {
+                        widgets[v].width = widget.width;
+                        widgets[v].url = widget.url;
+                    } else {
+                        console.log("Found a widget of unknown type: " + widgets[v].widgetType);
+                    }
                 }
             }
         }

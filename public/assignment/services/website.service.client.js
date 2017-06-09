@@ -50,7 +50,8 @@
         function updateWebsite(websiteId, website) {
             for (var v in websites) {
                 if (websites[v]._id === websiteId) {
-                    websites[v] = website;
+                    websites[v].name = website.name;
+                    websites[v].description = website.description;
                 }
             }
         }
