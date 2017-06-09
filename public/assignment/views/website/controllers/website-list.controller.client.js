@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("WebsiteListController", WebsiteListController);
 
-    function WebsiteListController($location, $routeParams, websiteService) {
+    function WebsiteListController($routeParams, websiteService) {
         var model = this;
         init();
 

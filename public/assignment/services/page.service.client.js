@@ -18,7 +18,9 @@
 
         function createPage(websiteId, page) {
             page._id = (new Date()).getTime() + "";
+            page.websiteId = websiteId;
             pages.push(page);
+            return page;
         }
 
         function findPageByWebsiteId(websiteId) {

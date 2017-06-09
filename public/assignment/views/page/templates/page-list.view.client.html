@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="nav navbar-brand pull-left">
-            <a href="GO TO WEBSITE LIST" class="navbar-link">
+            <a href="#!/user/{{model.userId}}/website" class="navbar-link">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </div>
@@ -10,60 +10,30 @@
             <b>Pages</b>
         </div>
         <div class="nav navbar-brand pull-right">
-            <a href="GO TO PAGE-NEW" class="navbar-link">
+            <a href="#!/user/{{model.userId}}/website/{{model.webId}}/page/new" class="navbar-link">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
         </div>
     </div>
 </nav>
 
-<ul class="list-group">
-    <li class="list-group-item">
-        <a href="GO TO WIDGET LIST">
-            Blog Post
-        </a>
-        <a href="GO TO PAGE-EDIT">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        <a href="GO TO WIDGET LIST">
-            Blogs
-        </a>
-        <a href="GO TO PAGE-EDIT">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        <a href="GO TO WIDGET LIST">
-            Home
-        </a>
-        <a href="GO TO PAGE-EDIT">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        <a href="GO TO WIDGET LIST">
-            About
-        </a>
-        <a href="GO TO PAGE-EDIT">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        <a href="GO TO WIDGET LIST">
-            Contact Us
-        </a>
-        <a href="GO TO PAGE-EDIT">
-            <span class="glyphicon glyphicon-cog pull-right"></span>
-        </a>
-    </li>
-</ul>
+<div class="wd-fixed-top-padding wd-fixed-bot-padding">
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="page in model.pageList">
+            <a href="#!/user/{{model.userId}}/website/{{model.webId}}/page/{{page._id}}/widget">
+                {{page.name}}
+            </a>
+            <a href="#!/user/{{model.userId}}/website/{{model.webId}}/page/{{page._id}}">
+                <span class="glyphicon glyphicon-cog pull-right"></span>
+            </a>
+        </li>
+    </ul>
+</div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="nav navbar-brand pull-right">
-            <a href="GO TO USER PROFILE">
+            <a href="#!/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>

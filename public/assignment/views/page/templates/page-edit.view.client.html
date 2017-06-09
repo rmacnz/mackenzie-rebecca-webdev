@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="nav navbar-brand pull-left">
-            <a href="GO TO PAGE LIST" class="navbar-link">
+            <a href="#!/user/{{model.userId}}/website/{{model.webId}}/page" class="navbar-link">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </div>
@@ -10,25 +10,25 @@
             <b>Edit Page</b>
         </div>
         <div class="nav navbar-brand pull-right">
-            <a href="GO TO PAGE LIST" class="navbar-link">
+            <a ng-click="model.updatePage()" class="navbar-link wd-clickable">
                 <span class="glyphicon glyphicon-ok"></span>
             </a>
         </div>
     </div>
 </nav>
 
-<form class="container-fluid">
+<form class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
     <label for="page-new-name">Name</label>
-    <input id="page-new-name" type="text" placeholder="Name" class="form-control" value="Blog Post"/>
+    <input id="page-new-name" type="text" placeholder="Name" class="form-control" ng-model="model.page.name"/>
     <label for="page-new-title">Title</label>
-    <input id="page-new-title" type="text" placeholder="Title" class="form-control" value="Lorem Ipsum"/>
-    <a class="btn btn-danger  btn-block" href="GO TO PAGE LIST">Delete</a>
+    <input id="page-new-title" type="text" placeholder="Title" class="form-control" ng-model="model.page.description"/>
+    <a class="btn btn-danger  btn-block" ng-click="model.deletePage()">Delete</a>
 </form>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="nav navbar-brand pull-right">
-            <a href="GO TO PROFILE">
+            <a href="#!/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
