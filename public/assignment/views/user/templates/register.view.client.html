@@ -1,31 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-    <div ng-controller="RegisterController" class="container">
-        <h1>Register</h1>
-        <input ng-model="model.user.username"
-               type="text"
-               class="form-control"
-               placeholder="username"/>
-        <input ng-model="model.user.password"
-               type="password"
-               class="form-control"
-               placeholder="password"/>
-        <input ng-model="model.user.password_verify"
-               type="password"
-               class="form-control"
-               placeholder="verify password"/>
-        <a class="btn btn-primary btn-block"
-           href="profile.html">Register</a>
-        <a class="btn btn-danger  btn-block"
-           href="login.html">Cancel</a>
-    </div>
-</body>
-</html>
+<div ng-controller="RegisterController" class="container">
+    <h1>Register</h1>
+    <input ng-model="model.user.username"
+           type="text"
+           class="form-control"
+           placeholder="username"/>
+    <input ng-model="model.user.password"
+           type="password"
+           class="form-control"
+           placeholder="password"/>
+    <input ng-model="model.user.password_verify"
+           type="password"
+           class="form-control"
+           placeholder="verify password"/>
+    <a class="btn btn-primary btn-block"
+       href="GO TO USER PROFILE">Register</a>
+    <a class="btn btn-danger  btn-block"
+       href="#!/login">Cancel</a>
+</div>
