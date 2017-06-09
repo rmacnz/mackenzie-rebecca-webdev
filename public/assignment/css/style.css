@@ -32,6 +32,10 @@ div.wd-sidebar-scroll {
     .col-md-8 {
         margin-left: 33%;
     }
+
+    .wd-navbar-right {
+        left: 33%;
+    }
 }
 
 .wd-video-container {
@@ -68,11 +72,6 @@ div.wd-sidebar-scroll {
 
 .wd-navbar-left {
     width: 33%;
-}
-
-.wd-navbar-right {
-    width: 66%;
-    left: 33%;
 }
 
 form.wd-form-right {

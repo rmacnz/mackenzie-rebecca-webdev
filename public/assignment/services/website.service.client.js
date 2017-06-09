@@ -20,9 +20,11 @@
             {"_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem"}
         ];
 
-        function createWebsite(website) {
+        function createWebsite(userId, website) {
             website._id = (new Date()).getTime() + "";
+            website.developerId = userId;
             websites.push(website);
+            return website;
         }
 
         function findWebsitesByUser(userId) {

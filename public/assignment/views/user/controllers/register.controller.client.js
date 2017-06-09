@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController);
     
-    function RegisterController($location, $routeParams, userService) {
+    function RegisterController($location, userService) {
         var model = this;
         model.register = register;
 
