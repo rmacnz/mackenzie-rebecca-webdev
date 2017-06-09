@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WebAppMaker">
 <head>
     <meta charset="UTF-8">
     <title>Assignment Home Page</title>
-    <script src="app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="container">
-        <h1>Assignment Home Page</h1>
-        <a class="btn btn-primary btn-block" href="user/login.html">Continue to login page</a>
-    </div>
+<div ng-view></div>
 </body>
 </html>

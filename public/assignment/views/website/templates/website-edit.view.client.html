@@ -81,15 +81,15 @@
             </div>
         </nav>
 
-        <form class="container-fluid wd-form-right">
+        <form ng-controller="EditWebsiteController" class="container-fluid wd-form-right">
             <label for="website-edit-name">
                 Name
             </label>
-            <input type="text" placeholder="Name" id="website-edit-name" class="form-control" value="Blogger" />
+            <input ng-model="model.website.name" type="text" placeholder="Name" id="website-edit-name" class="form-control" value="Blogger" />
             <label for="website-edit-desc">
                 Description
             </label>
-            <textarea id="website-edit-desc" rows="3" placeholder="Description" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</textarea>
+            <textarea ng-model="model.website.description" id="website-edit-desc" rows="3" placeholder="Description" class="form-control">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</textarea>
             <a href="website-list.html" class="btn btn-block btn-danger">Delete</a>
         </form>
     </div>
