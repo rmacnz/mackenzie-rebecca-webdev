@@ -2,16 +2,17 @@
     margin-bottom: 5px;
 }
 
-body.wd-fixed-top-padding {
+.wd-fixed-top-padding {
     padding-top: 60px;
 }
 
-body.wd-fixed-bot-padding {
+.wd-fixed-bot-padding {
     padding-bottom: 60px;
 }
 
 a.wd-white-link {
     color: white;
+    cursor: pointer;
 }
 
 li.list-group-item {

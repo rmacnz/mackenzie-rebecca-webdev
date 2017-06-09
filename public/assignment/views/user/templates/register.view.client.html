@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <div class="container">
     <h1>Register</h1>
+    <div ng-show="model.message" class="alert alert-danger">{{model.message}}</div>
     <input ng-model="model.user.username"
            type="text"
            class="form-control"
@@ -13,8 +14,8 @@
            type="password"
            class="form-control"
            placeholder="verify password"/>
-    <a class="btn btn-primary btn-block"
-       href="GO TO USER PROFILE">Register</a>
+    <a ng-click="model.register(model.user)"
+       class="btn btn-primary btn-block">Register</a>
     <a class="btn btn-danger  btn-block"
        href="#!/login">Cancel</a>
 </div>

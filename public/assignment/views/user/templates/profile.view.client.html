@@ -5,7 +5,7 @@
             <b>Profile</b>
         </div>
                 <div class="nav navbar-brand pull-right">
-                    <a href="#" class="navbar-link wd-white-link">
+                    <a ng-click="model.updateUser(model.user)" class="navbar-link wd-white-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
@@ -13,36 +13,46 @@
 </nav>
 
 
-    <div ng-controller="ProfileController" class="container">
+    <div class="container wd-fixed-top-padding wd-fixed-bot-padding">
         <form>
-            <div ng-model="model.user.username" class="form-group">
+            <div class="form-group">
                 <label for="username">Username</label>
-                <input readonly type="text" class="form-control" id="username" placeholder="al1c3">
+                <input readonly
+                       type="text"
+                       class="form-control"
+                       id="username"
+                       ng-model="model.user.username">
             </div>
-            <div ng-model="model.user.email" class="form-group">
+            <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Please enter your email address" value="alice@wonderland.com">
+                <input type="email" class="form-control" id="email"
+                       placeholder="Please enter your email address"
+                       ng-model="model.user.email">
             </div>
-            <div ng-model="model.user.first" class="form-group">
+            <div class="form-group">
                 <label for="first-name">First Name</label>
-                <input type="text" class="form-control" id="first-name" placeholder="Please enter your first name" value="Alice">
+                <input type="text" class="form-control" id="first-name"
+                       placeholder="Please enter your first name"
+                       ng-model="model.user.firstName">
             </div>
-            <div ng-model="model.user.last" class="form-group">
+            <div class="form-group">
                 <label for="last-name">Last Name</label>
-                <input type="text" class="form-control" id="last-name" placeholder="Please enter your last name" value="Wonderland">
+                <input type="text" class="form-control" id="last-name"
+                       placeholder="Please enter your last name"
+                       ng-model="model.user.lastName">
             </div>
         </form>
 
         <a class="btn btn-primary btn-block"
-           href="../website/website-list.html">Websites</a>
+           href="#!/user/{{model.user._id}}/website">Websites</a>
         <a class="btn btn-danger  btn-block"
-           href="login.html">Logout</a>
+           href="#!/login">Logout</a>
     </div>
 
 <nav class="navbar bg-primary navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="nav navbar-brand pull-right">
-            <a href="#" class="wd-white-link">
+            <a href="#!/user/{{model.user._id}}" class="wd-white-link">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
