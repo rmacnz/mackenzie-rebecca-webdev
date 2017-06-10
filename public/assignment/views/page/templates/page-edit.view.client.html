@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <div ng-include="'views/common/header/header-default-back-ok.view.client.html'"></div>
 
-<form class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
-    <label for="page-new-name">Name</label>
-    <input id="page-new-name" type="text" placeholder="Name" class="form-control" ng-model="model.page.name"/>
-    <label for="page-new-title">Title</label>
-    <input id="page-new-title" type="text" placeholder="Title" class="form-control" ng-model="model.page.description"/>
-    <a class="btn btn-danger  btn-block" ng-click="model.deletePage()">Delete</a>
-</form>
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <div ng-include="'views/common/error-message.view.client.html'"></div>
+
+    <form>
+        <label for="page-new-name">Name</label>
+        <input id="page-new-name" type="text" placeholder="Name" class="form-control" ng-model="model.page.name"/>
+        <label for="page-new-title">Title</label>
+        <input id="page-new-title" type="text" placeholder="Title" class="form-control" ng-model="model.page.description"/>
+        <a class="btn btn-danger  btn-block" ng-click="model.deletePage()">Delete</a>
+    </form>
+</div>
 
 <div ng-include="'views/common/footer/footer-default.view.client.html'"></div>

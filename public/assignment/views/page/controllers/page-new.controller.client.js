@@ -18,9 +18,11 @@
         }
 
         function createPage() {
-            if (model.page != null) {
+            if (model.page != null && model.page.name != null && model.page.name != "") {
                 pageService.createPage(model.webId, model.page);
                 $location.url("/user/" + model.userId + "/website/" + model.webId + "/page");
+            } else if (model.page != null) {
+                model.errormsg = "Please enter a name for your new page.";
             } else {
                 model.errormsg = "Please enter some information about your new page.";
             }

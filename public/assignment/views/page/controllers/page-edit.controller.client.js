@@ -21,8 +21,12 @@
         }
 
         function updatePage() {
-            pageService.updatePage(model.pageId, model.page);
-            $location.url("/user/" + model.userId + "/website/" + model.webId + "/page");
+            if (model.page.name != "") {
+                pageService.updatePage(model.pageId, model.page);
+                $location.url("/user/" + model.userId + "/website/" + model.webId + "/page");
+            } else {
+                model.errormsg = "Please enter a name for the page.";
+            }
         }
 
         function deletePage() {
