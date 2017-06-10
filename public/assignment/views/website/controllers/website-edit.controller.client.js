@@ -23,8 +23,12 @@
         }
 
         function updateSite() {
-            websiteService.updateWebsite(model.webId, model.website);
-            $location.url("/user/" + model.userId + "/website")
+            if (model.website.name != "") {
+                websiteService.updateWebsite(model.webId, model.website);
+                $location.url("/user/" + model.userId + "/website")
+            } else {
+                model.errormsg = "Please enter a name for the website.";
+            }
         }
 
         function deleteSite() {
