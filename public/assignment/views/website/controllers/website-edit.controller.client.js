@@ -5,8 +5,6 @@
 
     function EditWebsiteController($location, $routeParams, websiteService) {
         var model = this;
-        model.updateSite = updateSite;
-        model.deleteSite = deleteSite;
         init();
 
         function init() {
@@ -14,6 +12,14 @@
             model.webId = $routeParams["wid"];
             model.websiteList = websiteService.findWebsitesByUser(model.userId);
             model.website = websiteService.findWebsiteById(model.webId);
+
+            model.urlPrev = "#!/user/" + model.userId + "/website";
+            model.urlNew = "#!/user/" + model.userId + "/website/new";
+            model.headerTitleLeft = "Websites";
+            model.headerTitleRight = "Edit Website";
+
+            model.clickOk = updateSite;
+            model.deleteSite = deleteSite;
         }
 
         function updateSite() {

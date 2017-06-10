@@ -14,6 +14,10 @@
             model.pageId = $routeParams["pid"];
             model.widgetList = widgetService.findWidgetsByPageId(model.pageId);
 
+            model.urlPrev = "#!/user/" + model.userId + "/website/" + model.webId + "/page";
+            model.urlNew = "#!/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/new";
+            model.headerTitle = "Widgets";
+
             model.trustHtml = trustHtml;
             model.getEmbeddedYouTubeUrl = getEmbeddedYouTubeUrl;
             model.getWidgetViewUrl = getWidgetViewUrl;
@@ -34,7 +38,7 @@
         }
 
         function getWidgetViewUrl(widgetType) {
-            return "views/widget/templates/widget-" + widgetType.toLowerCase() + ".view.client.html";
+            return "views/widget/templates/widget-list/widget-" + widgetType.toLowerCase() + ".view.client.html";
         }
     }
 

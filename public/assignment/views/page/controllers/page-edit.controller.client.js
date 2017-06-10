@@ -5,8 +5,6 @@
 
     function EditPageController($location, $routeParams, pageService) {
         var model = this;
-        model.updatePage = updatePage;
-        model.deletePage = deletePage;
         init();
 
         function init() {
@@ -14,6 +12,12 @@
             model.webId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
             model.page = pageService.findPageById(model.pageId);
+
+            model.urlPrev = "#!/user/" + model.userId + "/website/" + model.webId + "/page";
+            model.headerTitle = "Edit Page";
+
+            model.clickOk = updatePage;
+            model.deletePage = deletePage;
         }
 
         function updatePage() {

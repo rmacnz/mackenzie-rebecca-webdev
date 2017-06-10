@@ -1,4 +1,4 @@
-<!DOCTYPE html>\
+<!DOCTYPE html>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="nav navbar-brand pull-left">
@@ -7,19 +7,19 @@
             </a>
         </div>
         <div class="nav navbar-brand">
-            <b>Widget Edit</b>
-        </div>
-        <div class="nav navbar-brand pull-right">
-            <a ng-click="model.updateWidget()" class="navbar-link wd-clickable">
-                <span class="glyphicon glyphicon-ok"></span>
-            </a>
+            <b>Choose Widget</b>
         </div>
     </div>
 </nav>
 
-<form class="container wd-fixed-top-padding wd-fixed-bot-padding">
-    <div ng-include="model.getWidgetEditUrl(model.widget.widgetType)"></div>
-    <a class="btn btn-danger  btn-block" ng-click="model.deleteWidget()">Delete</a>
-</form>
+<div class="wd-fixed-top-padding wd-fixed-bot-padding">
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="widgetType in model.widgetTypeList">
+            <a href="{{model.getWidgetNewUrl(widgetType)}}">
+                {{widgetType}}
+            </a>
+        </li>
+    </ul>
+</div>
 
 <div ng-include="'views/common/footer/footer-default.view.client.html'"></div>

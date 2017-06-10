@@ -5,12 +5,8 @@
     <div ng-include="'views/common/error-message.view.client.html'"></div>
 
     <form>
-        <label for="page-new-name">Name</label>
-        <input ng-model="model.page.name" id="page-new-name" type="text" placeholder="Name" class="form-control"/>
-        <label for="page-new-title">Title</label>
-        <input ng-model="model.page.description" id="page-new-title" type="text" placeholder="Title" class="form-control"/>
+        <div ng-include="model.getWidgetNewView()"></div>
     </form>
 </div>
-
 
 <div ng-include="'views/common/footer/footer-default.view.client.html'"></div>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<nav class="row-fluid navbar bg-primary navbar-fixed-top">
+    <div class="col-xs-1 nav navbar-brand pull-left">
+        <a href="{{model.urlPrev}}" class="navbar-link wd-white-link">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+    </div>
+    <div class="col-md-3 hidden-sm hidden-xs">
+        <div class="nav navbar-brand">
+            <b>{{model.headerTitleLeft}}</b>
+        </div>
+        <div class="nav navbar-brand pull-right">
+            <a href="{{model.urlNew}}" class="navbar-link wd-white-link">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-11 col-md-8">
+        <div class="nav navbar-brand">
+            <b>{{model.headerTitleRight}}</b>
+        </div>
+
+        <div class="nav navbar-brand pull-right">
+            <a ng-click="model.clickOk()" class="navbar-link wd-white-link">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </div>
+    </div>
+</nav>

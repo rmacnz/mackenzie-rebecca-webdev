@@ -1,21 +1,6 @@
 <!DOCTYPE html>
-<nav class="navbar bg-primary navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="nav navbar-brand pull-left">
-            <a href="#!/user/{{model.userId}}" class="navbar-link wd-white-link">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-        </div>
-        <div class="nav navbar-brand">
-            <b>Websites</b>
-        </div>
-        <div class="nav navbar-brand pull-right">
-            <a href="#!/user/{{model.userId}}/website/new" class="navbar-link wd-white-link">
-                <span class="glyphicon glyphicon-plus"></span>
-            </a>
-        </div>
-    </div>
-</nav>
+<div ng-include="'views/common/header/header-primary-back-new.view.client.html'"></div>
+
 <div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
     <ul class="list-group">
         <li ng-repeat="website in model.websites" class="list-group-item">
@@ -28,12 +13,5 @@
         </li>
     </ul>
 </div>
-<nav class="navbar bg-primary navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="nav navbar-brand pull-right">
-            <a href="#!/user/{{model.userId}}" class="wd-white-link">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-    </div>
-</nav>
+
+<div ng-include="'views/common/footer/footer-primary.view.client.html'"></div>

@@ -20,7 +20,7 @@
         }
 
         function getWidgetEditUrl() {
-            return "views/widget/templates/widget-edit-" + model.widget.widgetType.toLowerCase() + ".view.client.html";
+            return "views/widget/templates/widget-edit/widget-edit-" + model.widget.widgetType.toLowerCase() + ".view.client.html";
         }
 
         function updateWidget() {

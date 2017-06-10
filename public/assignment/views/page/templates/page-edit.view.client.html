@@ -1,21 +1,5 @@
 <!DOCTYPE html>
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="nav navbar-brand pull-left">
-            <a href="#!/user/{{model.userId}}/website/{{model.webId}}/page" class="navbar-link">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-        </div>
-        <div class="nav navbar-brand">
-            <b>Edit Page</b>
-        </div>
-        <div class="nav navbar-brand pull-right">
-            <a ng-click="model.updatePage()" class="navbar-link wd-clickable">
-                <span class="glyphicon glyphicon-ok"></span>
-            </a>
-        </div>
-    </div>
-</nav>
+<div ng-include="'views/common/header/header-default-back-ok.view.client.html'"></div>
 
 <form class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
     <label for="page-new-name">Name</label>
@@ -25,12 +9,4 @@
     <a class="btn btn-danger  btn-block" ng-click="model.deletePage()">Delete</a>
 </form>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="nav navbar-brand pull-right">
-            <a href="#!/user/{{model.userId}}">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-    </div>
-</nav>
+<div ng-include="'views/common/footer/footer-default.view.client.html'"></div>

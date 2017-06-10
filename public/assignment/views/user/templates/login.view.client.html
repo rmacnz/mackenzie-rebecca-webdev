@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div class="container">
     <h1>Login</h1>
-    <div ng-show="model.message" class="alert alert-danger">{{model.message}}</div>
+    <div ng-include="'views/common/error-message.view.client.html'"></div>
     <input ng-model="model.user.username"
            type="text"
            class="form-control"

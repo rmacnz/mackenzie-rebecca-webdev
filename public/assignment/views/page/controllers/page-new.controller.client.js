@@ -5,20 +5,25 @@
 
     function NewPageController($location, $routeParams, pageService) {
         var model = this;
-        model.createPage = createPage;
         init();
 
         function init() {
             model.userId = $routeParams["uid"];
             model.webId = $routeParams["wid"];
+
+            model.urlPrev = "#!/user/" + model.userId + "/website/" + model.webId + "/page";
+            model.headerTitle = "New Page";
+
+            model.clickOk = createPage;
         }
 
         function createPage() {
-            console.log("create page");
-            console.log(model.page.name);
-            console.log(model.page.description);
-            model.page = pageService.createPage(model.webId, model.page);
-            $location.url("/user/" + model.userId + "/website/" + model.webId + "/page");
+            if (model.page != null) {
+                pageService.createPage(model.webId, model.page);
+                $location.url("/user/" + model.userId + "/website/" + model.webId + "/page");
+            } else {
+                model.errormsg = "Please enter some information about your new page.";
+            }
         }
     }
 

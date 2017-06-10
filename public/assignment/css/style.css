@@ -29,12 +29,8 @@ div.wd-sidebar-scroll {
 }
 
 @media(min-width: 992px) {
-    .col-md-8 {
+    .wd-move-right {
         margin-left: 33%;
-    }
-
-    .wd-navbar-right {
-        left: 33%;
     }
 }
 
@@ -70,7 +66,7 @@ div.wd-sidebar-scroll {
     z-index: 1;
 }
 
-.wd-navbar-left {
+.wd-navbar-left nav {
     width: 33%;
 }
 
