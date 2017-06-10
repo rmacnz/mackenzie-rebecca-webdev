@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Widgets</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body class="wd-fixed-top-padding wd-fixed-bot-padding">
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="nav navbar-brand pull-left">
@@ -26,67 +16,18 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid">
-    <div class="wd-widget">
+
+
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <div ng-repeat="widget in model.widgetList" class="wd-widget">
         <div class="wd-widget-toolbar">
-            <a href="widget-heading.html">
+            <a href="#!/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
         </div>
-        <h1>Plan With Me</h1>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <a href="widget-heading.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <h3>Planner Boss Collective Sale Begins in Two Days!</h3>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <a href="widget-image.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <img width="100%" src="http://www.prettyneatliving.com/wp-content/uploads/2016/05/eclp-2016-17-colorful-vertical-weekly-spread.jpg"/>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <a href="widget-heading.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <p>I can hardly believe it’s time for a new planner, but it’s here! And Erin Condren will launch her beautiful new 2017 – 2018 Life Planners on May 4, 2017! Like all of you, I am eagerly awaiting launch day because there are some fabulous new products in the lineup, and the classic Life Planner has undergone some subtle (and some not-so-subtle) updates. If you’re new to the <a href="https://www.erincondren.com/">Erin Condren</a> Life Planner world, stick around! I’ll walk you through this planner from beginning to end and share with you why I’ve been in this planner for over 4 years (and give you <a href="https://www.erincondren.com/referral/invite/jenmackintosh0316">a coupon for $10 off</a>)! If you’re already an Erin Condren fan, you’ll love some of the changes I’m going to share! Let’s get started!</p>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <a href="widget-youtube.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <div class="wd-video-container">
-            <iframe width="100%" src="https://www.youtube.com/embed/Yetiqhn0Mg4" frameborder="0" allowfullscreen></iframe>
-        </div>
+        <div ng-include="model.getWidgetViewUrl(widget.widgetType)"></div>
     </div>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-        <span class="glyphicon glyphicon-play navbar-brand"></span>
-        <span class="glyphicon glyphicon-eye-open navbar-brand"></span>
-        <div class="nav navbar-brand pull-right">
-            <a href="../user/profile.html">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-    </div>
-</nav>
-
-</body>
-</html>
+<div ng-include="'views/common/footer-multi-icon.view.client.html'"></div>
