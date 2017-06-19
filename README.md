@@ -11,8 +11,3 @@ Links:
 Root to hosted environment on Heroku: https://mackenzie-rebecca-webdev.herokuapp.com/
 Project: https://mackenzie-rebecca-webdev.herokuapp.com/project/index.html
 Assignment: https://mackenzie-rebecca-webdev.herokuapp.com/assignment/index.html
-
-QUESTIONS ABOUT ASSIGNMENT 3:
-- For the services, the code online does not match the template given in the assignment (var api={} is not included in the online code and instead each
-  variable is set on its own). Which format should I follow?
-- One part of the assignment seems to suggest that we should have a file called website.controller.client.js but the other seems to suggest that we should split this up into three different controllers (for website-list, website-new, and website-edit). Which is it? This same problem occurs for pages and widgets. I have split mine up for websites because that's what you did but I am not sure this is correct so I have not figured out what to do for the pages and widgets.
