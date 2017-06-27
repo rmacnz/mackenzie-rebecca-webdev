@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="FundiesStaffPage">
 <head>
     <meta charset="UTF-8">
     <title>Project Home Page</title>
@@ -8,12 +8,6 @@
     <link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="container-fluid">
-        <h1>Project Home Page</h1>
-        <h3>What would you like to do?</h3>
-        <a href="#" class="btn btn-block btn-primary">Login</a>
-        <a href="#" class="btn btn-block btn-primary">Register</a>
-        <a href="#" class="btn btn-block btn-primary">Continue as Guest</a>
-    </div>
+<div ng-view></div>
 </body>
 </html>
