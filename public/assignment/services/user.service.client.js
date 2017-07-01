@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .factory('userService', userService);
 
-    function userService() {
+    function userService($http) {
         var users = [
             {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder", email: "alice@wonder.com"},
             {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley", email: "bob@marley.com"},
@@ -28,33 +28,30 @@
             return user;
         }
 
+        // Returns the user with this ID
         function findUserById(userId) {
-            for(var u in users) {
-                if(users[u]._id === userId)
-                    return users[u];
-            }
-            return null;
+            var url = "/api/user/" + userId;
+            return $http.get(url)
+                .then(function(response) {
+                    return response.data;
+                });
         }
 
         function findUserByUsername(username) {
-            var user = users.find(function (user) {
-                return user.username === username;
-            });
-            if(typeof user === 'undefined') {
-                return null;
-            }
-            return user;
+            var url = "/api/username?username=" + username;
+            return $http.get(url)
+                .then(function(response){
+                    return response.data;
+                });
         }
 
+        // Returns the user with the given username and password
         function findUserByCredentials(username, password) {
-            for(var u in users) {
-                var user = users[u];
-                if( user.username === username &&
-                    user.password === password) {
-                    return user;
-                }
-            }
-            return null;
+            var url = "/api/user?username=" + username + "&password=" + password;
+            return $http.get(url)
+                .then(function(response) {
+                    return response.data;
+                });
         }
 
         function updateUser(userId, user) {

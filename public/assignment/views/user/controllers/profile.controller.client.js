@@ -9,15 +9,20 @@
         init();
 
         function init() {
-            // set the user whose profile this is
             model.userId = $routeParams["uid"];
-            model.user = userService.findUserById(model.userId);
+            userService
+                .findUserById(model.userId)
+                .then(initializeUser);
         }
 
 
         // update this user based on the information they entered on the profile page
         function updateUser() {
             userService.updateUser(model.userId, model.user);
+        }
+
+        function initializeUser(user) {
+            model.user = user;
         }
     }
     
