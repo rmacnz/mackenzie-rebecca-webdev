@@ -22,10 +22,10 @@
         return api;
 
         function createUser(user) {
-            user._id = (new Date()).getTime() + "";
-            user.created = new Date();
-            users.push(user);
-            return user;
+            return $http.post("/api/user", user)
+                .then(function(response) {
+                    return response.data;
+                });
         }
 
         // Returns the user with this ID
