@@ -9,12 +9,18 @@
 
         function init() {
             model.userId = $routeParams["uid"];
-
-            model.websites = websiteService.findWebsitesByUser(model.userId);
-
             model.urlPrev = "#!/user/" + model.userId;
             model.urlNew = "#!/user/" + model.userId + "/website/new";
             model.headerTitle = "Websites";
+
+            //model.websites = websiteService.findAllWebsitesForUser(model.userId);
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(initializeWebsiteList);
+        }
+
+        function initializeWebsiteList(websites) {
+            model.websites = websites;
         }
 
 

@@ -10,8 +10,6 @@
         function init() {
             model.userId = $routeParams["uid"];
             model.webId = $routeParams["wid"];
-            model.websiteList = websiteService.findWebsitesByUser(model.userId);
-            model.website = websiteService.findWebsiteById(model.webId);
 
             model.urlPrev = "#!/user/" + model.userId + "/website";
             model.urlNew = "#!/user/" + model.userId + "/website/new";
@@ -20,11 +18,30 @@
 
             model.clickOk = updateSite;
             model.deleteSite = deleteSite;
+
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(initializeWebsiteList);
+            websiteService
+                .findWebsiteById(model.webId)
+                .then(initializeWebsite);
+        }
+
+        function initializeWebsiteList(websites) {
+            model.websiteList = websites;
+        }
+
+        function initializeWebsite(website) {
+            model.website = website;
         }
 
         function updateSite() {
             if (model.website.name != "") {
-                websiteService.updateWebsite(model.webId, model.website);
+                websiteService
+                    .updateWebsite(model.webId, model.website)
+                    .then(function() {
+                        console.log("Website updated successfully.");
+                    });
                 $location.url("/user/" + model.userId + "/website")
             } else {
                 model.errormsg = "Please enter a name for the website.";
@@ -32,8 +49,13 @@
         }
 
         function deleteSite() {
-            websiteService.deleteWebsite(model.webId);
-            $location.url("/user/" + model.userId + "/website")
+            console.log("Trying to delete site");
+            websiteService
+                .deleteWebsite(model.webId)
+                .then(function () {
+                    console.log("Deleted site");
+                    $location.url("/user/" + model.userId + "/website")
+                })
         }
     }
 

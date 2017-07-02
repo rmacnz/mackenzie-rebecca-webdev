@@ -1,9 +1,9 @@
 var app = require("../../express");
 
+app.post("/api/user", createUser);
 app.get("/api/user/:userId", findUserById);
 app.get("/api/username", findUserByUsername);
 app.get("/api/user", findUserByCredentials);
-app.post("/api/user", createUser);
 app.put("/api/user/:userId", updateUser);
 app.delete("/api/user/:userId", deleteUser);
 
@@ -18,9 +18,9 @@ function createUser(req, res) {
     // do stuff here
     var user = req.body;
     user._id = (new Date()).getTime() + "";
-     user.created = new Date();
-     users.push(user);
-     res.send(user);
+    user.created = new Date();
+    users.push(user);
+    res.json(user);
 }
 
 function findUserById(req, res) {
@@ -28,7 +28,7 @@ function findUserById(req, res) {
     var user = users.find(function(user) {
         return user._id === userId;
     });
-    res.send(user);
+    res.json(user);
 }
 
 function findUserByUsername(req, res) {
