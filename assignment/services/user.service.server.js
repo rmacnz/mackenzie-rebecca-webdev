@@ -4,6 +4,8 @@ app.get("/api/user/:userId", findUserById);
 app.get("/api/username", findUserByUsername);
 app.get("/api/user", findUserByCredentials);
 app.post("/api/user", createUser);
+app.put("/api/user/:userId", updateUser);
+app.delete("/api/user/:userId", deleteUser);
 
 var users = [
     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder", email: "alice@wonder.com"},
@@ -23,7 +25,6 @@ function createUser(req, res) {
 
 function findUserById(req, res) {
     var userId = req.params["userId"];
-    console.log("Finding user with id " + userId);
     var user = users.find(function(user) {
         return user._id === userId;
     });
@@ -53,4 +54,30 @@ function findUserByCredentials(req, res) {
         }
     }
     res.sendStatus(404);
+}
+
+function updateUser(req, res) {
+    var userId = req.params["userId"];
+    var user = req.body;
+    for(var u in users) {
+         if (users[u]._id === userId) {
+             users[u].username = user.username;
+             users[u].email = user.email;
+             users[u].firstName = user.firstName;
+             users[u].lastName = user.lastName;
+             res.json(user);
+             return;
+         }
+     }
+     res.sendStatus(404);
+}
+
+function deleteUser(req, res) {
+    var userId = req.params["userId"];
+    var user = users.find(function(user) {
+        return user._id === userId;
+    });
+    var index = users.indexOf(user);
+    users.splice(index, 1);
+    res.sendStatus(200);
 }

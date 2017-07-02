@@ -55,20 +55,19 @@
         }
 
         function updateUser(userId, user) {
-            for(var u in users) {
-                if (users[u]._id === userId) {
-                    users[u].username = user.username;
-                    users[u].email = user.email;
-                    users[u].firstName = user.firstName;
-                    users[u].lastName = user.lastName;
-                }
-            }
+            var url = "/api/user/" + userId;
+            return $http.put(url, user)
+                .then(function (response) {
+                    return response.data;
+                });
         }
 
         function deleteUser(userId) {
-            var user = findUserById(userId);
-            var index = users.indexOf(user);
-            users.splice(index, 1);
+            var url = "/api/user/" + userId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
         }
     }
 })();
