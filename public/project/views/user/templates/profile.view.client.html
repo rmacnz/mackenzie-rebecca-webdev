@@ -44,14 +44,14 @@
             </div>
         </form>
 
-        <a class="btn btn-primary btn-block"
-           href="#!/user/{{model.user._id}}/website">Websites</a>
         <a class="btn btn-danger  btn-block"
            href="#!/login">Logout</a>
         <a ng-click="model.deleteUser()"
-           class="btn btn-danger  btn-block">
+           class="btn btn-danger  btn-block wd-bot-margin">
             Delete Account
         </a>
+
+        <div ng-include="'views/user/templates/options-user.view.client.html'"></div>
     </div>
 
 <div ng-include="'views/common/footer/footer-primary.view.client.html'"></div>
