@@ -10,11 +10,18 @@
         function init() {
             model.userId = $routeParams["uid"];
             model.webId = $routeParams["wid"];
-            model.pageList = pageService.findPageByWebsiteId(model.webId);
 
             model.urlPrev = "#!/user/" + model.userId + "/website";
             model.urlNew = "#!/user/" + model.userId + "/website/" + model.webId + "/page/new";
             model.headerTitle = "Pages";
+
+            pageService
+                .findAllPagesForWebsite(model.webId)
+                .then(initializePageList);
+        }
+
+        function initializePageList(pageList) {
+            model.pageList = pageList;
         }
     }
 
