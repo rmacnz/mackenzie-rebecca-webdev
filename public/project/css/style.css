@@ -1,0 +1,37 @@
+.form-control {
+    margin-bottom: 5px;
+}
+
+.wd-fixed-top-padding {
+    padding-top: 60px;
+}
+
+.wd-fixed-bot-padding {
+    padding-bottom: 60px;
+}
+
+a.wd-white-link {
+    color: white;
+    cursor: pointer;
+}
+
+li.list-group-item {
+    border: none;
+}
+
+div.wd-sidebar-scroll {
+    position: absolute;
+    top: 40px;
+    bottom: 10px;
+    overflow: scroll;
+    padding-top: 20px;
+    padding-bot: 20px;
+}
+
+.wd-clickable {
+    cursor: pointer;
+}
+
+.wd-bot-margin {
+    margin-bottom: 10px;
+}

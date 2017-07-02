@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <title>Project Home Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!-- user -->
+    <script src="views/user/controllers/login.controller.client.js"></script>
+    <script src="views/user/controllers/profile.controller.client.js"></script>
+    <script src="views/user/controllers/register.controller.client.js"></script>
+    <script src="views/user/controllers/options.controller.client.js"></script>
+    <script src="services/user.service.client.js"></script>
 </head>
 <body>
 <div ng-view></div>

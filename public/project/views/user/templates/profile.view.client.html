@@ -12,8 +12,9 @@
     </div>
 </nav>
 
+    <div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+        <div ng-show="model.message" class="alert alert-success">{{model.message}}</div>
 
-    <div class="container wd-fixed-top-padding wd-fixed-bot-padding">
         <form>
             <div class="form-group">
                 <label for="username">Username</label>
@@ -47,6 +48,10 @@
            href="#!/user/{{model.user._id}}/website">Websites</a>
         <a class="btn btn-danger  btn-block"
            href="#!/login">Logout</a>
+        <a ng-click="model.deleteUser()"
+           class="btn btn-danger  btn-block">
+            Delete Account
+        </a>
     </div>
 
 <div ng-include="'views/common/footer/footer-primary.view.client.html'"></div>
