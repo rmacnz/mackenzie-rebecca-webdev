@@ -39,12 +39,17 @@
                     model.errormsg = invalidMsg;
                 } else {
                     model.widget.widgetType = model.widgetType.toUpperCase();
-                    widgetService.createWidget(model.pageId, model.widget);
-                    $location.url("/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget");
+                    widgetService
+                        .createWidget(model.pageId, model.widget)
+                        .then(createSuccess);
                 }
             } else {
                 model.errormsg = "Please enter some attributes of your new widget."
             }
+        }
+
+        function createSuccess(widget) {
+            $location.url("/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget");
         }
 
         function validateWidgetParams() {

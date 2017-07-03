@@ -12,7 +12,6 @@
             model.userId = $routeParams["uid"];
             model.webId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
-            model.widgetList = widgetService.findWidgetsByPageId(model.pageId);
 
             model.urlPrev = "#!/user/" + model.userId + "/website/" + model.webId + "/page";
             model.urlNew = "#!/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/new";
@@ -21,6 +20,14 @@
             model.trustHtml = trustHtml;
             model.getEmbeddedYouTubeUrl = getEmbeddedYouTubeUrl;
             model.getWidgetViewUrl = getWidgetViewUrl;
+
+            widgetService
+                .findAllWidgetsForPage(model.pageId)
+                .then(initializeWidgetList);
+        }
+
+        function initializeWidgetList(widgetList) {
+            model.widgetList = widgetList;
         }
 
         function trustHtml(html) {

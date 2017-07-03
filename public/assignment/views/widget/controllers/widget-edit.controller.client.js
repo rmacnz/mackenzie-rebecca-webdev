@@ -12,18 +12,21 @@
             model.webId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
             model.widgetId = $routeParams["wgid"];
-            model.widget = widgetService.findWidgetById(model.widgetId);
 
             model.urlPrev = "#!/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget";
-            model.headerTitle = "Edit " + model.widget.widgetType.toLowerCase() + " widget";
 
-            model.getWidgetEditUrl = getWidgetEditUrl;
             model.clickOk = updateWidget;
             model.deleteWidget = deleteWidget;
+
+            widgetService
+                .findWidgetById(model.widgetId)
+                .then(initializeWidget);
         }
 
-        function getWidgetEditUrl() {
-            return "views/widget/templates/widget-edit/widget-edit-" + model.widget.widgetType.toLowerCase() + ".view.client.html";
+        function initializeWidget(widget) {
+            model.widget = widget;
+            model.headerTitle = "Edit " + model.widget.widgetType.toLowerCase() + " widget";
+            model.widgetEditUrl = "views/widget/templates/widget-edit/widget-edit-" + model.widget.widgetType.toLowerCase() + ".view.client.html";
         }
 
         function updateWidget() {
@@ -31,13 +34,24 @@
             if (invalidMsg != "") {
                 model.errormsg = invalidMsg;
             } else {
-                model.widget = widgetService.updateWidget(model.widgetId, model.widget);
-                $location.url("/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget");
+                widgetService
+                    .updateWidget(model.widgetId, model.widget)
+                    .then(updateSuccess);
             }
         }
 
+        function updateSuccess(widget) {
+            model.widget = widget;
+            $location.url("/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget");
+        }
+
         function deleteWidget() {
-            widgetService.deleteWidget(model.widgetId);
+            widgetService
+                .deleteWidget(model.widgetId)
+                .then(deleteSuccess);
+        }
+
+        function deleteSuccess() {
             $location.url("/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget");
         }
 

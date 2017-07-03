@@ -4,10 +4,8 @@
 <div class="container wd-fixed-top-padding wd-fixed-bot-padding">
     <div ng-include="'views/common/error-message.view.client.html'"></div>
 
-    <form>
-        <div ng-include="model.getWidgetEditUrl(model.widget.widgetType)"></div>
-        <a class="btn btn-danger  btn-block" ng-click="model.deleteWidget()">Delete</a>
-    </form>
+    <div ng-include="model.widgetEditUrl"></div>
+    <a class="btn btn-danger  btn-block" ng-click="model.deleteWidget()">Delete</a>
 </div>
 
 <div ng-include="'views/common/footer/footer-default.view.client.html'"></div>
