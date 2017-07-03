@@ -79,7 +79,6 @@ function updateWidget(req, res) {
             } else {
                 console.log("Found a widget of unknown type: " + widgets[v].widgetType);
             }
-            console.log(widget);
             res.json(widget);
             return;
         }
@@ -99,7 +98,6 @@ function deleteWidget(req, res) {
 }
 
 function uploadImage(req, res) {
-
     var widgetId      = req.body.widgetId;
     var width         = req.body.width;
     var myFile        = req.file;
@@ -114,6 +112,8 @@ function uploadImage(req, res) {
     var destination   = myFile.destination;  // folder where file is saved to
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
+
+    console.log(myFile);
 
     var widget = widgets.find(function (widget) {
         return widget._id === widgetId;
