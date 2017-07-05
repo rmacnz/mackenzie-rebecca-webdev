@@ -103,7 +103,7 @@ function uploadImage(req, res) {
     var myFile        = req.file;
 
     var userId = req.body.userId;
-    var websiteId = req.body.websiteId;
+    var websiteId = req.body.webId;
     var pageId = req.body.pageId;
 
     var originalname  = myFile.originalname; // file name on user's computer
@@ -113,14 +113,19 @@ function uploadImage(req, res) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    console.log(myFile);
-
     var widget = widgets.find(function (widget) {
         return widget._id === widgetId;
     });
+    if (widget == null) {
+        widget = {};
+    }
     widget.url = "/public/assignment/uploads/" +filename;
 
-    var callbackUrl   = "/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+    var callbackUrl   = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+
+    if (widget._id == null) {
+        callbackUrl   = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/new/image";
+    }
 
     res.redirect(callbackUrl);
 }

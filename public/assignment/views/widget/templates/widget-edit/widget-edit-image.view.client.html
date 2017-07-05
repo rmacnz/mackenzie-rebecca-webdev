@@ -27,13 +27,17 @@
        ng-model="model.widget.width"
        placeholder="Image Width"/>
 
+<a href="#!/widget/:widgetId/search"
+   class="btn btn-block btn-primary">Search</a>
+<!-- <div ng-include="../widget-flickr-search.view.client.html"></div> -->
+
 <label for="widget-image-upload">Upload</label>
 
 <form action="/api/upload"   method="post" enctype="multipart/form-data">
     <input  id="widget-image-upload" name="myFile" type="file" class="form-control"/>
     <input  name="width"     value="{{model.widget.width}}" style="display: none"/>
     <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
-    <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+    <input  name="webId" value="{{model.webId}}"   style="display: none"/>
     <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
     <input  name="widgetId"  value="{{model.widget._id}}"   style="display: none"/>
     <button class="btn btn-block btn-primary wd-clickable wd-bot-margin" type="submit">Upload Image</button>

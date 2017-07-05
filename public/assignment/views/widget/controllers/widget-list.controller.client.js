@@ -40,7 +40,6 @@
             var splitUrl = url.split("/");
             var videoId = splitUrl[splitUrl.length - 1];
             var embeddedUrl = "https://www.youtube.com/embed/" + videoId;
-            console.log(embeddedUrl);
             return $sce.trustAsResourceUrl(embeddedUrl);
         }
 
