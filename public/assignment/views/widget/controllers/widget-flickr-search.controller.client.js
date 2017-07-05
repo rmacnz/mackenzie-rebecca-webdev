@@ -3,13 +3,18 @@
         .module("WebAppMaker")
         .controller("FlickrImageSearchController", FlickrImageSearchController)
 
-    function FlickrImageSearchController (flickrService) {
+    function FlickrImageSearchController ($routeParams, $location, flickrService, widgetService) {
         var model = this;
         init();
 
         function init() {
             model.searchPhotos = searchPhotos;
             model.selectPhoto = selectPhoto;
+
+            model.widgetId = $routeParams["widgetId"];
+            widgetService
+                .findWidgetById(model.widgetId)
+                .then(initializeWidget);
         }
 
         function searchPhotos(searchTerm) {
@@ -24,10 +29,22 @@
         }
 
         function selectPhoto(photo) {
-            console.log(photo);
             var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server
             + "/" + photo.id + "_" + photo.secret + "_s.jpg";
-            // TODO: Send photo url to edit/new widget page
+            model.widget.url = url;
+            widgetService
+                .updateWidget(model.widgetId, model.widget)
+                .then(updateSuccess);
+
+        }
+
+        function initializeWidget(widget) {
+            model.widget = widget;
+        }
+
+        function updateSuccess(widget) {
+            model.widget = widget;
+            $location.url("/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/" + widget._id);
         }
 
 
