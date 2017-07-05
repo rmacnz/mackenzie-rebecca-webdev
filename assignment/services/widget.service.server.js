@@ -119,7 +119,7 @@ function uploadImage(req, res) {
     if (widget == null) {
         widget = {};
     }
-    widget.url = "/public/assignment/uploads/" +filename;
+    widget.url = "/assignment/uploads/" +filename;
 
     var callbackUrl   = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
 
