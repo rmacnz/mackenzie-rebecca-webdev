@@ -14,7 +14,7 @@
             model.widgetId = $routeParams["widgetId"];
             widgetService
                 .findWidgetById(model.widgetId)
-                .then(initializeWidget);
+                .then(initializeWidget, newWidgetSearch);
         }
 
         function searchPhotos(searchTerm) {
@@ -44,9 +44,19 @@
 
         function updateSuccess(widget) {
             model.widget = widget;
+            var url = "/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/";
+            if (model.widgetId == null) {
+                url = url + "new/image?url=" + model.widget.url;
+            } else {
+                url = url + widget._id;
+            }
             $location.url("/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/" + widget._id);
         }
 
+        function newWidgetSearch(error) {
+            model.widgetId = null;
+            model.widget = {};
+        }
 
     }
 })();

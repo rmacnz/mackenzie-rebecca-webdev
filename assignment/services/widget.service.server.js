@@ -124,7 +124,8 @@ function uploadImage(req, res) {
     var callbackUrl   = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
 
     if (widget._id == null) {
-        callbackUrl   = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/new/image";
+        callbackUrl   = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/new/image"
+        + "?url=" + widget.url;
     }
 
     res.redirect(callbackUrl);
