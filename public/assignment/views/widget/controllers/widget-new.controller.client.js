@@ -8,10 +8,13 @@
         init();
 
         function init() {
+            initializeWidget();
+
             model.userId = $routeParams["uid"];
             model.webId = $routeParams["wid"];
             model.pageId = $routeParams["pid"];
             model.widgetType = $routeParams["wgtype"];
+            model.widgetId = "newimage";
 
             model.widgetTypeList = ["Heading", "Image", "YouTube", "Html"];
 
@@ -21,6 +24,26 @@
             model.getWidgetNewUrl = getWidgetNewUrl;
             model.getWidgetNewView = getWidgetNewView;
             model.clickOk = createWidget;
+        }
+
+        function initializeWidget() {
+            model.widget = {};
+            var imageName = $routeParams["name"];
+            if (imageName != null && imageName != "") {
+                model.widget.name = imageName;
+            }
+            var imageText = $routeParams["text"];
+            if (imageText != null && imageText != "") {
+                model.widget.text = imageText;
+            }
+            var imageWidth = $routeParams["width"];
+            if (imageWidth != null && imageWidth != "") {
+                model.widget.width = imageWidth;
+            }
+            var imageUrl = $routeParams["url"];
+            if (imageUrl != null && imageUrl != "") {
+                model.widget.url = imageUrl;
+            }
         }
 
         function getWidgetNewUrl(widgetType) {
@@ -64,10 +87,10 @@
                     }
                 case "IMAGE":
                     var width = model.widget.width;
-                    if (!width.endsWith("%") || parseInt(width.substring(0, width.length - 1)) === NaN) {
+                    if (width != null && (!width.endsWith("%") || parseInt(width.substring(0, width.length - 1)) === NaN)) {
                         return "Please enter a percentage between 0% and 100% for the image width (you must use the % sign).";
                     } else if (model.widget.url === "") {
-                        return "Please enter a URL for the image (we do not currently support file upload).";
+                        return "Please enter a URL for the image, search for an image, or upload an image from your computer.";
                     } else {
                         return "";
                     }

@@ -67,7 +67,7 @@
                     }
                 case "IMAGE":
                     var width = model.widget.width;
-                    if (!width.endsWith("%") || parseInt(width.substring(0, width.length - 1)) === NaN) {
+                    if (width != null && (!width.endsWith("%") || parseInt(width.substring(0, width.length - 1)) === NaN)) {
                         return "Please enter a percentage between 0% and 100% for the image width (you must use the % sign).";
                     } else if (model.widget.url === "") {
                         return "Please enter a URL for the image (we do not currently support file upload).";
@@ -79,7 +79,7 @@
                     if (!width.endsWith("%") || parseInt(width.substring(0, width.length - 1)) === NaN) {
                         return "Please enter a percentage between 0% and 100% for the image width.";
                     } else if (model.widget.url === "") {
-                        return "Please enter a URL for the YouTube video.";
+                        return "Please enter a URL for the image, search for an image, or upload an image from your computer.";
                     } else {
                         return "";
                     }

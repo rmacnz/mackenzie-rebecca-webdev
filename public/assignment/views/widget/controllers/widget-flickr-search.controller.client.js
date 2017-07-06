@@ -11,10 +11,13 @@
             model.searchPhotos = searchPhotos;
             model.selectPhoto = selectPhoto;
 
-            model.widgetId = $routeParams["widgetId"];
+            model.userId = $routeParams["uid"];
+            model.webId = $routeParams["wid"];
+            model.pageId = $routeParams["pid"];
+            model.widgetId = $routeParams["wgid"];
             widgetService
                 .findWidgetById(model.widgetId)
-                .then(initializeWidget, newWidgetSearch);
+                .then(initializeWidget);
         }
 
         function searchPhotos(searchTerm) {
@@ -32,31 +35,43 @@
             var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server
             + "/" + photo.id + "_" + photo.secret + "_s.jpg";
             model.widget.url = url;
-            widgetService
-                .updateWidget(model.widgetId, model.widget)
-                .then(updateSuccess);
+            if (model.widgetId != null) {
+                widgetService
+                    .updateWidget(model.widgetId, model.widget)
+                    .then(updateSuccess);
+            } else {
+                var togo = "/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId +
+                    "/widget/new/image?url=" + url;
+                if (model.widget.name != null) {
+                    togo = togo + "&name=" + model.widget.name;
+                }
+                if (model.widget.text != null) {
+                    togo = togo + "&text=" + model.widget.text;
+                }
+                if (model.widget.width != null) {
+                    togo = togo + "&width=" + model.widget.width;
+                }
+                $location.url(togo);
+            }
 
         }
 
         function initializeWidget(widget) {
-            model.widget = widget;
+            if (widget._id == null) {
+                model.widgetId = null;
+                model.widget = {};
+                model.widget.name = $routeParams["name"];
+                model.widget.text = $routeParams["text"];
+                model.widget.width = $routeParams["width"];
+            } else {
+                model.widget = widget;
+            }
         }
 
         function updateSuccess(widget) {
             model.widget = widget;
-            var url = "/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/";
-            if (model.widgetId == null) {
-                url = url + "new/image?url=" + model.widget.url;
-            } else {
-                url = url + widget._id;
-            }
-            $location.url("/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/" + widget._id);
+            var url = "/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/" + widget._id;
+            $location.url(url);
         }
-
-        function newWidgetSearch(error) {
-            model.widgetId = null;
-            model.widget = {};
-        }
-
     }
 })();
