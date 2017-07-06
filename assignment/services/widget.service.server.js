@@ -13,6 +13,9 @@ app.delete("/api/widget/:widgetId", deleteWidget);
 // upload images
 app.post ("/api/upload", upload.single("myFile"), uploadImage);
 
+// sort widgets
+app.put("/api/page/:pageId/widget", sortWidgets);
+
 var widgets = [
     { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
     { "_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum h4"},
@@ -129,5 +132,35 @@ function uploadImage(req, res) {
     }
 
     res.redirect(callbackUrl);
+}
+
+function sortWidgets(req, res) {
+    var pageId = req.params["pageId"];
+    var initialIndex = req.query["initial"];
+    var finalIndex = req.query["final"];
+    var moveThisWidget = widgets.get(initialIndex);
+    var newWidgets = [];
+    for (i = 0; i < widgets.length; i++) {
+        if (i == finalIndex) {
+            newWidgets.push(widgets[initialIndex]);
+        } else if (i < initialIndex && i < finalIndex) {
+            // this portion of the list is unaffected
+            newWidgets.push(widgets[i]);
+        } else if (i < initialIndex) {
+            // we are after the final index but before the initial index
+            newWidgets.push(widgets[i-1]);
+        } else if (i < finalIndex) {
+            // we are after the initial index but before the final index
+            newWidgets.push(widgets[i+1]);
+        } else {
+            // this portion of the list is unaffected
+            newWidgets.push(widgets[i]);
+        }
+    }
+    console.log("old list");
+    console.log(widgets);
+    console.log("new list");
+    console.log(newWidgets);
+    widgets = newWidgets;
 }
 

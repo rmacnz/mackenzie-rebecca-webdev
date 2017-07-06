@@ -2,8 +2,8 @@
 <div ng-include="'views/common/header/header-default-back-new.view.client.html'"></div>
 
 
-<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
-    <div ng-repeat="widget in model.widgetList" class="wd-widget">
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding" wbdv-sortable>
+    <div ng-repeat="widget in model.widgetList" class="wd-widget" id="{{widget._id}}">
         <div class="wd-widget-toolbar">
             <a href="#!/user/{{model.userId}}/website/{{model.webId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
