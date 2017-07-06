@@ -9,6 +9,7 @@
         this.findWidgetById = findWidgetById;
         this.updateWidget = updateWidget;
         this.deleteWidget = deleteWidget;
+        this.sortWidgets = sortWidgets;
 
         function createWidget(pageId, widget){
             var url = "/api/page/" + pageId + "/widget";
@@ -45,6 +46,14 @@
         function deleteWidget(widgetId) {
             var url = "/api/widget/" + widgetId;
             return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function sortWidgets(pageId, initialIndex, finalIndex) {
+            var url = "/api/page/" + pageId + "/widget?initial=" + initialIndex + "&final=" + finalIndex;
+            return $http.put(url)
                 .then(function (response) {
                     return response.data;
                 });

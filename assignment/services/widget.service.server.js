@@ -138,29 +138,19 @@ function sortWidgets(req, res) {
     var pageId = req.params["pageId"];
     var initialIndex = req.query["initial"];
     var finalIndex = req.query["final"];
-    var moveThisWidget = widgets.get(initialIndex);
+    var widgetToMove = widgets[initialIndex];
+    widgets.splice(initialIndex, 1);
     var newWidgets = [];
-    for (i = 0; i < widgets.length; i++) {
+    var currentindex = 0;
+    for (i = 0; i <= widgets.length; i++) {
         if (i == finalIndex) {
-            newWidgets.push(widgets[initialIndex]);
-        } else if (i < initialIndex && i < finalIndex) {
-            // this portion of the list is unaffected
-            newWidgets.push(widgets[i]);
-        } else if (i < initialIndex) {
-            // we are after the final index but before the initial index
-            newWidgets.push(widgets[i-1]);
-        } else if (i < finalIndex) {
-            // we are after the initial index but before the final index
-            newWidgets.push(widgets[i+1]);
+            newWidgets.push(widgetToMove);
         } else {
-            // this portion of the list is unaffected
-            newWidgets.push(widgets[i]);
+            newWidgets.push(widgets[currentindex]);
+            currentindex++;
         }
     }
-    console.log("old list");
-    console.log(widgets);
-    console.log("new list");
-    console.log(newWidgets);
     widgets = newWidgets;
+    res.sendStatus(200);
 }
 
