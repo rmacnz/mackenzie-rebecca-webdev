@@ -18,8 +18,6 @@
         }
 
         function loginSuccess(user) {
-            console.log("Found a user at login");
-            console.log(user);
             if (user != null) {
                 $location.url("/user/" + user._id);
             }

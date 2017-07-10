@@ -1,4 +1,5 @@
 var app = require("../../express");
+var userModel = require("../model/user/user.model.server");
 
 app.post("/api/user", createUser);
 app.get("/api/user/:userId", findUserById);
@@ -15,45 +16,44 @@ var users = [
 ];
 
 function createUser(req, res) {
-    // do stuff here
     var user = req.body;
-    user._id = (new Date()).getTime() + "";
-    user.created = new Date();
-    users.push(user);
-    res.json(user);
+    userModel.createUser(user)
+        .then(function(userCreated) {
+            res.json(userCreated);
+        });
 }
 
 function findUserById(req, res) {
     var userId = req.params["userId"];
-    var user = users.find(function(user) {
-        return user._id === userId;
-    });
-    res.json(user);
+    userModel.findUserById(userId)
+        .then(function(userFound) {
+            res.json(userFound);
+        });
 }
 
 function findUserByUsername(req, res) {
     var username = req.query["username"];
-    var user = users.find(function (user) {
-        return user.username === username;
-    });
-    if(typeof user === 'undefined') {
-        res.sendStatus(404);
-    }
-    res.json(user);
+    userModel.findUserByUsername(username)
+        .then(function(user) {
+            res.json(user);
+        }, function(err) {
+            res.sendStatus(404);
+        });
 }
 
 function findUserByCredentials(req, res) {
     var username = req.query["username"];
     var password = req.query["password"];
-    for(var u in users) {
-        var user = users[u];
-        if( user.username === username &&
-            user.password === password) {
-            res.json(user);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    userModel.findUserByCredentials(username, password)
+        .then(function(user) {
+            if (user != null) {
+                res.json(user);
+            } else {
+                res.sendStatus(404);
+            }
+        }, function(err) {
+            res.send(err);
+        });
 }
 
 function updateUser(req, res) {
