@@ -59,25 +59,16 @@ function findUserByCredentials(req, res) {
 function updateUser(req, res) {
     var userId = req.params["userId"];
     var user = req.body;
-    for(var u in users) {
-         if (users[u]._id === userId) {
-             users[u].username = user.username;
-             users[u].email = user.email;
-             users[u].firstName = user.firstName;
-             users[u].lastName = user.lastName;
-             res.json(user);
-             return;
-         }
-     }
-     res.sendStatus(404);
+    userModel.updateUser(userId, user)
+        .then(function(status) {
+            res.sendStatus(200);
+        });
 }
 
 function deleteUser(req, res) {
     var userId = req.params["userId"];
-    var user = users.find(function(user) {
-        return user._id === userId;
-    });
-    var index = users.indexOf(user);
-    users.splice(index, 1);
-    res.sendStatus(200);
+    userModel.deleteUser(userId)
+        .then(function(status) {
+            res.sendStatus(200);
+        });
 }

@@ -20,6 +20,8 @@
         function loginSuccess(user) {
             if (user != null) {
                 $location.url("/user/" + user._id);
+            } else {
+                loginFail("No such user");
             }
         }
 
@@ -31,6 +33,8 @@
         function nameSuccess(user) {
             if (user != null) {
                 model.errormsg = "Incorrect password for user '" + model.user.username + "'.";
+            } else {
+                nameFail("No user with this username");
             }
         }
 

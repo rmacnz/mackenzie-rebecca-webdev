@@ -17,7 +17,11 @@
         }
 
         function nameSuccess(user) {
-            model.errormsg = "A user with this username already exists. Please choose another username or go to the login page if you already have an account."
+            if (user != null) {
+                model.errormsg = "A user with this username already exists. Please choose another username or go to the login page if you already have an account."
+            } else {
+                nameFail("No such user");
+            }
         }
 
         function nameFail(error) {

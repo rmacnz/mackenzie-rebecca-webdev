@@ -30,7 +30,18 @@ function findUserByCredentials(username, password) {
     return userModel.findOne({username: username, password: password});
 }
 
-function updateUser(userId, user) {}
+function updateUser(userId, user) {
+    return userModel.update({_id: userId}, {
+        $set: {
+            username: user.username,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName
+        }
+    });
+}
 
-function deleteUser(userId) {}
+function deleteUser(userId) {
+    return userModel.remove({_id: userId});
+}
 

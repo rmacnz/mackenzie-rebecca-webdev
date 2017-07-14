@@ -19,7 +19,7 @@
             model.clickOk = createSite;
 
             websiteService
-                .findWebsitesByUser(model.userId)
+                .findAllWebsitesForUser(model.userId)
                 .then(initializeWebsiteList);
         }
 
