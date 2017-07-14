@@ -61,7 +61,7 @@
                 if (invalidMsg != "") {
                     model.errormsg = invalidMsg;
                 } else {
-                    model.widget.widgetType = model.widgetType.toUpperCase();
+                    model.widget.type = model.widgetType.toUpperCase();
                     widgetService
                         .createWidget(model.pageId, model.widget)
                         .then(createSuccess);
@@ -76,7 +76,7 @@
         }
 
         function validateWidgetParams() {
-            switch(model.widget.widgetType) {
+            switch(model.widget.type) {
                 case "HEADING":
                     if (model.widget.size > 7 || model.widget.size < 1 || model.widget.size % 1 != 0) {
                         return "Please enter an integer between 1 and 6 for the heading size.";

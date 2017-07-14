@@ -25,8 +25,8 @@
 
         function initializeWidget(widget) {
             model.widget = widget;
-            model.headerTitle = "Edit " + model.widget.widgetType.toLowerCase() + " widget";
-            model.widgetEditUrl = "views/widget/templates/widget-edit/widget-edit-" + model.widget.widgetType.toLowerCase() + ".view.client.html";
+            model.headerTitle = "Edit " + model.widget.type.toLowerCase() + " widget";
+            model.widgetEditUrl = "views/widget/templates/widget-edit/widget-edit-" + model.widget.type.toLowerCase() + ".view.client.html";
         }
 
         function updateWidget() {
@@ -56,7 +56,7 @@
         }
 
         function validateWidgetParams() {
-            switch(model.widget.widgetType) {
+            switch(model.widget.type) {
                 case "HEADING":
                     if (model.widget.size > 7 || model.widget.size < 1 || model.widget.size % 1 != 0) {
                         return "Please enter an integer between 1 and 6 for the heading size.";

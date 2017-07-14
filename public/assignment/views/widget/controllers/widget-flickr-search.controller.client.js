@@ -17,7 +17,7 @@
             model.widgetId = $routeParams["wgid"];
             widgetService
                 .findWidgetById(model.widgetId)
-                .then(initializeWidget);
+                .then(initializeWidget, errorWhenInitializing);
         }
 
         function searchPhotos(searchTerm) {
@@ -34,6 +34,9 @@
         function selectPhoto(photo) {
             var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server
             + "/" + photo.id + "_" + photo.secret + "_s.jpg";
+            if (model.widget == null) {
+                errorWhenInitializing("Widget was never initialized");
+            }
             model.widget.url = url;
             if (model.widgetId != null) {
                 widgetService
@@ -58,14 +61,18 @@
 
         function initializeWidget(widget) {
             if (widget._id == null) {
-                model.widgetId = null;
-                model.widget = {};
-                model.widget.name = $routeParams["name"];
-                model.widget.text = $routeParams["text"];
-                model.widget.width = $routeParams["width"];
+                errorWhenInitializing("No such widget");
             } else {
                 model.widget = widget;
             }
+        }
+
+        function errorWhenInitializing(error) {
+            model.widgetId = null;
+            model.widget = {};
+            model.widget.name = $routeParams["name"];
+            model.widget.text = $routeParams["text"];
+            model.widget.width = $routeParams["width"];
         }
 
         function updateSuccess(widget) {
