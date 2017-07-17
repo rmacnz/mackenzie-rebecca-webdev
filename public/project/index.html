@@ -20,6 +20,31 @@
     <script src="services/user.service.client.js"></script>
 </head>
 <body>
-<div ng-view></div>
+<div class="container-fluid" ng-controller="FSPController as model">
+    <h1>Fundies Staff Calendar API</h1>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Search</h2>
+            <input ng-model="model.title" class="form-control"
+                   placeholder="Please enter a search term (e.g. the name of a staff member)"/>
+            <button class="btn btn-primary btn-block"
+                    ng-click="model.searchCalendar(model.title)">SEARCH</button>
+            <div ng-show="model.results">
+                <h1>Results:</h1>
+                <ul class="list-group">
+                    <li ng-repeat="result in model.results"
+                        ng-click="model.searchDetails(result)"
+                        class="list-group-item wd-clickable">{{result}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div ng-show="model.detailedResult">
+                <h2>Details</h2>
+                {{model.detailedResult}}
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
