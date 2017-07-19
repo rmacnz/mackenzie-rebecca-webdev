@@ -1,7 +1,7 @@
 (function() {
     angular
         .module('FundiesStaffPage')
-        .factory('serverService', serverService);
+        .factory('calendarService', calendarService);
 
     function serverService($http) {
         var api = {

@@ -11,7 +11,7 @@
         function searchCalendar(searchTerm) {
             // TODO: Update to search the Fundies 1 calendar for an event with this name
             var calendarListUrl = "https://www.googleapis.com/calendar/v3/users/me/calendarList";
-            serverService.findCalendarList()
+            calendarService.findCalendarList()
                 .then(function(response){
                     console.log(response);
                 });
