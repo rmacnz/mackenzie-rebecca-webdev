@@ -3,7 +3,7 @@
         .module("FundiesStaffPage",["ngRoute"])
         .controller("FSPController", fspController);
 
-    function fspController($http) {
+    function fspController($http, serverService) {
         var model = this;
         model.searchCalendar = searchCalendar;
         model.searchDetails = searchDetails;
@@ -11,11 +11,15 @@
         function searchCalendar(searchTerm) {
             // TODO: Update to search the Fundies 1 calendar for an event with this name
             var calendarListUrl = "https://www.googleapis.com/calendar/v3/users/me/calendarList";
-            $http.get(calendarListUrl)
+            serverService.findCalendarList()
+                .then(function(response){
+                    console.log(response);
+                });
+            /*$http.get("/api/calendar/list")
                 .then(function(response) {
                     console.log(response);
                     model.results = response.data.Search;
-                });
+                });*/
         }
 
         function searchDetails(event) {
