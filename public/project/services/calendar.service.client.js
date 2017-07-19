@@ -3,7 +3,7 @@
         .module('FundiesStaffPage')
         .factory('calendarService', calendarService);
 
-    function serverService($http) {
+    function calendarService($http) {
         var api = {
             findCalendarList: findCalendarList
         }

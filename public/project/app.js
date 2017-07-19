@@ -3,7 +3,7 @@
         .module("FundiesStaffPage",["ngRoute"])
         .controller("FSPController", fspController);
 
-    function fspController($http, serverService) {
+    function fspController($http, calendarService) {
         var model = this;
         model.searchCalendar = searchCalendar;
         model.searchDetails = searchDetails;
