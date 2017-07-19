@@ -87,6 +87,20 @@
                     if (model.widget.text === "") {
                         return "Please enter some HTML in the textbox.";
                     }
+                case "TEXT":
+                    if (model.widget.rows == null) {
+                        model.widget.rows = 1;
+                    }
+                    if (model.widget.rows > 1 && (model.widget.text == null || model.widget.text === "")) {
+                        return "Please enter some text for this widget.";
+                    }
+                    if (model.widget.rows === 1 && (model.widget.placeholder == null || model.widget.placeholder === "")) {
+                        return "Please enter some placeholder text for this widget.";
+                    }
+                    if (model.widget.formatted == null) {
+                        model.widget.formatted = false;
+                    }
+                    return "";
                 default:
                     return "";
             }

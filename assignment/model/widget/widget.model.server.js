@@ -66,6 +66,15 @@ function updateWidget(widgetId, widget) {
                     height: widget.height
                 }
             });
+        case "TEXT":
+            return widgetModel.update({_id: widgetId}, {
+                $set: {
+                    text: widget.text,
+                    placeholder: widget.placeholder,
+                    rows: widget.rows,
+                    formatted: widget.formatted
+                }
+            });
     }
 }
 
@@ -74,34 +83,25 @@ function deleteWidget(widgetId) {
 }
 
 function reorderWidget(pageId, start, end) {
-    if (start != end) {
-        findAllWidgetsForPage(pageId)
-            .then(function (results) {
-                for (var index in results) {
-                    var widget = results[index];
-                    if (index === start) {
-                        widgetModel.update({_id: widget._id}, {
-                            $set: {
-                                index: end
-                            }
-                        });
-                    } else if (start < end && index > start && index <= end) {
-                        widgetModel.update({_id: widget._id}, {
-                            $set: {
-                                index: index - 1
-                            }
-                        });
-                    } else if (start > end && index >= end && index < start) {
-                        widgetModel.update({_id: widget._id}, {
-                            $set: {
-                                index: index + 1
-                            }
-                        });
+    return widgetModel
+        .find({_page: pageId}, function (error, widgets) {
+            widgets.forEach(function (widget) {
+                if (widget.index == start) {
+                    widget.index = end;
+                    widget.save();
+                }
+                else if ( end > start){
+                    if ( widget.index <= end && widget.index > start ){
+                        widget.index = widget.index - 1;
+                        widget.save();
                     }
                 }
-                return;
+                else{ // end < start
+                    if ( widget.index >= end && widget.index < start){
+                        widget.index = widget.index + 1;
+                        widget.save();
+                    }
+                }
             });
-    } else {
-        return;
-    }
+        }).sort({order: 1});
 }

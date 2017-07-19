@@ -16,7 +16,7 @@
             model.widgetType = $routeParams["wgtype"];
             model.widgetId = "newimage";
 
-            model.widgetTypeList = ["Heading", "Image", "YouTube", "Html"];
+            model.widgetTypeList = ["Heading", "Image", "YouTube", "Html", "Text"];
 
             model.urlPrev = "#!/user/" + model.userId + "/website/" + model.webId + "/page/" + model.pageId + "/widget/new";
             model.headerTitle = "New " + model.widgetType + " widget";
@@ -59,6 +59,7 @@
             if (model.widget != null) {
                 var invalidMsg = validateWidgetParams();
                 if (invalidMsg != "") {
+                    console.log(invalidMsg);
                     model.errormsg = invalidMsg;
                 } else {
                     model.widget.type = model.widgetType.toUpperCase();
@@ -107,6 +108,20 @@
                     if (model.widget.text === "") {
                         return "Please enter some HTML in the textbox.";
                     }
+                case "TEXT":
+                    if (model.widget.rows == null) {
+                        model.widget.rows = 1;
+                    }
+                    if (model.widget.rows > 1 && model.widget.text === "") {
+                        return "Please enter some text for this widget.";
+                    }
+                    if (model.widget.rows === 1 && model.widget.placeholder === "") {
+                        return "Please enter some placeholder text for this widget.";
+                    }
+                    if (model.widget.formatted == null) {
+                        model.widget.formatted = false;
+                    }
+                    return "";
                 default:
                     return "";
             }

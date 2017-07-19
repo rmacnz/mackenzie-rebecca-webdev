@@ -110,19 +110,5 @@ function sortWidgets(req, res) {
         .then(function() {
             res.sendStatus(200);
         })
-    /*var widgetToMove = widgets[initialIndex];
-    widgets.splice(initialIndex, 1);
-    var newWidgets = [];
-    var currentindex = 0;
-    for (i = 0; i <= widgets.length; i++) {
-        if (i == finalIndex) {
-            newWidgets.push(widgetToMove);
-        } else {
-            newWidgets.push(widgets[currentindex]);
-            currentindex++;
-        }
-    }
-    widgets = newWidgets;
-    res.sendStatus(200);*/
 }
 

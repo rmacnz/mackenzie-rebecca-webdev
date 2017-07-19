@@ -3,7 +3,7 @@ mongoose.Promise = require("q").Promise;
 
 var widgetSchema = mongoose.Schema({
     _page: {type: mongoose.Schema.ObjectId, ref: "PageModel", required: true},
-    type: {type: String, enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT'], required: true},
+    type: {type: String, enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT', 'TEXT'], required: true},
     index: {type: Number, required: true},
     name: String,
     text: String,
