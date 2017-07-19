@@ -16,6 +16,7 @@ var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
 
 
 function getCalendarList(req, res) {
+    var queryString = req.query["search"];
     // Load client secrets from a local file.
     fs.readFile('client_secret.json', function processClientSecrets(err, content) {
         if (err) {
@@ -24,7 +25,10 @@ function getCalendarList(req, res) {
         }
         // Authorize a client with the loaded credentials, then call the
         // Google Calendar API.
-        authorize(JSON.parse(content), listEvents);
+        var events = authorize(JSON.parse(content), function (auth) {
+            return listEvents(auth, queryString);
+        });
+        res.json(events);
     });
 }
 
@@ -48,7 +52,7 @@ function authorize(credentials, callback) {
             getNewToken(oauth2Client, callback);
         } else {
             oauth2Client.credentials = JSON.parse(token);
-            callback(oauth2Client);
+            return callback(oauth2Client);
         }
     });
 }
@@ -80,7 +84,7 @@ function getNewToken(oauth2Client, callback) {
             }
             oauth2Client.credentials = token;
             storeToken(token);
-            callback(oauth2Client);
+            return callback(oauth2Client);
         });
     });
 }
@@ -107,7 +111,7 @@ function storeToken(token) {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-function listEvents(auth) {
+function listEvents(auth, queryString) {
     var calendar = google.calendar('v3');
     /*calendar.calendarList.list({
         auth: auth
@@ -115,8 +119,9 @@ function listEvents(auth) {
         console.log(err);
         console.log(response);
     })*/ // Use this to find all calendars
-    calendar.events.list({
+    return calendar.events.list({
         auth: auth,
+        q: queryString,
         calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
         timeMin: (new Date()).toISOString(),
         maxResults: 10,
@@ -124,11 +129,12 @@ function listEvents(auth) {
         orderBy: 'startTime'
     }, function(err, response) {
         if (err) {
-            //console.log('The API returned an error: ' + err);
+            console.log('The API returned an error: ' + err);
             return;
         }
         var events = response.items;
-        if (events.length == 0) {
+        return events;
+        /*if (events.length == 0) {
             //console.log('No upcoming events found.');
         } else {
             //console.log('Upcoming 10 events:');
@@ -137,6 +143,6 @@ function listEvents(auth) {
                 var start = event.start.dateTime || event.start.date;
                 console.log('%s - %s', start, event.summary);
             }
-        }
+        }*/
     });
 }

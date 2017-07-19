@@ -9,9 +9,10 @@
         }
         return api;
 
-        function findCalendarList() {
-            return $http.get("/api/calendar/list")
+        function findCalendarList(queryString) {
+            return $http.get("/api/calendar/list?query="+queryString)
                 .then(function(response) {
+                    console.log(response);
                     return response.data;
                 });
         }
