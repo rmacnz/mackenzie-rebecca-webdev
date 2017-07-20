@@ -54,23 +54,22 @@
                 <h2>Details</h2>
                 <div class="bg-info">
                     <div class="bg-primary"><h2>{{model.detailedResult.summary}}</h2></div>
+                    <div>
+                        Recurring event:
+                        <input disabled type="checkbox" ng-model="model.detailedResult.isRecurring"/>
+                    </div>
+                    <div ng-if="model.detailedResult.isRecurring">
+                        <p>Occurs on: {{model.detailedResult.recur.date}}</p>
+                        <p>Frequency: {{model.detailedResult.recur.freq}}</p>
+                        <p>Starts: {{model.detailedResult.recur.start}}</p>
+                        <p>Ends: {{model.detailedResult.recur.until}}</p>
+                    </div>
+                    <div ng-if="!model.detailedResult.isRecurring">
+                        <p>Starts: {{model.detailedResult.dateStart}}</p>
+                        <p>Ends: {{model.detailedResult.dateEnd}}</p>
+                    </div>
+                    <p>Description: {{model.detailedResult.description}}</p>
                 </div>
-                <div>
-                    Recurring event:
-                    <input disabled type="checkbox" ng-model="model.detailedResult.isRecurring"/>
-                </div>
-                {{model.detailedresult.isRecurring}}
-                <div ng-if="model.detailedResult.isRecurring">
-                    <p>Occurs on: {{model.detailedResult.recur.date}}</p>
-                    <p>Frequency: {{model.detailedResult.recur.freq}}</p>
-                    <p>Starts: {{model.detailedResult.recur.start}}</p>
-                    <p>Ends: {{model.detailedResult.recur.until}}</p>
-                </div>
-                <div ng-if="!model.detailedResult.isRecurring">
-                    <p>Starts: {{model.detailedResult.dateStart}}</p>
-                    <p>Ends: {{model.detailedResult.dateEnd}}</p>
-                </div>
-                <p>Description: {{model.detailedResult.description}}</p>
             </div>
         </div>
     </div>
