@@ -17,7 +17,7 @@
                         if (event.recurrence != null) {
                             event.prettyDate = formatRecurringDate(event.start, event.end);
                         } else {
-                            event.prettyDate = "From " + formatDate(event.start) + " to " + formatDate(event.end);
+                            event.prettyDate = "From " + formatDate(event.start, true) + " to " + formatDate(event.end, true);
                         }
                         events[index] = event;
                     }
@@ -29,11 +29,37 @@
             // TODO: Update to search the Fundies 1 calendar for the given event
             calendarService.findEventById(event.id)
                 .then(function(eventinfo) {
+                    if (eventinfo.recurrence != null) {
+                        eventinfo.isRecurring = true;
+                        eventinfo.recur = parseRecurrence(eventinfo.recurrence[0]);
+                        eventinfo.recur.date = formatRecurringDate(eventinfo.start, eventinfo.end);
+                        eventinfo.recur.start = formatDate(eventinfo.start, false);
+                        eventinfo.recur.end = formatDate(eventinfo.end, false);
+                    } else {
+                        eventinfo.isRecurring = false;
+                        eventinfo.dateStart = formatDate(eventinfo.start, true);
+                        eventinfo.dateEnd = formatDate(eventinfo.end, true);
+                    }
                     model.detailedResult = eventinfo;
                 });
         }
 
-        function formatDate(dateObj) {
+        function parseRecurrence(recurrence) {
+            var freqsub = recurrence.substr(recurrence.indexOf("FREQ=")+5);
+            var frequency = freqsub.substr(0, freqsub.indexOf(";"));
+            var dateSub = recurrence.substr(recurrence.indexOf("UNTIL=")+6);
+            var untilDate = dateSub.substr(0, dateSub.indexOf(";"));
+            var untilYear = untilDate.substr(0,4);
+            var untilMon = untilDate.substr(4,2);
+            var untilDay = untilDate.substr(6,2);
+            var result = {
+                freq: frequency.toLowerCase(),
+                until: formatDate({dateTime: new Date(untilYear+"-"+untilMon+"-"+untilDay)}, false)
+            }
+            return result;
+        }
+
+        function formatDate(dateObj, includeTime) {
             var date = new Date(dateObj.dateTime);
             var monthNames = [
                 "January", "February", "March",
@@ -46,7 +72,11 @@
             var monthIndex = date.getMonth();
             var year = date.getFullYear();
 
-            return monthNames[monthIndex] + ' ' + day + ', ' + year + " at " + formatDateTime(date);
+            var result = monthNames[monthIndex] + ' ' + day + ', ' + year;
+            if (includeTime) {
+                result = result + " at " + formatDateTime(date);
+            }
+            return result;
         }
 
         function formatRecurringDate(startObj, endObj) {

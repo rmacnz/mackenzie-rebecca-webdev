@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="FundiesStaffPage">
+<html lang="en" ng-app="FundiesStaffPage" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Project Home Page</title>
@@ -38,18 +38,39 @@
                     <li ng-repeat="event in model.results"
                         ng-click="model.searchDetails(event)"
                         class="list-group-item wd-clickable">
-                        <h2>{{event.summary}}</h2>
-                        <div><h3>When:</h3>{{event.prettyDate}}</div>
-                        <h3>Description</h3>
-                        <p>{{event.description}}</p>
-                        <p>{{event}}</p></li>
+                        <div class="bg-info">
+                            <div class="bg-primary"><h2>{{event.summary}}</h2></div>
+                            <h4>When:</h4>
+                            <p>{{event.prettyDate}}</p>
+                            <h4>Where:</h4>
+                            <p>{{event.location}}</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="col-xs-6">
             <div ng-show="model.detailedResult">
                 <h2>Details</h2>
-                {{model.detailedResult}}
+                <div class="bg-info">
+                    <div class="bg-primary"><h2>{{model.detailedResult.summary}}</h2></div>
+                </div>
+                <div>
+                    Recurring event:
+                    <input disabled type="checkbox" ng-model="model.detailedResult.isRecurring"/>
+                </div>
+                {{model.detailedresult.isRecurring}}
+                <div ng-if="model.detailedResult.isRecurring">
+                    <p>Occurs on: {{model.detailedResult.recur.date}}</p>
+                    <p>Frequency: {{model.detailedResult.recur.freq}}</p>
+                    <p>Starts: {{model.detailedResult.recur.start}}</p>
+                    <p>Ends: {{model.detailedResult.recur.until}}</p>
+                </div>
+                <div ng-if="!model.detailedResult.isRecurring">
+                    <p>Starts: {{model.detailedResult.dateStart}}</p>
+                    <p>Ends: {{model.detailedResult.dateEnd}}</p>
+                </div>
+                <p>Description: {{model.detailedResult.description}}</p>
             </div>
         </div>
     </div>
