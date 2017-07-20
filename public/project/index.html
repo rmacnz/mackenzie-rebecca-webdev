@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Project Home Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
 
@@ -26,16 +28,21 @@
     <div class="row">
         <div class="col-xs-6">
             <h2>Search</h2>
-            <input ng-model="model.title" class="form-control"
+            <input ng-model="model.searchTerm" class="form-control"
                    placeholder="Please enter a search term (e.g. the name of a staff member)"/>
             <button class="btn btn-primary btn-block"
-                    ng-click="model.searchCalendar(model.title)">SEARCH</button>
+                    ng-click="model.searchCalendar(model.searchTerm)">SEARCH</button>
             <div ng-show="model.results">
                 <h1>Results:</h1>
                 <ul class="list-group">
-                    <li ng-repeat="result in model.results"
-                        ng-click="model.searchDetails(result)"
-                        class="list-group-item wd-clickable">{{result}}</li>
+                    <li ng-repeat="event in model.results"
+                        ng-click="model.searchDetails(event)"
+                        class="list-group-item wd-clickable">
+                        <h2>{{event.summary}}</h2>
+                        <div><h3>When:</h3>{{event.prettyDate}}</div>
+                        <h3>Description</h3>
+                        <p>{{event.description}}</p>
+                        <p>{{event}}</p></li>
                 </ul>
             </div>
         </div>

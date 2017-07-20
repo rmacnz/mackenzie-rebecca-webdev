@@ -5,16 +5,27 @@
 
     function calendarService($http) {
         var api = {
-            findCalendarList: findCalendarList
+            searchCalendarForEvents: searchCalendarForEvents,
+            findEventById: findEventById
         }
         return api;
 
-        function findCalendarList(queryString) {
-            return $http.get("/api/calendar/list?query="+queryString)
+        function searchCalendarForEvents(queryString) {
+            return $http.get("/api/calendar/event?search="+queryString)
                 .then(function(response) {
-                    console.log(response);
                     return response.data;
+                }, function (error) {
+                    console.log(error);
                 });
+        }
+
+        function findEventById(eventId) {
+            return $http.get("/api/calendar/event/"+eventId)
+                .then(function(response) {
+                    return response.data;
+                }, function(error) {
+                    console.log(error);
+                })
         }
     }
 })();

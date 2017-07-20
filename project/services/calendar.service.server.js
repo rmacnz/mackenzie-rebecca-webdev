@@ -1,6 +1,7 @@
 var app = require("../../express");
 
-app.get("/api/calendar/list", getCalendarList);
+app.get("/api/calendar/event", searchEvents);
+app.get("/api/calendar/event/:eventId", findEventById);
 
 var fs = require('fs');
 var readline = require('readline');
@@ -15,7 +16,7 @@ var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
 var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
 
 
-function getCalendarList(req, res) {
+function searchEvents(req, res) {
     var queryString = req.query["search"];
     // Load client secrets from a local file.
     fs.readFile('client_secret.json', function processClientSecrets(err, content) {
@@ -25,10 +26,59 @@ function getCalendarList(req, res) {
         }
         // Authorize a client with the loaded credentials, then call the
         // Google Calendar API.
-        var events = authorize(JSON.parse(content), function (auth) {
-            return listEvents(auth, queryString);
-        });
-        res.json(events);
+        authorize(JSON.parse(content), function (auth) {
+            var calendar = google.calendar('v3');
+            calendar.events.list({
+                auth: auth,
+                q: queryString,
+                calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
+                timeMin: (new Date()).toISOString(),
+                maxResults: 10,
+                singleEvents: false,
+                orderBy: 'updated'
+            }, function(err, response) {
+                if (err) {
+                    console.log('The API returned an error: ' + err);
+                    return;
+                }
+                res.json(response.items);
+            });
+        })
+    });
+}
+
+function findEventById(req, res) {
+    var eventId = req.params["eventId"];
+    fs.readFile('client_secret.json', function processClientSecrets(err, content) {
+        if (err) {
+            console.log('Error loading client secret file: ' + err);
+            return;
+        }
+        // Authorize a client with the loaded credentials, then call the
+        // Google Calendar API.
+        authorize(JSON.parse(content), function (auth) {
+            var calendar = google.calendar('v3');
+            calendar.events.get({
+                auth: auth,
+                calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
+                eventId: eventId
+            }, function(err, response) {
+                if (err) {
+                    console.log("The API returned an error: " + err);
+                    return;
+                } else {
+                    res.json(response);
+                }
+            });
+            // }, function(err, response) {
+            //     if (err) {
+            //         console.log('The API returned an error: ' + err);
+            //         return;
+            //     }
+            //     var events = response.items;
+            //     res.send(response.items);
+            // });
+        })
     });
 }
 
@@ -119,7 +169,7 @@ function listEvents(auth, queryString) {
         console.log(err);
         console.log(response);
     })*/ // Use this to find all calendars
-    return calendar.events.list({
+    calendar.events.list({
         auth: auth,
         q: queryString,
         calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
@@ -133,7 +183,7 @@ function listEvents(auth, queryString) {
             return;
         }
         var events = response.items;
-        return events;
+        return response;
         /*if (events.length == 0) {
             //console.log('No upcoming events found.');
         } else {
