@@ -111,17 +111,19 @@ function authorize(credentials, callback) {
     if (process.env.GCAPI_ACCESS_TOKEN) {
         credentials.access_token = process.env.GCAPI_ACCESS_TOKEN;
         credentials.refresh_token = process.env.GCAPI_REFRESH_TOKEN;
+        oauth2Client.credentials = credentials;
+        return callback(oauth2Client);
     } else {
         fs.readFile(TOKEN_PATH, function (err, token) {
             if (err) {
                 getNewToken(oauth2Client, callback);
             } else {
                 credentials = JSON.parse(token);
+                oauth2Client.credentials = credentials;
+                return callback(oauth2Client);
             }
         });
     }
-    oauth2Client.credentials = credentials;
-    return callback(oauth2Client);
 }
 
 /**
