@@ -179,8 +179,8 @@ function getNewToken(oauth2Client, callback) {
 function storeToken(token) {
     if (process.env.GCAPI_ACCESS_TOKEN) {
         var newToken = JSON.stringify(token);
-        process.env.GCAPI_ACCESS_TOKEN = newToken.access_token;
-        process.env.GCAPI_REFRESH_TOKEN = newToken.refresh_token;
+        process.env['GCAPI_ACCESS_TOKEN'] = newToken.access_token;
+        process.env['GCAPI_REFRESH_TOKEN'] = newToken.refresh_token;
         console.log("Token stored to enviroment variables");
     } else {
         try {
