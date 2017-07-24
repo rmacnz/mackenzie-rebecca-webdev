@@ -20,20 +20,8 @@ var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
 function searchEvents(req, res) {
     var queryString = req.query["search"];
     // Load client secrets from a local file.
-    fs.readFile('client_secret.json', function processClientSecrets(err, content) {
-        if (err) {
-            console.log('Error loading client secret file: ' + err);
-            return;
-        }
-        // Authorize a client with the loaded credentials, then call the
-        // Google Calendar API.
-        var clientinfo;
-        if (process.env.GCAPI_CLIENT_SECRET) {
-            clientinfo = null;
-        } else {
-            clientinfo = JSON.parse(content);
-        }
-        authorize(clientinfo, function (auth) {
+    if (process.env.GCAPI_CLIENT_SECRET) {
+        authorize(null, function (auth) {
             var calendar = google.calendar('v3');
             calendar.events.list({
                 auth: auth,
@@ -50,8 +38,42 @@ function searchEvents(req, res) {
                 }
                 res.json(response.items);
             });
-        })
-    });
+        });
+    } else {
+        fs.readFile('client_secret.json', function processClientSecrets(err, content) {
+            if (err) {
+                console.log('Error loading client secret file: ' + err);
+                return;
+            }
+            // Authorize a client with the loaded credentials, then call the
+            // Google Calendar API.
+            var clientinfo;
+            if (process.env.GCAPI_CLIENT_SECRET) {
+                clientinfo = null;
+            } else {
+                clientinfo = JSON.parse(content);
+            }
+            authorize(clientinfo, function (auth) {
+                var calendar = google.calendar('v3');
+                calendar.events.list({
+                    auth: auth,
+                    q: queryString,
+                    calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
+                    timeMin: (new Date()).toISOString(),
+                    maxResults: 10,
+                    singleEvents: false,
+                    orderBy: 'updated'
+                }, function(err, response) {
+                    if (err) {
+                        console.log('The API returned an error: ' + err);
+                        return;
+                    }
+                    res.json(response.items);
+                });
+            })
+        });
+    }
+
 }
 
 function findEventById(req, res) {
