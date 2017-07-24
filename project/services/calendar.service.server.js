@@ -20,103 +20,64 @@ var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
 function searchEvents(req, res) {
     var queryString = req.query["search"];
     // Load client secrets from a local file.
-    if (process.env.GCAPI_CLIENT_SECRET) {
-        authorize(null, function (auth) {
-            var calendar = google.calendar('v3');
-            calendar.events.list({
-                auth: auth,
-                q: queryString,
-                calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
-                timeMin: (new Date()).toISOString(),
-                maxResults: 10,
-                singleEvents: false,
-                orderBy: 'updated'
-            }, function(err, response) {
-                if (err) {
-                    console.log('The API returned an error: ' + err);
-                    return;
-                }
-                res.json(response.items);
-            });
-        });
-    } else {
+    var clientinfo = null;
+    if (!process.env.GCAPI_CLIENT_SECRET) {
         fs.readFile('client_secret.json', function processClientSecrets(err, content) {
             if (err) {
                 console.log('Error loading client secret file: ' + err);
                 return;
             }
-            // Authorize a client with the loaded credentials, then call the
-            // Google Calendar API.
-            var clientinfo;
-            if (process.env.GCAPI_CLIENT_SECRET) {
-                clientinfo = null;
-            } else {
-                clientinfo = JSON.parse(content);
-            }
-            authorize(clientinfo, function (auth) {
-                var calendar = google.calendar('v3');
-                calendar.events.list({
-                    auth: auth,
-                    q: queryString,
-                    calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
-                    timeMin: (new Date()).toISOString(),
-                    maxResults: 10,
-                    singleEvents: false,
-                    orderBy: 'updated'
-                }, function(err, response) {
-                    if (err) {
-                        console.log('The API returned an error: ' + err);
-                        return;
-                    }
-                    res.json(response.items);
-                });
-            })
+            clientinfo = JSON.parse(content);
         });
     }
+    authorize(clientinfo, function (auth) {
+        var calendar = google.calendar('v3');
+        calendar.events.list({
+            auth: auth,
+            q: queryString,
+            calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
+            timeMin: (new Date()).toISOString(),
+            maxResults: 10,
+            singleEvents: false,
+            orderBy: 'updated'
+        }, function(err, response) {
+            if (err) {
+                console.log('The API returned an error: ' + err);
+                return;
+            }
+            res.json(response.items);
+        });
+    });
 
 }
 
 function findEventById(req, res) {
     var eventId = req.params["eventId"];
-    if (process.env.GCAPI_CLIENT_SECRET) {
-        authorize(null, function(auth) {
-            var calendar = google.calendar('v3');
-            calendar.events.get({
-                auth: auth,
-                calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
-                eventId: eventId
-            }, function(err, response) {
-                if (err) {
-                    console.log("The API returned an error: " + err);
-                    return;
-                } else {
-                    res.json(response);
-                }
-            });
-        });
-    } else {
+    var clientinfo = null;
+    if (!process.env.GCAPI_CLIENT_SECRET) {
         fs.readFile('client_secret.json', function processClientSecrets(err, content) {
             if (err) {
                 console.log('Error loading client secret file: ' + err);
                 return;
             }
-            authorize(JSON.parse(content), function (auth) {
-                var calendar = google.calendar('v3');
-                calendar.events.get({
-                    auth: auth,
-                    calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
-                    eventId: eventId
-                }, function(err, response) {
-                    if (err) {
-                        console.log("The API returned an error: " + err);
-                        return;
-                    } else {
-                        res.json(response);
-                    }
-                });
-            })
+            clientinfo = JSON.parse(content);
         });
     }
+    authorize(clientinfo, function (auth) {
+        var calendar = google.calendar('v3');
+        calendar.events.get({
+            auth: auth,
+            calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
+            eventId: eventId
+        }, function(err, response) {
+            if (err) {
+                console.log("The API returned an error: " + err);
+                return;
+            } else {
+                res.json(response);
+            }
+        });
+    })
 
 }
 
@@ -131,7 +92,7 @@ function authorize(credentials, callback) {
     var clientSecret;
     var clientId;
     var redirectUrl;
-    if (process.env.GCAPI_CLIENT_SECRET) {
+    if (credentials == null) {
         clientSecret = process.env.GCAPI_CLIENT_SECRET;
         clientId = process.env.GCAPI_CLIENT_ID;
         redirectUrl = process.env.GCAPI_REDIRECT_URL;
