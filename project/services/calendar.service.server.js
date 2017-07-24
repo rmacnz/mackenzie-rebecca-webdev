@@ -27,7 +27,13 @@ function searchEvents(req, res) {
         }
         // Authorize a client with the loaded credentials, then call the
         // Google Calendar API.
-        authorize(JSON.parse(content), function (auth) {
+        var clientinfo;
+        if (process.env.GCAPI_CLIENT_SECRET) {
+            clientinfo = null;
+        } else {
+            clientinfo = JSON.parse(content);
+        }
+        authorize(clientinfo, function (auth) {
             var calendar = google.calendar('v3');
             calendar.events.list({
                 auth: auth,
@@ -71,7 +77,13 @@ function findEventById(req, res) {
         //         res.json(response);
         //     }
         // });
-        authorize(JSON.parse(content), function (auth) {
+        var clientinfo;
+        if (process.env.GCAPI_CLIENT_SECRET) {
+            clientinfo = null;
+        } else {
+            clientinfo = JSON.parse(content);
+        }
+        authorize(clientinfo, function (auth) {
             var calendar = google.calendar('v3');
             calendar.events.get({
                 auth: auth,
@@ -97,9 +109,19 @@ function findEventById(req, res) {
  * @param {function} callback The callback to call with the authorized client.
  */
 function authorize(credentials, callback) {
-    var clientSecret = credentials.installed.client_secret;
-    var clientId = credentials.installed.client_id;
-    var redirectUrl = credentials.installed.redirect_uris[0];
+    var clientSecret;
+    var clientId;
+    var redirectUrl;
+    if (process.env.GCAPI_CLIENT_SECRET) {
+        clientSecret = process.env.GCAPI_CLIENT_SECRET;
+        clientId = process.env.GCAPI_CLIENT_ID;
+        redirectUrl = process.env.GCAPI_REDIRECT_URL;
+    } else {
+        clientSecret = credentials.installed.client_secret;
+        clientId = credentials.installed.client_id;
+        redirectUrl = credentials.installed.redirect_uris[0];
+    }
+
     var auth = new googleAuth();
     var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
