@@ -29,18 +29,18 @@ function searchEvents(req, res) {
             }
             clientinfo = JSON.parse(content);
             authorize(clientinfo, function (auth) {
-                searchByEventsAuthorized(auth, queryString);
+                searchByEventsAuthorized(auth, res, queryString);
             });
         });
     } else {
         authorize(null, function (auth) {
-            searchByEventsAuthorized(auth, queryString);
+            searchByEventsAuthorized(auth, res, queryString);
         });
     }
 
 }
 
-function searchByEventsAuthorized(auth, queryString) {
+function searchByEventsAuthorized(auth, res, queryString) {
     var calendar = google.calendar('v3');
     calendar.events.list({
         auth: auth,
@@ -54,7 +54,7 @@ function searchByEventsAuthorized(auth, queryString) {
         if (err) {
             if (err.code == 401) {
                 getNewToken(auth, function (auth) {
-                    searchByEventsAuthorized(auth, queryString);
+                    searchByEventsAuthorized(auth, res, queryString);
                 });
             }
             console.log('The API returned an error: ' + err);
