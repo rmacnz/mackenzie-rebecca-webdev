@@ -56,6 +56,20 @@ function findEventById(req, res) {
         }
         // Authorize a client with the loaded credentials, then call the
         // Google Calendar API.
+        // BELOW: Tried to use API key but it didn't work
+        // calendar.events.get({
+        //     auth: auth,
+        //     calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
+        //     eventId: eventId,
+        //     key: 'AIzaSyC5eECj6-1uqKA6d7y1hqmE8dtN2U4qGes'
+        // }, function (err, response) {
+        //     if (err) {
+        //         console.log("The API returned an error: " + err);
+        //         return;
+        //     } else {
+        //         res.json(response);
+        //     }
+        // });
         authorize(JSON.parse(content), function (auth) {
             var calendar = google.calendar('v3');
             calendar.events.get({
@@ -70,14 +84,6 @@ function findEventById(req, res) {
                     res.json(response);
                 }
             });
-            // }, function(err, response) {
-            //     if (err) {
-            //         console.log('The API returned an error: ' + err);
-            //         return;
-            //     }
-            //     var events = response.items;
-            //     res.send(response.items);
-            // });
         })
     });
 }
