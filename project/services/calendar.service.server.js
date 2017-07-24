@@ -106,6 +106,7 @@ function authorize(credentials, callback) {
     var clientId;
     var redirectUrl;
     if (credentials == null) {
+        credentials = {};
         clientSecret = process.env.GCAPI_CLIENT_SECRET;
         clientId = process.env.GCAPI_CLIENT_ID;
         redirectUrl = process.env.GCAPI_REDIRECT_URL;
@@ -120,7 +121,6 @@ function authorize(credentials, callback) {
 
     // Check if we have previously stored a token.
 
-    var credentials = {};
     if (process.env.GCAPI_ACCESS_TOKEN) {
         credentials.access_token = process.env.GCAPI_ACCESS_TOKEN;
         credentials.refresh_token = process.env.GCAPI_REFRESH_TOKEN;
