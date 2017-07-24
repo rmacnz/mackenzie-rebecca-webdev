@@ -28,27 +28,40 @@ function searchEvents(req, res) {
                 return;
             }
             clientinfo = JSON.parse(content);
+            authorize(clientinfo, function (auth) {
+                searchByEventsAuthorized(auth, queryString);
+            });
+        });
+    } else {
+        authorize(null, function (auth) {
+            searchByEventsAuthorized(auth, queryString);
         });
     }
-    authorize(clientinfo, function (auth) {
-        var calendar = google.calendar('v3');
-        calendar.events.list({
-            auth: auth,
-            q: queryString,
-            calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
-            timeMin: (new Date()).toISOString(),
-            maxResults: 10,
-            singleEvents: false,
-            orderBy: 'updated'
-        }, function(err, response) {
-            if (err) {
-                console.log('The API returned an error: ' + err);
-                return;
-            }
-            res.json(response.items);
-        });
-    });
 
+}
+
+function searchByEventsAuthorized(auth, queryString) {
+    var calendar = google.calendar('v3');
+    calendar.events.list({
+        auth: auth,
+        q: queryString,
+        calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
+        timeMin: (new Date()).toISOString(),
+        maxResults: 10,
+        singleEvents: false,
+        orderBy: 'updated'
+    }, function(err, response) {
+        if (err) {
+            if (err.code == 401) {
+                getNewToken(auth, function (auth) {
+                    searchByEventsAuthorized(auth, queryString);
+                });
+            }
+            console.log('The API returned an error: ' + err);
+            return;
+        }
+        res.json(response.items);
+    });
 }
 
 function findEventById(req, res) {
