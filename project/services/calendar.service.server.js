@@ -56,34 +56,8 @@ function searchEvents(req, res) {
 
 function findEventById(req, res) {
     var eventId = req.params["eventId"];
-    fs.readFile('client_secret.json', function processClientSecrets(err, content) {
-        if (err) {
-            console.log('Error loading client secret file: ' + err);
-            return;
-        }
-        // Authorize a client with the loaded credentials, then call the
-        // Google Calendar API.
-        // BELOW: Tried to use API key but it didn't work
-        // calendar.events.get({
-        //     auth: auth,
-        //     calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
-        //     eventId: eventId,
-        //     key: 'AIzaSyC5eECj6-1uqKA6d7y1hqmE8dtN2U4qGes'
-        // }, function (err, response) {
-        //     if (err) {
-        //         console.log("The API returned an error: " + err);
-        //         return;
-        //     } else {
-        //         res.json(response);
-        //     }
-        // });
-        var clientinfo;
-        if (process.env.GCAPI_CLIENT_SECRET) {
-            clientinfo = null;
-        } else {
-            clientinfo = JSON.parse(content);
-        }
-        authorize(clientinfo, function (auth) {
+    if (process.env.GCAPI_CLIENT_SECRET) {
+        authorize(null, function(auth) {
             var calendar = google.calendar('v3');
             calendar.events.get({
                 auth: auth,
@@ -97,8 +71,31 @@ function findEventById(req, res) {
                     res.json(response);
                 }
             });
-        })
-    });
+        });
+    } else {
+        fs.readFile('client_secret.json', function processClientSecrets(err, content) {
+            if (err) {
+                console.log('Error loading client secret file: ' + err);
+                return;
+            }
+            authorize(JSON.parse(content), function (auth) {
+                var calendar = google.calendar('v3');
+                calendar.events.get({
+                    auth: auth,
+                    calendarId: '5t8dq96sndpeu54813468o805g@group.calendar.google.com',
+                    eventId: eventId
+                }, function(err, response) {
+                    if (err) {
+                        console.log("The API returned an error: " + err);
+                        return;
+                    } else {
+                        res.json(response);
+                    }
+                });
+            })
+        });
+    }
+
 }
 
 /**
