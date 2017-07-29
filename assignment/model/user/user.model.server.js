@@ -6,6 +6,7 @@ var userSchema = require("./user.schema.server");
 var userModel = mongoose.model("UserModel", userSchema);
 
 userModel.createUser = createUser;
+userModel.findAllUsers = findAllUsers;
 userModel.findUserById = findUserById;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
@@ -15,7 +16,12 @@ userModel.deleteUser = deleteUser;
 module.exports = userModel;
 
 function createUser(user) {
+    user.roles = ["USER"];
     return userModel.create(user);
+}
+
+function findAllUsers() {
+    return userModel.find();
 }
 
 function findUserById(userId) {

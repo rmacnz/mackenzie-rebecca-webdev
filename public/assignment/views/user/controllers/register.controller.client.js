@@ -27,7 +27,7 @@
         function nameFail(error) {
             if (model.user.password === model.user.password_verify) {
                 //model.user = userService.createUser(model.user);
-                userService.createUser(model.user)
+                userService.register(model.user)
                     .then(createSuccess);
             } else {
                 model.errormsg = "Passwords did not match. Please try again."
@@ -36,7 +36,7 @@
 
         function createSuccess(user) {
             model.user = user;
-            $location.url("/user/" + user._id);
+            $location.url("/profile");
         }
     }
     

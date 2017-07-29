@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Assignment Home Page</h1>
+    <a class="btn btn-primary btn-block"
+       href="#!/login" ng-if="!model.user">Continue to login page</a>
+    <a class="btn btn-primary btn-block"
+       href="#!/register" ng-if="!model.user">Continue to registration</a>
+    <a class="btn btn-primary btn-block"
+       href="#!/profile" ng-if="model.user">Continue to profile page</a>
+    <a class="btn btn-primary btn-block"
+       href="#!/admin" ng-if="model.user && model.user.roles && (model.user.roles.indexOf('ADMIN') > -1)">Continue to admin home page</a>
+</div>

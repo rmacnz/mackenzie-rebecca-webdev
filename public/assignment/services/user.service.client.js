@@ -7,17 +7,31 @@
 
         var api = {
             createUser: createUser,
+            findAllUsers: findAllUsers,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            unregister: unregister,
+            login: login,
+            checkLoggedIn: checkLoggedIn,
+            logout: logout,
+            register: register
         };
         return api;
 
         function createUser(user) {
             return $http.post("/api/user", user)
                 .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        // Return a list of all the users
+        function findAllUsers() {
+            return $http.get("/api/user")
+                .then(function (response) {
                     return response.data;
                 });
         }
@@ -60,6 +74,45 @@
             var url = "/api/user/" + userId;
             return $http.delete(url)
                 .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function unregister() {
+            return $http.delete("/api/user")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function login(username, password) {
+            var credentials = {
+                username: username,
+                password: password
+            }
+            return $http.post("/api/login", credentials)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        
+        function checkLoggedIn() {
+            return $http.get("/api/checkLoggedIn")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function logout() {
+            return $http.post("/api/logout")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function register(user) {
+            return $http.post("/api/register", user)
+                .then(function(response) {
                     return response.data;
                 });
         }

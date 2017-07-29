@@ -10,7 +10,7 @@
         function login() {
             if (model.user != null) {
                 userService
-                    .findUserByCredentials(model.user.username, model.user.password)
+                    .login(model.user.username, model.user.password)
                     .then(loginSuccess, loginFail);
             } else {
                 model.errormsg = "Please enter a username and password.";
@@ -19,18 +19,20 @@
 
         function loginSuccess(user) {
             if (user != null) {
-                $location.url("/user/" + user._id);
+                $location.url("/profile");
             } else {
                 loginFail("No such user");
             }
         }
 
         function loginFail(error) {
+            console.log(error);
             userService.findUserByUsername(model.user.username)
                 .then(nameSuccess, nameFail);
         }
 
         function nameSuccess(user) {
+            console.log(user);
             if (user != null) {
                 model.errormsg = "Incorrect password for user '" + model.user.username + "'.";
             } else {

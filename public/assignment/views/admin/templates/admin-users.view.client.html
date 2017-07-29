@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<div class="container-fluid">
+    <h1>Admin Users Page</h1>
+    <ul class="list-group">
+        <li class="list-group-item"
+            ng-repeat="user in model.userList">
+            <a ng-click="model.deleteAccount(user._id)">
+                <span class="glyphicon glyphicon-remove pull-right"></span>
+            </a>
+            <p>Username: {{user.username}}</p>
+            <p>First Name: {{user.firstName}}</p>
+            <p>Last Name: {{user.lastName}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Roles: {{user.roles}}</p>
+        </li>
+    </ul>
+</div>
