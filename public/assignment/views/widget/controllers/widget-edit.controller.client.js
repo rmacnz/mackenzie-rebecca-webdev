@@ -62,9 +62,9 @@
         function validateWidgetParams() {
             switch(model.widget.type) {
                 case "HEADING":
-                    if (model.widget.size > 7 || model.widget.size < 1 || model.widget.size % 1 != 0) {
+                    if (model.widget.size != null && model.widget.size > 6 || model.widget.size < 1 || model.widget.size % 1 != 0) {
                         return "Please enter an integer between 1 and 6 for the heading size.";
-                    } else if (model.widget.text === "") {
+                    } else if (model.widget.text == null || model.widget.text === "") {
                         return "Please enter some text for the heading.";
                     } else {
                         return "";
