@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<div class="container-fluid">
+    <h1>Project Home Page</h1>
+    <a class="btn btn-primary btn-block" href="#!/login"
+       ng-if="!model.user">Login</a>
+    <a class="btn btn-primary btn-block" href="#!/register"
+       ng-if="!model.user">Register</a>
+    <a class="btn btn-primary btn-block" href="#!/search/items">
+        Search Items</a>
+    <a class="btn btn-primary btn-block" href="#!/search/auctions">
+        Search Auctions</a>
+    <a class="btn btn-primary btn-block" href="#!/profile"
+       ng-if="model.user">Profile</a>
+</div>

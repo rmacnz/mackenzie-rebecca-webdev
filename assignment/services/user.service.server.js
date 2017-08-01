@@ -35,7 +35,7 @@ app.post("/api/register", register);
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+//passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
 var users = [
     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder", email: "alice@wonder.com"},

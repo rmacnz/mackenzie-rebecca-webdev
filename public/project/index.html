@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="FundiesStaffPage" xmlns="http://www.w3.org/1999/html">
+<html lang="en" ng-app="RunescapeApp">
 <head>
     <meta charset="UTF-8">
     <title>Project Home Page</title>
@@ -14,65 +14,16 @@
     <script src="app.js"></script>
     <script src="config.js"></script>
 
+    <!-- home page -->
+    <script src="views/home/controllers/home.controller.client.js"></script>
+
     <!-- user -->
     <script src="views/user/controllers/login.controller.client.js"></script>
     <script src="views/user/controllers/profile.controller.client.js"></script>
     <script src="views/user/controllers/register.controller.client.js"></script>
-    <script src="views/user/controllers/options.controller.client.js"></script>
     <script src="services/user.service.client.js"></script>
-    <script src="services/calendar.service.client.js"></script>
 </head>
 <body>
-<div class="container-fluid" ng-controller="FSPController as model">
-    <h1>Fundies Staff Calendar API</h1>
-    <div class="row">
-        <div class="col-xs-6">
-            <h2>Search</h2>
-            <input ng-model="model.searchTerm" class="form-control"
-                   placeholder="Please enter a search term (e.g. the name of a staff member)"/>
-            <button class="btn btn-primary btn-block"
-                    ng-click="model.searchCalendar(model.searchTerm)">SEARCH</button>
-            <div ng-show="model.results">
-                <h1>Results:</h1>
-                <ul class="list-group">
-                    <li ng-repeat="event in model.results"
-                        ng-click="model.searchDetails(event)"
-                        class="list-group-item wd-clickable">
-                        <div class="bg-info">
-                            <div class="bg-primary"><h2>{{event.summary}}</h2></div>
-                            <h4>When:</h4>
-                            <p>{{event.prettyDate}}</p>
-                            <h4>Where:</h4>
-                            <p>{{event.location}}</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div ng-show="model.detailedResult">
-                <h2>Details</h2>
-                <div class="bg-info">
-                    <div class="bg-primary"><h2>{{model.detailedResult.summary}}</h2></div>
-                    <div>
-                        Recurring event:
-                        <input disabled type="checkbox" ng-model="model.detailedResult.isRecurring"/>
-                    </div>
-                    <div ng-if="model.detailedResult.isRecurring">
-                        <p>Occurs on: {{model.detailedResult.recur.date}}</p>
-                        <p>Frequency: {{model.detailedResult.recur.freq}}</p>
-                        <p>Starts: {{model.detailedResult.recur.start}}</p>
-                        <p>Ends: {{model.detailedResult.recur.until}}</p>
-                    </div>
-                    <div ng-if="!model.detailedResult.isRecurring">
-                        <p>Starts: {{model.detailedResult.dateStart}}</p>
-                        <p>Ends: {{model.detailedResult.dateEnd}}</p>
-                    </div>
-                    <p>Description: {{model.detailedResult.description}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div ng-view></div>
 </body>
 </html>

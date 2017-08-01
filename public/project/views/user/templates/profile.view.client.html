@@ -12,46 +12,44 @@
     </div>
 </nav>
 
-    <div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
-        <div ng-show="model.message" class="alert alert-success">{{model.message}}</div>
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <div ng-show="model.message" class="alert alert-success">{{model.message}}</div>
 
-        <form>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input readonly
-                       type="text"
-                       class="form-control"
-                       id="username"
-                       ng-model="model.user.username">
-            </div>
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email"
-                       placeholder="Please enter your email address"
-                       ng-model="model.user.email">
-            </div>
-            <div class="form-group">
-                <label for="first-name">First Name</label>
-                <input type="text" class="form-control" id="first-name"
-                       placeholder="Please enter your first name"
-                       ng-model="model.user.firstName">
-            </div>
-            <div class="form-group">
-                <label for="last-name">Last Name</label>
-                <input type="text" class="form-control" id="last-name"
-                       placeholder="Please enter your last name"
-                       ng-model="model.user.lastName">
-            </div>
-        </form>
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input readonly
+                   type="text"
+                   class="form-control"
+                   id="username"
+                   ng-model="model.user.username">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email"
+                   placeholder="Please enter your email address"
+                   ng-model="model.user.email">
+        </div>
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" class="form-control" id="first-name"
+                   placeholder="Please enter your first name"
+                   ng-model="model.user.firstName">
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" class="form-control" id="last-name"
+                   placeholder="Please enter your last name"
+                   ng-model="model.user.lastName">
+        </div>
+    </form>
 
-        <a class="btn btn-danger  btn-block"
-           href="#!/login">Logout</a>
-        <a ng-click="model.deleteUser()"
-           class="btn btn-danger  btn-block wd-bot-margin">
-            Delete Account
-        </a>
-
-        <div ng-include="'views/user/templates/options-user.view.client.html'"></div>
-    </div>
-
-<div ng-include="'views/common/footer/footer-primary.view.client.html'"></div>
+    <a href="#!/"
+       class="btn btn-primary btn-block">Home Page</a>
+    <a ng-click="model.logout()"
+       class="btn btn-primary btn-block">Logout</a>
+    <a ng-click="model.unregister()"
+       class="btn btn-danger btn-block wd-bot-margin">
+        Unregister
+    </a>
+</div>

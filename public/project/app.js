@@ -1,6 +1,6 @@
 (function(){
     angular
-        .module("FundiesStaffPage",["ngRoute"])
+        .module("RunescapeApp",["ngRoute"])
         .controller("FSPController", fspController);
 
     function fspController($http, calendarService) {

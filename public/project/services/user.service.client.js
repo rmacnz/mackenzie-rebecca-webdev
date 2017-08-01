@@ -1,29 +1,37 @@
 (function(){
     angular
-        .module('FundiesStaffPage')
+        .module('RunescapeApp')
         .factory('userService', userService);
 
     function userService($http) {
-        var users = [
-            {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder", email: "alice@wonder.com"},
-            {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley", email: "bob@marley.com"},
-            {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia", email: "cherrygarcia@gmail.com"},
-            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi", email: "jose@ccs.neu.edu"}
-        ];
 
         var api = {
             createUser: createUser,
+            findAllUsers: findAllUsers,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            unregister: unregister,
+            login: login,
+            checkLoggedIn: checkLoggedIn,
+            logout: logout,
+            register: register
         };
         return api;
 
         function createUser(user) {
             return $http.post("/api/user", user)
                 .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        // Return a list of all the users
+        function findAllUsers() {
+            return $http.get("/api/user")
+                .then(function (response) {
                     return response.data;
                 });
         }
@@ -66,6 +74,45 @@
             var url = "/api/user/" + userId;
             return $http.delete(url)
                 .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function unregister() {
+            return $http.delete("/api/user")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function login(username, password) {
+            var credentials = {
+                username: username,
+                password: password
+            }
+            return $http.post("/api/login", credentials)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkLoggedIn() {
+            return $http.get("/api/checkLoggedIn")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function logout() {
+            return $http.post("/api/logout")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function register(user) {
+            return $http.post("/api/register", user)
+                .then(function(response) {
                     return response.data;
                 });
         }

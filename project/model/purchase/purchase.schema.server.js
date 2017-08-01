@@ -6,6 +6,6 @@ var purchaseSchema = mongoose.Schema({
     item: {type: mongoose.Schema.Types.ObjectId, ref:"ItemModel"},
     num: {type: Number, required: true, default: 1},
     pricePer: {type: Number, required: true},
-    buyer: {type: mongoose.Schema.Types.ObjectId, ref:"UserModel", required: true},
-    seller: {type: mongoose.Schema.Types.ObjectId, ref:"UserModel", required: true}
+    buyer: {type: mongoose.Schema.Types.ObjectId, ref:"ProjectUserModel", required: true},
+    seller: {type: mongoose.Schema.Types.ObjectId, ref:"ProjectUserModel", required: true}
 }, {collection: "purchase"});

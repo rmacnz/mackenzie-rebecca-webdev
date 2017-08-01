@@ -3,7 +3,7 @@ mongoose.Promise = require("q").Promise;
 
 var userSchema = require("./user.schema.server");
 
-var userModel = mongoose.model("UserModel", userSchema);
+var userModel = mongoose.model("ProjectUserModel", userSchema);
 
 userModel.createUser = createUser;
 userModel.findAllUsers = findAllUsers;

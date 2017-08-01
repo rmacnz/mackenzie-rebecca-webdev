@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("FundiesStaffPage")
+        .module("RunescapeApp")
         .controller("RegisterController", RegisterController);
     
     function RegisterController($location, userService) {
@@ -17,14 +17,18 @@
         }
 
         function nameSuccess(user) {
-            model.errormsg = "A user with this username already exists. Please choose another username or go to the login page if you already have an account."
+            if (user != null) {
+                model.errormsg = "A user with this username already exists. Please choose another username or go to the login page if you already have an account."
+            } else {
+                nameFail("No such user");
+            }
         }
 
         function nameFail(error) {
             if (model.user.password === model.user.password_verify) {
                 //model.user = userService.createUser(model.user);
-                userService.createUser(model.user)
-                    .then(createSuccess, createFail);
+                userService.register(model.user)
+                    .then(createSuccess);
             } else {
                 model.errormsg = "Passwords did not match. Please try again."
             }
@@ -32,12 +36,7 @@
 
         function createSuccess(user) {
             model.user = user;
-            $location.url("/user/" + user._id);
-        }
-
-        function createFail(error) {
-            console.log("Failed to create user");
-            console.log(error);
+            $location.url("/profile");
         }
     }
     
