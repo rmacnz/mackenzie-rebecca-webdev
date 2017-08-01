@@ -55,7 +55,7 @@
 
         // Returns the user with the given username and password
         function findUserByCredentials(username, password) {
-            var url = "/api/user?username=" + username + "&password=" + password;
+            var url = "/api/user/credentials?username=" + username + "&password=" + password;
             return $http.get(url)
                 .then(function(response) {
                     return response.data;

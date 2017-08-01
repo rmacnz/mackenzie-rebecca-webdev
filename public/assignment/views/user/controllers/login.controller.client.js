@@ -8,13 +8,17 @@
         model.login = login;
 
         function login() {
-            if (model.user != null && model.user.username != null && model.user.username != ""
-                && model.user.password != null && model.user.password != "") {
+            if (model.user == null || ((model.user.username == null || model.user.username === "")
+                && (model.user.password == null || model.user.password === ""))) {
+                model.errormsg = "Please enter a username and password.";
+            } else if (model.user.username == null || model.user.username === "") {
+                model.errormsg = "Please enter a username.";
+            } else if (model.user.password == null || model.user.password === "") {
+                model.errormsg = "Please enter your password.";
+            } else {
                 userService
                     .login(model.user.username, model.user.password)
                     .then(loginSuccess, loginFail);
-            } else {
-                model.errormsg = "Please enter a username and password.";
             }
         }
 
@@ -27,7 +31,6 @@
         }
 
         function loginFail(error) {
-            console.log(error);
             userService.findUserByUsername(model.user.username)
                 .then(nameSuccess, nameFail);
         }
