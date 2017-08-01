@@ -8,7 +8,8 @@
         model.login = login;
 
         function login() {
-            if (model.user != null) {
+            if (model.user != null && model.user.username != null && model.user.username != ""
+                && model.user.password != null && model.user.password != "") {
                 userService
                     .login(model.user.username, model.user.password)
                     .then(loginSuccess, loginFail);

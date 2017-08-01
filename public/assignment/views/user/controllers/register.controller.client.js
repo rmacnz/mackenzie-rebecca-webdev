@@ -8,7 +8,8 @@
         model.register = register;
 
         function register() {
-            if (model.user != null && model.user.username != null && model.user.password != null) {
+            if (model.user != null && model.user.username != null && model.user.username != ""
+                && model.user.password != null && model.user.password != "") {
                 userService.findUserByUsername(model.user.username)
                     .then(nameSuccess, nameFail);
             } else {

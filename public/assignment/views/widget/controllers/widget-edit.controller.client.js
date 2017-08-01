@@ -30,13 +30,17 @@
         }
 
         function updateWidget() {
-            var invalidMsg = validateWidgetParams();
-            if (invalidMsg != "") {
-                model.errormsg = invalidMsg;
+            if (model.widget != null && model.widget.name != null && model.widget.name != "") {
+                var invalidMsg = validateWidgetParams();
+                if (invalidMsg != "") {
+                    model.errormsg = invalidMsg;
+                } else {
+                    widgetService
+                        .updateWidget(model.widgetId, model.widget)
+                        .then(updateSuccess);
+                }
             } else {
-                widgetService
-                    .updateWidget(model.widgetId, model.widget)
-                    .then(updateSuccess);
+                model.errormsg = "Please enter a name for your widget.";
             }
         }
 

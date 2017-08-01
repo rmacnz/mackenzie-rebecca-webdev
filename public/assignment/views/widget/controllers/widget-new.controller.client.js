@@ -56,7 +56,7 @@
         }
 
         function createWidget() {
-            if (model.widget != null) {
+            if (model.widget != null && model.widget.name != null && model.widget.name != "") {
                 var invalidMsg = validateWidgetParams();
                 if (invalidMsg != "") {
                     console.log(invalidMsg);
@@ -68,7 +68,7 @@
                         .then(createSuccess);
                 }
             } else {
-                model.errormsg = "Please enter some attributes of your new widget."
+                model.errormsg = "Please enter a name for your widget."
             }
         }
 
