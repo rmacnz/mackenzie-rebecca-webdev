@@ -35,7 +35,6 @@ function findUserByUsername(username) {
 }
 
 function findUserByCredentials(username, password) {
-    console.log("Finding user by credentials: {username: '"+ username + "', password: '" + password + "'}");
     return userModel.findOne({username: username, password: password});
 }
 

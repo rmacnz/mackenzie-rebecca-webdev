@@ -58,6 +58,7 @@
             var url = "/api/user/credentials?username=" + username + "&password=" + password;
             return $http.get(url)
                 .then(function(response) {
+                    console.log(response);
                     return response.data;
                 });
         }

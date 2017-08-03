@@ -133,16 +133,14 @@ function localStrategy(username, password, done) {
         .findUserByCredentials(username, password)
         .then(
             function(user) {
-                console.log("in localstrategy success func");
-                if(user.username === username && user.password === password
-                    && bcrypt.compareSync(password, user.password)) {
+                if(user != null && user.username === username && (user.password === password ||
+                    bcrypt.compareSync(password, user.password))) {
                     return done(null, user);
                 } else {
                     return done(null, false);
                 }
             },
             function(err) {
-                console.log("in localstrategy error func");
                 if (err) { return done(err); }
             }
         );
