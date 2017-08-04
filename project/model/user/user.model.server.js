@@ -1,51 +1,52 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require("q").Promise;
 
-var userSchema = require("./user.schema.server");
+var projectUserSchema = require("./user.schema.server");
 
-var userModel = mongoose.model("ProjectUserModel", userSchema);
+var projectUserModel = mongoose.model("ProjectUserModel", projectUserSchema);
 
-userModel.createUser = createUser;
-userModel.findAllUsers = findAllUsers;
-userModel.findUserById = findUserById;
-userModel.findUserByUsername = findUserByUsername;
-userModel.findUserByCredentials = findUserByCredentials;
-userModel.updateUser = updateUser;
-userModel.deleteUser = deleteUser;
+projectUserModel.createUser = createUser;
+projectUserModel.findAllUsers = findAllUsers;
+projectUserModel.findUserById = findUserById;
+projectUserModel.findUserByUsername = findUserByUsername;
+projectUserModel.findUserByCredentials = findUserByCredentials;
+projectUserModel.updateUser = updateUser;
+projectUserModel.deleteUser = deleteUser;
 
-module.exports = userModel;
+module.exports = projectUserModel;
 
 function createUser(user) {
-    return userModel.create(user);
+    return projectUserModel.create(user);
 }
 
 function findAllUsers() {
-    return userModel.find();
+    return projectUserModel.find();
 }
 
 function findUserById(userId) {
-    return userModel.findById(userId);
+    return projectUserModel.findById(userId);
 }
 
 function findUserByUsername(username) {
-    return userModel.findOne({username: username});
+    return projectUserModel.findOne({username: username});
 }
 
 function findUserByCredentials(username, password) {
-    return userModel.findOne({username: username, password: password});
+    return projectUserModel.findOne({username: username, password: password});
 }
 
 function updateUser(userId, user) {
-    return userModel.update({_id: userId}, {
+    return projectUserModel.update({_id: userId}, {
         $set: {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            runescapeName: user.runescapeName
+            runescapeName: user.runescapeName,
+            gold: user.gold
         }
     });
 }
 
 function deleteUser(userId) {
-    return userModel.remove({_id: userId});
+    return projectUserModel.remove({_id: userId});
 }

@@ -27,11 +27,27 @@
         function nameFail(error) {
             if (model.user.password === model.user.password_verify) {
                 //model.user = userService.createUser(model.user);
-                userService.register(model.user)
-                    .then(createSuccess);
+                userService.findMemberInfo(model.user.username)
+                    .then(foundMemberInfo, noMemberInfo);
             } else {
                 model.errormsg = "Passwords did not match. Please try again."
             }
+        }
+
+        function foundMemberInfo(memberInfo) {
+            if (memberInfo && memberInfo.name) {
+                model.user.roles = ["USER", "MEMBER"];
+            } else {
+                model.user.roles = ["USER"];
+            }
+            userService.register(model.user)
+                .then(createSuccess);
+        }
+
+        function noMemberInfo(error) {
+            model.user.roles = ["USER"];
+            userService.register(model.user)
+                .then(createSuccess);
         }
 
         function createSuccess(user) {

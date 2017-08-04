@@ -1,21 +1,24 @@
 var mongoose = require("mongoose");
 mongoose.Promise = require("q").Promise;
 
-var userSchema = mongoose.Schema({
+var projectUserSchema = mongoose.Schema({
     username: {type: String, require: true},
     password: {type: String, require: true},
     firstName: String,
     lastName: String,
     email: String,
-    runescapeName: String,
+    gold: {type: Number, require: true, default: 1000},
     roles: [{type: String, enum: ["ADMIN", "USER", "MEMBER"], default: "USER"}],
     dateCreated: {type: Date, default: Date.now},
     buys: [
-        {type: mongoose.Schema.Types.ObjectId, ref:"AuctionModel"}
+        {type: mongoose.Schema.Types.ObjectId, ref:"OfferModel"}
     ],
     sells: [
-        {type: mongoose.Schema.Types.ObjectId, ref:"AuctionModel"}
+        {type: mongoose.Schema.Types.ObjectId, ref:"OfferModel"}
+    ],
+    items: [
+        {type: mongoose.Schema.Types.ObjectId, ref: "ItemModel"}
     ]
-}, {collection: "user"});
+}, {collection: "projectuser"});
 
-module.exports = userSchema;
+module.exports = projectUserSchema;

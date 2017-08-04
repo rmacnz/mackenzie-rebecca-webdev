@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<div ng-include="'views/common/header-default.view.client.html'"></div>
+
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <div ng-include="'views/common/error-message.view.client.html'"></div>
+    <h2>Create a new Auction</h2>
+    <label for="create-type">Type</label>
+    <select ng-model="model.type"
+            id="create-type" class="form-control">
+        <option value="BUY">Buy</option>
+        <option value="SELL">Sell</option>
+    </select>
+    <label for="create-item">Item</label>
+    <input ng-if="model.item"
+           ng-model="model.item.name"
+           id="create-item" class="form-control" readonly/>
+    <a class="btn btn-primary btn-block"
+            href="{{model.getSearchUrl()}}">
+        Search for an item
+    </a>
+    <label for="create-num">How many?</label>
+    <input ng-model="model.num" id="create-num"
+           class="form-control" type="number"/>
+    <label for="create-price">Price per item</label>
+    <input ng-model="model.price" id="create-price"
+           class="form-control" type="number"/>
+    <button class="btn btn-primary btn-block"
+            ng-click="model.createAuction()">
+        Create
+    </button>
+</div>

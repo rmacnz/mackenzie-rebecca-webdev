@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<div ng-include="'views/common/header-default.view.client.html'"></div>
+
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <div ng-include="'views/common/error-message.view.client.html'"></div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div ng-if="model.user">
+                <a class="btn btn-primary btn-block"
+                   href="#!/auction/new">
+                    Create Auction
+                </a>
+            </div>
+            <h2>Search for Auctions</h2>
+            <label for="search-type">Type</label>
+            <select ng-model="model.search.type"
+                    id="search-type" class="form-control">
+                <option value="BUY">Buy</option>
+                <option value="SELL">Sell</option>
+            </select>
+
+            <label for="search-comp">Show Completed Auctions?</label>
+            <input ng-model="model.search.completed" type="checkbox"
+                   id="search-comp" class="form-control wd-checkbox-left"/>
+
+            <label for="search-text">Item Name</label>
+            <input ng-model="model.search.text" type="text"
+                id="search-text" class="form-control"/>
+
+            <button class="btn btn-primary btn-block"
+                    ng-click="model.searchAuctions()">
+                Search
+            </button>
+        </div>
+        <div class="col-xs-6">
+        </div>
+    </div>
+</div>

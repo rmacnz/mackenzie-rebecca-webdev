@@ -94,6 +94,8 @@
             return $http.post("/api/login", credentials)
                 .then(function (response) {
                     return response.data;
+                }, function (error) {
+                    console.log(error);
                 });
         }
 

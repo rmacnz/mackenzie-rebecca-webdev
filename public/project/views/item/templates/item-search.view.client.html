@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<div ng-include="'views/common/header-default.view.client.html'"></div>
+
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <div ng-include="'views/common/error-message.view.client.html'"></div>
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Search for Items</h2>
+            <select ng-model="model.category" class="form-control">
+                <option ng-repeat="category in model.categories"
+                        value="{{category.id}}">{{category.name}}</option>
+            </select>
+            <input ng-model="model.searchTerm"
+                   class="form-control"
+                   placeholder="Enter a search term here."/>
+            <button class="btn btn-primary btn-block"
+                    ng-click="model.searchItems()">
+                Search
+            </button>
+
+            <div ng-if="model.searchResults">
+                <h2>Search Results</h2>
+                <ul class="list-group">
+                    <li ng-click="model.findItemById(item.id)" ng-repeat="item in model.searchResults.items"
+                        class="list-group-item wd-clickable">
+                        <img ng-src="{{item.icon}}" width="50px"/>
+                        <div><b>Name: </b> {{item.name}}</div>
+                        <div><b>Description: </b> {{item.description}}</div>
+                        <div><b>Members Only: </b> {{item.members}}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div ng-if="!model.details && model.searchResults"
+                 class="alert">
+                <h2>Select an item to learn more about it</h2>
+            </div>
+            <div ng-if="model.details">
+                <h2>Details</h2>
+                <img ng-src="{{model.details.icon_large}}"/>
+                <div><b>Name: </b> {{model.details.name}}</div>
+                <div><b>Description: </b> {{model.details.description}}</div>
+                <div><b>Members Only: </b> {{model.details.members}}</div>
+                <div><b>Current Price: </b> {{model.details.current.price}}</div>
+                <div>
+                    <b>Trends:</b>
+                    <li class="list-group">
+                        <ul class="list-group-item">
+                            30 days: {{model.details.day30.change}}
+                        </ul>
+                        <ul class="list-group-item">
+                            90 days: {{model.details.day90.change}}
+                        </ul>
+                        <ul class="list-group-item">
+                            180 days: {{model.details.day180.change}}
+                        </ul>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -25,8 +25,8 @@ app.use(passport.session());
 require("./project/app.js");
 
 // for lecture app
-var lectureApp = require("./lectures/app.js");
-lectureApp(app);
+/*var lectureApp = require("./lectures/app.js");
+lectureApp(app);*/
 
 var port = process.env.PORT || 3000;
 

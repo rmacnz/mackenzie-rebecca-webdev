@@ -38,9 +38,28 @@
                 }
             })
             .when("/search/items", {
-                templateUrl: "views/item/templates/itemsearch.view.client.html",
+                templateUrl: "views/item/templates/item-search.view.client.html",
                 controller: "ItemSearchController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    currentUser: findCurrentUser
+                }
+            })
+            .when("/search/offers", {
+                templateUrl: "views/offer/templates/offer-search.view.client.html",
+                controller: "OfferSearchController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: findCurrentUser
+                }
+            })
+            .when("/offer/new", {
+                templateUrl: "views/offer/templates/offer-new.view.client.html",
+                controller: "OfferNewController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: findCurrentUser
+                }
             });
     }
 

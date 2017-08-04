@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="nav navbar-brand">
+            <b>{{model.headerTitle}}</b>
+        </div>
+        <div class="nav navbar-brand pull-right">
+            <a href="#!/profile" class="navbar-link"
+               ng-if="model.user">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+            <a href="#!/" class="navbar-link">
+                <span class="glyphicon glyphicon-home"></span>
+            </a>
+        </div>
+    </div>
+</nav>

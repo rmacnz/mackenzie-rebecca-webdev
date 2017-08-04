@@ -181,7 +181,7 @@ function logout(req, res) {
 
 function register(req, res) {
     var user = req.body;
-    user.roles = ["USER"];
+    user.gold = 1000;
     userModel.createUser(user)
         .then(function(userCreated) {
             req.login(userCreated, function (status) {

@@ -35,3 +35,13 @@ div.wd-sidebar-scroll {
 .wd-bot-margin {
     margin-bottom: 10px;
 }
+
+li {
+    list-style-type: none;
+}
+
+input.wd-checkbox-left {
+    width: auto;
+    display: inline;
+    vertical-align: middle;
+}
