@@ -24,7 +24,8 @@ app.get("/api/user", isAdmin, findAllUsers);
 app.get("/api/user/creds", findUserByCredentials);
 app.post("/api/user", createUser);
 app.put("/api/user/:userId", updateUser);
-app.delete("/api/user/:userId", isAdmin, deleteUser);
+app.delete("/api/user/:userId", verifyCanDelete, deleteUser);
+app.delete("/api/user", unregister);
 
 app.post("/api/login", passport.authenticate("local"), login);
 app.get("/api/checkLoggedIn", checkLoggedIn);
@@ -124,7 +125,7 @@ function localStrategy(username, password, done) {
         .findUserByCredentials(username, password)
         .then(
             function(user) {
-                if(user.username === username && user.password === password) {
+                if(user != null && user.username === username && user.password === password) {
                     return done(null, user);
                 } else {
                     return done(null, false);
@@ -204,6 +205,16 @@ function authenticateFindAllUsers(req, res, next) {
 
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.user.roles.indexOf("ADMIN") > -1) {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
+
+function verifyCanDelete(req, res, next) {
+    var userId = req.params["userId"];
+    if (req.isAuthenticated() &&
+        (req.user.roles.indexOf("ADMIN") > -1 || req.user._doc._id.toString() === userId)) {
         next();
     } else {
         res.sendStatus(401);

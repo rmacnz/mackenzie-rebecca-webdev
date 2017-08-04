@@ -37,6 +37,14 @@
                     currentUser: verifyLogin
                 }
             })
+            .when("/user/:userid", {
+                templateUrl: "views/user/templates/user-edit.view.client.html",
+                controller: "UserEditController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: verifyCanEdit
+                }
+            })
             .when("/search/items", {
                 templateUrl: "views/item/templates/item-search.view.client.html",
                 controller: "ItemSearchController",
@@ -117,6 +125,26 @@
                     $location.url("/profile");
                 } else {
                     deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function verifyCanEdit($q, $location, $route, userService) {
+        var userId = $route.current.params["userid"];
+        var deferred = $q.defer();
+        userService.checkLoggedIn()
+            .then(function (currentUser) {
+                if (currentUser == "0") {
+                    deferred.reject();
+                    $location.url("/");
+                } else if (currentUser.roles.indexOf("ADMIN") > -1) {
+                    deferred.resolve(currentUser);
+                } else if (currentUser._id === userId) {
+                    deferred.resolve(currentUser);
+                } else {
+                    deferred.reject();
+                    $location.url("/user/" + currentUser._id);
                 }
             });
         return deferred.promise;

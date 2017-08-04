@@ -8,6 +8,7 @@
         init();
 
         function init() {
+            model.headerTitle = "Profile";
             model.userId = currentUser._id;
             model.user = currentUser;
             model.message = null;
@@ -16,9 +17,9 @@
             model.deleteUser = deleteUser;
             model.unregister = unregister;
             model.logout = logout;
-            if (currentUser.runescapeName) {
+            if (currentUser.roles.indexOf("MEMBER") > -1) {
                 userService
-                    .findMemberInfo(currentUser.runescapeName)
+                    .findMemberInfo(currentUser.username)
                     .then(function (info) {
                         model.memberInfo = info;
                     });
