@@ -16,6 +16,14 @@
             model.deleteUser = deleteUser;
             model.unregister = unregister;
             model.logout = logout;
+            if (currentUser.runescapeName) {
+                userService
+                    .findMemberInfo(currentUser.runescapeName)
+                    .then(function (info) {
+                        model.memberInfo = info;
+                    });
+                model.skillIdToName = skillIdToName;
+            }
         }
 
 
@@ -51,6 +59,15 @@
                 .then(function() {
                     $location.url("");
                 });
+        }
+
+        function skillIdToName(idNum) {
+            var skills = ["Attack", "Defence", "Strength", "Constitution", "Ranged",
+            "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing",
+            "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility",
+            "Thieving", "Slayer", "Farming", "Runecrafting", "Hunter", "Construction",
+            "Summoning", "Dungeoneering", "Divination", "Invention"];
+            return skills[idNum];
         }
     }
     

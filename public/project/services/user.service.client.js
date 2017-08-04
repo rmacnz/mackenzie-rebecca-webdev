@@ -17,7 +17,8 @@
             login: login,
             checkLoggedIn: checkLoggedIn,
             logout: logout,
-            register: register
+            register: register,
+            findMemberInfo: findMemberInfo
         };
         return api;
 
@@ -112,6 +113,13 @@
 
         function register(user) {
             return $http.post("/api/register", user)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function findMemberInfo(username) {
+            return $http.get("https://apps.runescape.com/runemetrics/profile/profile?user=" + username)
                 .then(function(response) {
                     return response.data;
                 });

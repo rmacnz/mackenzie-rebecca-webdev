@@ -21,8 +21,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //require ("./test/app.js")(app);
-require("./assignment/app.js");
-//require("./project/app.js");
+//require("./assignment/app.js");
+require("./project/app.js");
 
 // for lecture app
 var lectureApp = require("./lectures/app.js");

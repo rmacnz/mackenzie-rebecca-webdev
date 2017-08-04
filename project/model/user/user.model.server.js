@@ -16,7 +16,6 @@ userModel.deleteUser = deleteUser;
 module.exports = userModel;
 
 function createUser(user) {
-    user.roles = ["USER"];
     return userModel.create(user);
 }
 
@@ -39,10 +38,10 @@ function findUserByCredentials(username, password) {
 function updateUser(userId, user) {
     return userModel.update({_id: userId}, {
         $set: {
-            username: user.username,
-            runescapeName: user.runescapeName,
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            email: user.email,
+            runescapeName: user.runescapeName
         }
     });
 }

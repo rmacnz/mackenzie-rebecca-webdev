@@ -2,6 +2,21 @@ var app = require("../../express");
 var userModel = require("../model/user/user.model.server");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var bcrypt = require("bcrypt-nodejs");
+
+var googleConfig = {
+    clientID     : process.env.GOOGLE_CLIENT_ID,
+    clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL  : process.env.GOOGLE_CALLBACK_URL
+};
+
+var facebookConfig = {
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL
+}
 
 app.get("/api/user/:userId", findUserById);
 app.get("/api/username", findUserByUsername);
@@ -11,9 +26,32 @@ app.post("/api/user", createUser);
 app.put("/api/user/:userId", updateUser);
 app.delete("/api/user/:userId", isAdmin, deleteUser);
 
+app.post("/api/login", passport.authenticate("local"), login);
+app.get("/api/checkLoggedIn", checkLoggedIn);
+app.get("/api/checkAdmin", checkAdminLoggedIn);
+
+app.get("/auth/google", passport.authenticate("google", { scope : ["profile", "email"] }));
+app.get("/auth/google/callback",
+    passport.authenticate('google', {
+        successRedirect: '/assignment/index.html#!/profile',
+        failureRedirect: '/assignment/index.html#!/login'
+    }));
+
+app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/assignment/index.html#!/profile',
+        failureRedirect: '/assignment/index.html#!/login'
+    }));
+
+app.post("/api/logout", logout);
+app.post("/api/register", register);
+
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 function createUser(req, res) {
     var user = req.body;
@@ -178,4 +216,76 @@ function unregister(req, res) {
         .then(function(status) {
             res.sendStatus(200);
         });
+}
+
+function googleStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        email:     email,
+                        google: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+}
+
+function facebookStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(
+            function (user) {
+                if (user) {
+                    return done(null, user);
+                } else {
+                    var newFacebookUser = {
+                        username: profile.username,
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
+                        facebook: {
+                            id: profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newFacebookUser);
+                }
+            }, function (err) {
+                if (err) {
+                    return done(err);
+                }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
 }

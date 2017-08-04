@@ -28,13 +28,19 @@
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email"
                    placeholder="Please enter your email address"
-                   ng-model="model.user.email">
+                   ng-model="model.user.email"/>
+        </div>
+        <div class="form-group">
+            <label for="runescapeName">Runescape Username</label>
+            <input type="text" class="form-control" id="runescapeName"
+                   placeholder="Please enter your runescape name"
+                   ng-model="model.user.runescapeName"/>
         </div>
         <div class="form-group">
             <label for="first-name">First Name</label>
             <input type="text" class="form-control" id="first-name"
                    placeholder="Please enter your first name"
-                   ng-model="model.user.firstName">
+                   ng-model="model.user.firstName"/>
         </div>
         <div class="form-group">
             <label for="last-name">Last Name</label>
@@ -43,6 +49,30 @@
                    ng-model="model.user.lastName">
         </div>
     </form>
+
+    <div ng-if="model.memberInfo.error"
+        class="container-fluid wd-bot-margin alert alert-danger">{{model.memberInfo.error}}</div>
+    <div class="container-fluid" ng-if="model.memberInfo.name">
+        <h3>Member Information</h3>
+        <div>Total Level: {{model.memberInfo.totalskill}}</div>
+        <div>Total XP: {{model.memberInfo.totalxp}}</div>
+        <div>Combat Level: {{model.memberInfo.combatlevel}}</div>
+        <div class="container-fluid">
+            <h4>Skills</h4>
+            <ul class="list-group">
+                <li ng-repeat="skill in model.memberInfo.skillvalues"
+                    class="list-group-item">
+                    {{model.skillIdToName(skill.id)}}: {{skill.level}}
+                </li>
+            </ul>
+        </div>
+        <div class="container-fluid wd-bot-margin">
+            <h4>Quests</h4>
+            <div>Quests Started: {{model.memberInfo.questsstarted}}</div>
+            <div>Quests Not Started: {{model.memberInfo.questsnotstarted}}</div>
+            <div>Quests Completed: {{model.memberInfo.questscomplete}}</div>
+        </div>
+    </div>
 
     <a href="#!/"
        class="btn btn-primary btn-block">Home Page</a>
