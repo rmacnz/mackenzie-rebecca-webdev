@@ -36,6 +36,11 @@
                 resolve: {
                     currentUser: verifyLogin
                 }
+            })
+            .when("/search/items", {
+                templateUrl: "views/item/templates/itemsearch.view.client.html",
+                controller: "ItemSearchController",
+                controllerAs: "model"
             });
     }
 
