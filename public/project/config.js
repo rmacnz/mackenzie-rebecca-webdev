@@ -61,6 +61,14 @@
                     currentUser: findCurrentUser
                 }
             })
+            .when("/item/:itemid", {
+                templateUrl: "views/item/templates/item-detail.view.client.html",
+                controller: "ItemDetailController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: findCurrentUser
+                }
+            })
             .when("/offer/new", {
                 templateUrl: "views/offer/templates/offer-new.view.client.html",
                 controller: "OfferNewController",

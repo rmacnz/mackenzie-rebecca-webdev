@@ -5,12 +5,14 @@
 
     function itemService($http) {
         var api = {
-            findItemsByName: findItemsByName,
-            findItemById: findItemById
+            findItemsByNameAPI: findItemsByNameAPI,
+            findItemByIdAPI: findItemByIdAPI,
+            findItemById: findItemById,
+            createItem: createItem
         };
         return api;
 
-        function findItemsByName(category, itemName) {
+        function findItemsByNameAPI(category, itemName) {
             var url = "http://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category="
                 + category + "&alpha=" + itemName;
             return $http.get(url)
@@ -21,12 +23,27 @@
                 });
         }
 
-        function findItemById(itemId) {
+        function findItemByIdAPI(itemId) {
             var url = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=" + itemId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });
+        }
+
+        function findItemById(itemId) {
+            var url = "/api/item/" + itemId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function createItem(item) {
+            return $http.post("/api/item", item)
+                .then(function (response) {
+                    return response.data;
+                })
         }
     }
 })();

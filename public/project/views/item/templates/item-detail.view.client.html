@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<div ng-include="'views/common/header-default.view.client.html'"></div>
+
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <div ng-include="'views/common/error-message.view.client.html'"></div>
+    <h2>Details</h2>
+    <img ng-src="{{model.item.icon_large}}"/>
+    <div><b>Name: </b> {{model.item.name}}</div>
+    <div><b>Description: </b> {{model.item.description}}</div>
+    <div><b>Members Only: </b> {{model.item.members}}</div>
+    <div><b>Current Price: </b> {{model.item.current.price}}</div>
+    <div>
+        <b>Trends:</b>
+        <li class="list-group">
+            <ul class="list-group-item">
+                30 days: {{model.item.day30.change}}
+            </ul>
+            <ul class="list-group-item">
+                90 days: {{model.item.day90.change}}
+            </ul>
+            <ul class="list-group-item">
+                180 days: {{model.item.day180.change}}
+            </ul>
+        </li>
+    </div>
+    <a href="#!/search/items?{{model.urlParams}}"
+       class="btn btn-block btn-primary">Return to item search</a>
+    <div ng-if="model.offer">
+        <a href="#!/offer/new?{{model.urlParams}}"
+           class="btn btn-block btn-primary">Select item and return to offer creation</a>
+    </div>
+</div>

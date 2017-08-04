@@ -3,15 +3,20 @@
         .module("RunescapeApp")
         .controller("ItemSearchController",ItemSearchController);
 
-    function ItemSearchController(itemService, currentUser) {
+    function ItemSearchController(itemService, categoryService, currentUser, $location, $routeParams) {
         var model = this;
         init();
 
         function init() {
             model.headerTitle = "Item Search";
             model.user = currentUser;
+            initializeUrlParams();
 
-            model.categories = [{id: 0, name: "Miscellaneous"},  {id: 1, name: "Ammo"}, {id: 2, name: "Arrows"},
+            categoryService.findAllCategories()
+                .then(function (categories) {
+                    model.categories = categories;
+                });
+            /*model.categories = [{id: 0, name: "Miscellaneous"},  {id: 1, name: "Ammo"}, {id: 2, name: "Arrows"},
                 {id: 3, name: "Bolts"}, {id: 4, name: "Construction materials"},
                 {id: 5, name: "Construction projects"}, {id: 6, name: "Cooking ingredients"},
                 {id: 7, name: "Costumes"}, {id: 8, name: "Crafting materials"}, {id: 9, name: "Familiars"},
@@ -27,10 +32,31 @@
                 {id: 30, name: "Range weapons"}, {id: 31, name: "Runecrafting"},
                 {id: 32, name: "Runes, spells, and teleports"}, {id: 33, name: "Seeds"},
                 {id: 34, name: "Summoning scrolls"}, {id: 35, name: "Tools and containers"},
-                {id: 36, name: "Woodcutting product"}, {id: 37, name: "Pocket items"}];
+                {id: 36, name: "Woodcutting product"}, {id: 37, name: "Pocket items"}];*/
 
             model.searchItems = searchItems;
-            model.findItemById = findItemById;
+            model.showDetails = showDetails;
+        }
+
+        function initializeUrlParams() {
+            var offer = $routeParams["offer"]
+            if (offer) {
+                model.offer = {
+                    type: $routeParams["type"],
+                    num: $routeParams["num"],
+                    pricePer: $routeParams["price"]
+                }
+                model.urlParams = "offer=true";
+                if (model.offer.type) {
+                    model.urlParams = model.urlParams + "type=" + model.offer.type;
+                }
+                if (model.offer.num) {
+                    model.urlParams = model.urlParams + "num=" + model.offer.num;
+                }
+                if (model.offer.pricePer) {
+                    model.urlParams = model.urlParams + "price=" + model.offer.pricePer;
+                }
+            }
         }
 
         function searchItems() {
@@ -48,12 +74,12 @@
             }
         }
 
-        function findItemById(itemId) {
-            itemService
-                .findItemById(itemId)
-                .then(function (data) {
-                    model.details = data.item;
-                });
+        function showDetails(itemId) {
+            var url = "/item/"+itemId;
+            if (model.urlParams) {
+                url = url + model.urlParams;
+            }
+            $location.url(url);
         }
     }
 })();
