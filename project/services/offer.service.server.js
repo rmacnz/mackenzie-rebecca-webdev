@@ -4,6 +4,7 @@ var offerModel = require("../model/offer/offer.model.server");
 app.post("/api/offer", createOffer)
 app.get("/api/offer/:offerId", findOfferById);
 app.get("/api/offer", findOffersByItem);
+app.put("/api/offer/:offerId", updateOffer);
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -46,4 +47,13 @@ function findOffersByItem(req, res) {
                 res.json(offerData);
             });
     }
+}
+
+function updateOffer(req, res) {
+    var offerId = req.params["offerId"];
+    var offer = req.body;
+    offerModel.updateOffer(offerId, offer)
+        .then(function(status) {
+            res.sendStatus(status);
+        });
 }

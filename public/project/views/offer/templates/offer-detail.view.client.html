@@ -13,11 +13,11 @@
     <div ng-if="model.responder"><b>Responder: </b> {{model.responder.username}}</div>
     <div><b>Completed: </b> {{model.offer.completed}}</div>
     <button ng-if="model.canBuy()" class="btn btn-block btn-primary"
-        ng-click="model.buyOffer()">
+        ng-click="model.completeOffer()">
         Buy
     </button>
     <button ng-if="model.canSell()" class="btn btn-block btn-primary"
-        ng-click="model.sellOffer()">
+        ng-click="model.completeOffer()">
         Sell
     </button>
 </div>

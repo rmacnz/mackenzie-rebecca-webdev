@@ -3,7 +3,7 @@
         .module("RunescapeApp")
         .controller("OfferDetailController", OfferDetailController);
 
-    function OfferDetailController(currentUser, $routeParams, offerService, itemService, userService) {
+    function OfferDetailController(currentUser, $routeParams, $location, offerService, itemService, userService) {
         var model = this;
         init();
 
@@ -15,8 +15,7 @@
 
             model.canBuy = canBuy;
             model.canSell = canSell;
-            model.buyOffer = buyOffer;
-            model.sellOffer = sellOffer;
+            model.completeOffer = completeOffer;
         }
 
         function initializeOfferData(idNumber) {
@@ -72,17 +71,46 @@
             return (!item.members) || (user.roles.indexOf("MEMBER") > -1);
         }
 
-        function buyOffer() {
-            // TODO: update the offer such that it is complete and I am the responder
-            // TODO: update my list of buys such that this is one of them
-            // TODO: update my gold count to be less now
-            // TODO: update my inventory to have this item in it
+        function completeOffer() {
+            model.offer.responder = model.user._id;
+            model.offer.complete = true;
+            offerService.updateOffer(model.offerId, model.offer)
+                .then(function (status) {
+                    updatePoster();
+                });
         }
 
-        function sellOffer() {
-            // TODO: update the offer such that it is complete and I am the responder
-            // TODO: update my list of sells such that this is one of them
-            // TODO: update my inventory to no longer have this item in it
+        function updatePoster() {
+            userService.findUserById(model.offer.poster)
+                .then(function (foundPoster) {
+                    if (model.offer.type === "BUY") {
+                        userService.updateUserSellComplete(foundPoster, model.offer.num * model.offer.pricePer)
+                            .then(function (status) {
+                                updateResponder();
+                            });
+                    } else if (model.offer.type === "SELL") {
+                        userService.updateUserBuyComplete(foundPoster, model.offer.num, model.offer.item)
+                            .then(function (status) {
+                                updateResponder();
+                            });
+                    }
+                });
+        }
+
+        function updateResponder() {
+            if (model.offer.type === "BUY") {
+                userService.respondToBuyOffer(model.user, model.offer.num * model.offer.pricePer, model.offer.num,
+                model.offer.item, model.offer._id)
+                    .then(function (status) {
+                        $location.url("#!/profile");
+                    });
+            } else if (model.offer.type === "SELL"){
+                userService.respondToSellOffer(model.user, model.offer.num * model.offer.pricePer, model.offer.num,
+                    model.offer.item, model.offer._id)
+                    .then(function (status) {
+                        $location.url("#!/profile");
+                    });
+            }
         }
     }
 })();

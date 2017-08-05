@@ -9,6 +9,8 @@ offerModel.createOffer = createOffer;
 offerModel.findAllOffers = findAllOffers;
 offerModel.findOfferById = findOfferById;
 offerModel.findOffersByItem = findOffersByItem;
+offerModel.findActiveOffersByItem = findActiveOffersByItem;
+offerModel.updateOffer = updateOffer;
 offerModel.deleteOffer = deleteOffer;
 
 module.exports = offerModel;
@@ -36,6 +38,16 @@ function findOffersByItem(type, itemName) {
 // find the active offers with this type and a similar item name
 function findActiveOffersByItem(type, itemName) {
     return offerModel.find({type: type, completed: false, 'item.name':new RegExp('^'+itemName+'$', "i")});
+}
+
+// update the offer with this unique ID# to have the updated data
+function updateOffer(offerId, offerData) {
+    return offerModel.update({_id: offerId}, {
+        $set: {
+            responder: offerData.responder,
+            completed: offerData.completed
+        }
+    });
 }
 
 // remove the offer with this unique ID# from the database

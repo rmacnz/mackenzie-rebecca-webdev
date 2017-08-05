@@ -3,7 +3,7 @@
         .module("RunescapeApp")
         .controller("OfferNewController",OfferNewController);
 
-    function OfferNewController(offerService, itemService, currentUser, $routeParams, $location) {
+    function OfferNewController(offerService, itemService, userService, currentUser, $routeParams, $location) {
         var model = this;
         init();
 
@@ -70,8 +70,24 @@
                 }
                 offerService.createOffer(offer, model.user._id)
                     .then(function (created) {
+                        updateUserAfterCreation(created);
+                    });
+            }
+        }
+
+        function updateUserAfterCreation(offer) {
+            if (offer.type === "BUY") {
+                userService.updateUserCreateBuy(model.user, offer.num * offer.pricePer, offer._id)
+                    .then(function (userUpdate) {
                         $location.url("#!/profile");
                     });
+            } else if (offer.type === "SELL") {
+                userService.updateUserCreateSell(model.user)
+                    .then(function (userUpdate) {
+                        $location.url("#!/profile");
+                    });
+            } else {
+                model.errormsg = "Could not update user after creation of offer.";
             }
         }
 
@@ -92,8 +108,39 @@
                 if (price < 0 || Math.floor(price) != price || price == Infinity) {
                     return "Please enter a valid natural number for the price.";
                 }
-                return null;
+                if (type === "BUY") {
+                    return validateBuyOfferParams(num, price);
+                } else if (type === "SELL") {
+                    return validateSellOfferParams(item, num);
+                }
             }
+        }
+
+        function validateBuyOfferParams(numToBuy, pricePerItem) {
+            //ensure that the user has enough gold and is not trying to purchase a members item if they are not a member
+            if (model.user.roles.indexOf("MEMBER") === -1 && model.item && model.item.members) {
+                return "You cannot buy this item unless you are a member!";
+            }
+            if (model.user.gold < numToBuy * pricePerItem) {
+                return "You cannot afford this.";
+            }
+            return null;
+        }
+
+        function validateSellOfferParams(itemId, numToSell) {
+            // ensure that the user has enough of this item to sell
+            var currentItems = model.user.inventory;
+            var index;
+            for (index in currentItems) {
+                if (currentItems[index].item === itemId) {
+                    if (currentItems[index].num < numToSell) {
+                        return "You do not have enough of this item to sell that many!";
+                    } else {
+                        return null;
+                    }
+                }
+            }
+            return "You do not own this item so you cannot sell it.";
         }
     }
 })();

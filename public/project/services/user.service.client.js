@@ -18,7 +18,13 @@
             checkLoggedIn: checkLoggedIn,
             logout: logout,
             register: register,
-            findMemberInfo: findMemberInfo
+            findMemberInfo: findMemberInfo,
+            updateUserCreateBuy: updateUserCreateBuy,
+            updateUserCreateSell: updateUserCreateSell,
+            respondToSellOffer: respondToSellOffer,
+            respondToBuyOffer: respondToBuyOffer,
+            updateUserBuyComplete: updateUserBuyComplete,
+            updateUserSellComplete: updateUserSellComplete
         };
         return api;
 
@@ -126,5 +132,93 @@
                     return response.data;
                 });
         }
+
+        function updateUserCreateBuy(user, totalPrice, offerId) {
+            // remove gold, update buys
+            user.gold = user.gold - totalPrice;
+            user.buys.push(offerId);
+            updateUser(user._id, user);
+        }
+
+        function updateUserCreateSell(user, itemId, numSold, offerId) {
+            // update inventory, update sells
+            user.sells.push(offerId);
+            user.inventory = removeFromInventory(user.inventory, numSold, itemId);
+            updateUser(user._id, user);
+        }
+
+        function respondToSellOffer(user, totalPrice, numBought, itemId, offerId) {
+            // remove gold, update inventory, update buys
+            user.gold = user.gold - totalPrice;
+            user.buys.push(offerId);
+            user.inventory = addToInventory(user.inventory, numBought, itemId);
+            updateUser(user._id, user);
+        }
+
+        function respondToBuyOffer(user, totalPrice, numSold, itemId, offerId) {
+            // add gold, update inventory, update sells
+            user.gold = user.gold + totalPrice;
+            user.sells.push(offerId);
+            user.inventory = removeFromInventory(user.inventory, numSold, itemId);
+            updateUser(user._id, user);
+        }
+
+        function updateUserBuyComplete(user, numBought, itemId) {
+            // update inventory (gold removal already done)
+            user.inventory = addToInventory(user.inventory, numBought, itemId);
+            updateUser(user._id, user);
+        }
+
+        function updateUserSellComplete(user, totalPrice) {
+            user.gold = user.gold + totalPrice;
+            updateUser(user._id, user);
+        }
+
+        function addToInventory(inventory, num, id) {
+            var itemFound = false;
+            var index;
+            for (index in inventory) {
+                var currentItem = inventory[index];
+                if (currentItem._id === id) {
+                    itemFound = true;
+                    inventory[index] = {
+                        num: currentItem.num + num,
+                        item: id
+                    };
+                }
+            }
+            if (!itemFound) {
+                inventory.push({
+                    num: num,
+                    item: id
+                });
+            }
+            return inventory;
+        }
+
+        function removeFromInventory(inventory, num, id) {
+            var itemFound = false;
+            var removeIndex = -1;
+            var index;
+            for (index in inventory) {
+                var currentItem = inventory[index];
+                if (currentItem._id === id) {
+                    itemFound = true;
+                    if (currentItem.num === num) {
+                        removeIndex = index;
+                    } else {
+                        inventory[index] = {
+                            num: currentItem.num - num,
+                            item: id
+                        };
+                    }
+                }
+            }
+            if (removeIndex > -1) {
+                inventory.splice(removeIndex, 1);
+            }
+            return inventory;
+        }
+
     }
 })();

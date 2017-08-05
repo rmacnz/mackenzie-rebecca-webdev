@@ -17,7 +17,7 @@ var projectUserSchema = mongoose.Schema({
         {type: mongoose.Schema.Types.ObjectId, ref:"OfferModel"}
     ],
     items: [
-        {type: mongoose.Schema.Types.ObjectId, ref: "ItemModel"}
+        {num: Number, item: {type: mongoose.Schema.Types.ObjectId, ref: "ItemModel"}}
     ]
 }, {collection: "projectuser"});
 

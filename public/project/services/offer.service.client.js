@@ -7,7 +7,8 @@
         var api = {
             createOffer: createOffer,
             findOfferById: findOfferById,
-            findOffersByItem: findOffersByItem
+            findOffersByItem: findOffersByItem,
+            updateOffer: updateOffer
         };
         return api;
 
@@ -33,6 +34,14 @@
                 url = url + "completed=" + completed;
             }
             return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function updateOffer(offerId, offer) {
+            var url = "/api/offer/" + offerId;
+            return $http.put(url, offer)
                 .then(function (response) {
                     return response.data;
                 });

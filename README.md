@@ -27,12 +27,6 @@ PROJECT PROBLEMS:
 - Not sure if this is related to the above issue but when I try to create an offer (and it obviously fails) it changes the URL to have "#!/profile" at the end instead of actually redirecting to #!/profile as intended
 
 TO DO:
-- When you create an offer it should update your information to contain the offer's ID in either your buys or sells
-- When you click the buy/sell button on the offer detail page it actually buys/sells the item
-- When you buy/sell something (and complete the offer) your inventory should be updated accordingly
-
-- When you create a sell offer it should check your inventory to make sure you have that thing
-- When you create a buy offer it should check (and update) your gold supply, also it should ensure that if you are a non-member you can't buy non-member items
-
 - Profile should display inventory of items
 - Profile should display skills in a more user friendly manner
+- Profile should display buying/selling info

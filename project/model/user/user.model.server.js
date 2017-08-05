@@ -41,8 +41,10 @@ function updateUser(userId, user) {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            runescapeName: user.runescapeName,
-            gold: user.gold
+            gold: user.gold,
+            buys: user.buys,
+            sells: user.sells,
+            inventory: user.inventory
         }
     });
 }
