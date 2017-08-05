@@ -24,7 +24,6 @@ PROJECT PROBLEMS:
 - Same problem as above when creating an offer. Changed schema to say that item is a number, not an ObjectID but this had no effect
     - Could not think of a temporary hack for this since offers do not exist in the API, only in my database
     - It seems to be inserting something into a collection called offermodels which is weird because I specified the name of my collection in my schema as "offer". The thing it is inserting also seems to just have an ID and that's it...
-- Not sure if this is related to the above issue but when I try to create an offer (and it obviously fails) it changes the URL to have "#!/profile" at the end instead of actually redirecting to #!/profile as intended
 
 TO DO:
 - Profile should display skills in a more user friendly manner
