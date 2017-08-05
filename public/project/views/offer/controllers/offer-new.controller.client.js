@@ -70,7 +70,7 @@
                 }
                 offerService.createOffer(offer, model.user._id)
                     .then(function (created) {
-                        $location.url("#!/user/offers");
+                        $location.url("#!/profile");
                     });
             }
         }

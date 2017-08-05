@@ -13,12 +13,24 @@ Project: https://mackenzie-rebecca-webdev.herokuapp.com/project/index.html
 Assignment: https://mackenzie-rebecca-webdev.herokuapp.com/assignment/index.html
 
 PROJECT PROBLEMS:
+- When I mouse over the profile button in my header it gets a little underscore next to it for some reason. This is the most minor problem.
 - Category service is totally broken. Never returns anything even though there are 38 categories in there with valid ids and names
     - Temporary hack: just use an array of all known categories to find their ids/names
 - createItem (on item-detail.controller) doesn't seem to work at all so when you return to the offer you don't have any information really
     (ItemModel validation failed: _id: Cast to ObjectID failed for value "1897" at path "_id")
-    Because of this I changed my ItemSchema so that the category reference is just a number rather than an Object ID but this seemed to have no effect. This makes sense since it is complaining about the item ID (which was already set to be a number), not the category ID
+    - Because of this I changed my ItemSchema so that the category reference is just a number rather than an Object ID but this seemed to have no effect. This makes sense since it is complaining about the item ID (which was already set to be a number), not the category ID
+    - Much Googling seems to suggest that many people have this issue when trying to FIND an item but nobody seems to have this issue when they CREATE an item...
     - Temporary hack: just look up items in the API all the time instead of storing anything in the database
 - Same problem as above when creating an offer. Changed schema to say that item is a number, not an ObjectID but this had no effect
     - Could not think of a temporary hack for this since offers do not exist in the API, only in my database
-    - It seems to be inserting something into a collection called offermodels which is weird because I specified the name of my collection in my schema as "offer"
+    - It seems to be inserting something into a collection called offermodels which is weird because I specified the name of my collection in my schema as "offer". The thing it is inserting also seems to just have an ID and that's it...
+- Not sure if this is related to the above issue but when I try to create an offer (and it obviously fails) it changes the URL to have "#!/profile" at the end instead of actually redirecting to #!/profile as intended
+
+TO DO:
+- Admin pages: manage users
+- When you create an offer it should update your information to contain the offer's ID in either your buys or sells
+- You should be able to search through offers and when you select one it takes you to the offer detail page and you can respond to open offers
+- When you create a sell offer it should check your inventory to make sure you have that thing
+- When you create a buy offer it should check (and update) your gold supply, also it should ensure that if you are a non-member you can't buy non-member items
+- When you buy/sell something (and complete the offer) your inventory should be updated accordingly
+- When you search for items if you are a non-member then only non-member items should display
