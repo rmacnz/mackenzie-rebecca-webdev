@@ -76,6 +76,22 @@
                 resolve: {
                     currentUser: verifyLogin
                 }
+            })
+            .when("/offer/:offerid", {
+                templateUrl: "views/offer/templates/offer-detail.view.client.html",
+                controller: "OfferDetailController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: findCurrentUser
+                }
+            })
+            .when("/users", {
+                templateUrl: "views/user/templates/user-list.view.client.html",
+                controller: "UserListController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: verifyAdmin
+                }
             });
     }
 

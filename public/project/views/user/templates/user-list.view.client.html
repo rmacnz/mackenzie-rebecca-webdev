@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<div ng-include="'views/common/header-default.view.client.html'"></div>
+
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <h2>Users</h2>
+    <ul class="list-group">
+        <li class="list-group-item wd-clickable"
+            ng-repeat="user in model.userList">
+            <div><b>Username: </b> {{user.username}}</div>
+            <div><b>Password: </b> {{user.password}}</div>
+            <div><b>Buys: </b> {{user.buys.length}}</div>
+            <div><b>Sells: </b> {{user.sells.length}}</div>
+            <div><b>Items: </b> {{user.items.length}}</div>
+        </li>
+    </ul>
+</div>

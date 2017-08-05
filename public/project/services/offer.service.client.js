@@ -6,6 +6,7 @@
     function offerService($http) {
         var api = {
             createOffer: createOffer,
+            findOfferById: findOfferById,
             findOffersByItem: findOffersByItem
         };
         return api;
@@ -16,6 +17,14 @@
                 .then(function (response) {
                     return response.data;
                 })
+        }
+
+        function findOfferById(offerId) {
+            var url = "/api/offer/" + offerId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
         }
 
         function findOffersByItem(type, completed, itemName) {

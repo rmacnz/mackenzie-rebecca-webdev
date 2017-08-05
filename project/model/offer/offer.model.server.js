@@ -7,6 +7,7 @@ var offerModel = mongoose.model("OfferModel", offerSchema);
 
 offerModel.createOffer = createOffer;
 offerModel.findAllOffers = findAllOffers;
+offerModel.findOfferById = findOfferById;
 offerModel.findOffersByItem = findOffersByItem;
 offerModel.deleteOffer = deleteOffer;
 
@@ -20,6 +21,11 @@ function createOffer(offer) {
 // find all the offers in the database
 function findAllOffers() {
     return offerModel.find();
+}
+
+// find the offer with this ID#
+function findOfferById(offerId) {
+    return offerModel.findById(offerId);
 }
 
 // find the offers with this type, and a similar item name

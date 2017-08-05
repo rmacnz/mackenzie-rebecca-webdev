@@ -2,6 +2,7 @@ var app = require("../../express");
 var offerModel = require("../model/offer/offer.model.server");
 
 app.post("/api/offer", createOffer)
+app.get("/api/offer/:offerId", findOfferById);
 app.get("/api/offer", findOffersByItem);
 
 function createOffer(req, res) {
@@ -9,6 +10,16 @@ function createOffer(req, res) {
     offerModel.createOffer(offer)
         .then(function (createdOffer) {
             res.json(createdOffer);
+        })
+}
+
+function findOfferById(req, res) {
+    var offerId = req.params["offerId"];
+    offerModel.findOfferById(offerId)
+        .then(function (offerFound) {
+            res.json(offerFound);
+        }, function (error) {
+            res.sendStatus(404);
         })
 }
 

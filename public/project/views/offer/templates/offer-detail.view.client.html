@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<div ng-include="'views/common/header-default.view.client.html'"></div>
+
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+    <h2>Details</h2>
+    <div><b>Type: </b> {{model.offer.type}}</div>
+    <div><b>Date created: </b> {{model.offer.date}}</div>
+    <div><b>Members only: </b> {{model.item.members}}</div>
+    <div><b>Item: </b> {{model.item.name}}</div>
+    <div><b>Number: </b> {{model.offer.num}}</div>
+    <div><b>Price per item: </b> {{model.offer.pricePer}}</div>
+    <div><b>Poster: </b> {{model.poster.username}}</div>
+    <div ng-if="model.responder"><b>Responder: </b> {{model.responder.username}}</div>
+    <div><b>Completed: </b> {{model.offer.completed}}</div>
+    <button ng-if="model.canBuy()" class="btn btn-block btn-primary"
+        ng-click="model.buyOffer()">
+        Buy
+    </button>
+    <button ng-if="model.canSell()" class="btn btn-block btn-primary"
+        ng-click="model.sellOffer()">
+        Sell
+    </button>
+</div>

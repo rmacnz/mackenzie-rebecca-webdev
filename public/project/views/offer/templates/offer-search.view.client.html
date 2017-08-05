@@ -34,4 +34,18 @@
             ng-click="model.searchOffers()">
         Search
     </button>
+
+    <div ng-if="model.searchResults">
+        <h2>Search Results</h2>
+        <ul class="list-group">
+            <li ng-click="model.showDetails(offer._id)" ng-repeat="offer in model.searchResults"
+                class="list-group-item wd-clickable">
+                <div><b>Type: </b> {{offer.type}}</div>
+                <div><b>Item: </b> {{offer.item}}</div>
+                <div><b>Number: </b> {{offer.num}}</div>
+                <div><b>Price per item: </b> {{offer.pricePer}}</div>
+                <div><b>Completed: </b> {{offer.completed}}</div>
+            </li>
+        </ul>
+    </div>
 </div>
