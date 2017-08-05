@@ -40,9 +40,15 @@
             <div>Quests Completed: {{model.memberInfo.questscomplete}}</div>
         </div>
     </div>
-    <a ng-click="model.logout()"
-       class="btn btn-primary btn-block">Logout</a>
-    <a href="#!/user/{{model.user._id}}" class="btn btn-primary btn-block">
-        Edit my information
-    </a>
 </div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <a ng-click="model.logout()"
+           class="wd-surround-margin btn btn-primary btn-block">Logout</a>
+        <a href="#!/user/{{model.user._id}}"
+           class="wd-surround-margin btn btn-primary btn-block">
+            Edit my information
+        </a>
+    </div>
+</nav>

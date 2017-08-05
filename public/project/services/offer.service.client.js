@@ -1,16 +1,25 @@
 (function () {
     angular
         .module('RunescapeApp')
-        .factory('auctionService', auctionService);
+        .factory('offerService', offerService);
 
-    function auctionService($http) {
+    function offerService($http) {
         var api = {
-            findAuctionsByItem: findAuctionsByItem
+            createOffer: createOffer,
+            findOffersByItem: findOffersByItem
         };
         return api;
 
-        function findAuctionsByItem(type, completed, itemName) {
-            var url = "/api/auction?type=" + type + "text=" + itemName;
+        function createOffer(offer, userId) {
+            offer.poster = userId;
+            return $http.post("/api/offer", offer)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function findOffersByItem(type, completed, itemName) {
+            var url = "/api/offer?type=" + type + "text=" + itemName;
             if (!completed) {
                 url = url + "completed=" + completed;
             }

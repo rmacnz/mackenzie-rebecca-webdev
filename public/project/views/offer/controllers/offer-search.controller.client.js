@@ -1,37 +1,37 @@
 (function () {
     angular
         .module("RunescapeApp")
-        .controller("AuctionSearchController",AuctionSearchController);
+        .controller("OfferSearchController",OfferSearchController);
 
-    function AuctionSearchController(auctionService, currentUser) {
+    function OfferSearchController(offerService, currentUser) {
         var model = this;
         init();
 
         function init() {
-            model.headerTitle = "Auction Search";
+            model.headerTitle = "Offer Search";
             model.user = currentUser;
 
-            model.searchAuctions = searchAuctions;
+            model.searchOffers = searchOffers;
         }
 
-        function searchAuctions() {
+        function searchOffers() {
             if (model.search) {
                 if (!model.search.type) {
-                    model.errormsg = "Please select which type of auction to search for.";
+                    model.errormsg = "Please select which type of offer to search for.";
                 } else if (!model.search.text) {
                     model.errormsg = "Please enter the name of the item you are looking for.";
                 } else {
                     if (model.search.completed == null) {
                         model.search.completed = false;
                     }
-                    auctionService
-                        .findAuctionsByItem(model.search.type, model.search.completed, model.search.category, model.search.text)
-                        .then(function (auctions) {
-                            model.searchResults = auctions;
+                    offerService
+                        .findOffersByItem(model.search.type, model.search.completed, model.search.category, model.search.text)
+                        .then(function (offers) {
+                            model.searchResults = offers;
                         });
                 }
             } else {
-                model.errormsg = "Please enter some information to search for auctions.";
+                model.errormsg = "Please enter some information to search for offers.";
             }
         }
     }

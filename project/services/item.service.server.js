@@ -16,8 +16,12 @@ function findItemById(req, res) {
 
 function createItem(req, res) {
     var item = req.body;
+    var numId = Number(item._id);
+    item._id = numId;
     itemModel.createItem(item)
         .then(function(itemCreated) {
             res.json(itemCreated);
+        }, function (error) {
+            console.log(error);
         });
 }

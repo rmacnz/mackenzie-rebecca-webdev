@@ -4,7 +4,7 @@
 
 <div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
     <div ng-include="'views/common/error-message.view.client.html'"></div>
-    <h2>Create a new Auction</h2>
+    <h2>Create a new Offer</h2>
     <label for="create-type">Type</label>
     <select ng-model="model.type"
             id="create-type" class="form-control">
@@ -16,7 +16,7 @@
            ng-model="model.item.name"
            id="create-item" class="form-control" readonly/>
     <a class="btn btn-primary btn-block"
-            href="{{model.getSearchUrl()}}">
+        ng-href="{{model.getSearchUrl()}}">
         Search for an item
     </a>
     <label for="create-num">How many?</label>
@@ -26,7 +26,7 @@
     <input ng-model="model.price" id="create-price"
            class="form-control" type="number"/>
     <button class="btn btn-primary btn-block"
-            ng-click="model.createAuction()">
+            ng-click="model.createOffer()">
         Create
     </button>
 </div>

@@ -1,33 +1,38 @@
 (function () {
     angular
         .module("RunescapeApp")
-        .controller("AuctionNewController",AuctionNewController);
+        .controller("OfferNewController",OfferNewController);
 
-    function AuctionNewController(auctionService, itemService, currentUser, $routeParams, $location) {
+    function OfferNewController(offerService, itemService, currentUser, $routeParams, $location) {
         var model = this;
         init();
 
         function init() {
-            model.headerTitle = "New Auction";
+            model.headerTitle = "New Offer";
             model.user = currentUser;
-            initializeAuctionInfo();
+            initializeOfferInfo();
 
-            model.searchForItem = searchForItem;
-            model.createAuction = createAuction;
+            model.getSearchUrl = getSearchUrl;
+            model.createOffer = createOffer;
         }
 
-        function initializeAuctionInfo() {
+        function initializeOfferInfo() {
             var type = $routeParams["type"];
-            var itemId = $routeParams["itemId"];
+            var itemId = $routeParams["item"];
             var num = $routeParams["num"];
             var price = $routeParams["price"];
             if (type) {
                 model.type = type;
             }
             if (itemId) {
-                itemService.findItemById(itemId)
+                /*itemService.findItemById(itemId)
                     .then(function (itemData) {
                         model.item = itemData;
+                    });*/
+                itemService.findItemByIdAPI(itemId)
+                    .then(function (itemData) {
+                        model.item = itemData.item;
+                        model.price = model.item.current.price;
                     });
             }
             if (num) {
@@ -39,40 +44,40 @@
         }
 
         function getSearchUrl() {
-            var url = "#!/search/items?";
+            var url = "#!/search/items?offer=true";
             if (model.type) {
-                url = url + "type=" + model.type;
+                url = url + "&type=" + model.type;
             }
             if (model.num) {
-                url = url + "num=" + model.num;
+                url = url + "&num=" + model.num;
             }
             if (model.price) {
-                url = url + "price=" + model.price;
+                url = url + "&price=" + model.price;
             }
             return url;
         }
 
-        function createAuction() {
-            var errorMsg = validateAuctionParams(model.type, model.item, model.num, model.price);
+        function createOffer() {
+            var errorMsg = validateOfferParams(model.type, model.item, model.num, model.price);
             if (errorMsg) {
                 model.errormsg = errorMsg;
             } else {
-                var auction = {
+                var offer = {
                     type: model.type,
                     item: model.item._id,
                     num: model.num,
                     price: model.price
                 }
-                auctionService.createAuction(auction)
+                offerService.createOffer(offer, model.user._id)
                     .then(function (created) {
-                        $location.url("#!/user/auctions");
+                        $location.url("#!/user/offers");
                     });
             }
         }
 
-        function validateAuctionParams(type, item, num, price) {
+        function validateOfferParams(type, item, num, price) {
             if (!type) {
-                return "Please select which type of auction you would like to create.";
+                return "Please select which type of offer you would like to create.";
             } else if (!item) {
                 return "Please select which item you would like to " + type.toLowerCase() + ".";
             } else if (!num) {

@@ -8,6 +8,8 @@ function findAllCategories(req, res) {
     categoryModel.findAllCategories()
         .then(function (results) {
             res.json(results);
+        }, function (error) {
+            console.log(error);
         });
 }
 

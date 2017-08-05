@@ -26,8 +26,8 @@
     </div>
     <a href="#!/search/items?{{model.urlParams}}"
        class="btn btn-block btn-primary">Return to item search</a>
-    <div ng-if="model.offer">
-        <a href="#!/offer/new?{{model.urlParams}}"
+    <div ng-if="model.user && model.offer">
+        <a href="#!/offer/new?item={{model.item._id}}&{{model.urlParams}}"
            class="btn btn-block btn-primary">Select item and return to offer creation</a>
     </div>
 </div>

@@ -10,6 +10,10 @@
     padding-bottom: 60px;
 }
 
+.wd-fixed-bot-large {
+    padding-bottom: 200px;
+}
+
 a.wd-white-link {
     color: white;
     cursor: pointer;
@@ -44,4 +48,8 @@ input.wd-checkbox-left {
     width: auto;
     display: inline;
     vertical-align: middle;
+}
+
+.wd-surround-margin {
+    margin: 10px;
 }

@@ -74,7 +74,7 @@
                 controller: "OfferNewController",
                 controllerAs: "model",
                 resolve: {
-                    currentUser: findCurrentUser
+                    currentUser: verifyLogin
                 }
             });
     }
