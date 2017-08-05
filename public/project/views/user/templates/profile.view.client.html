@@ -12,13 +12,38 @@
     <div class="container-fluid">
         <h3>Inventory</h3>
         <div><b>Gold: </b> {{model.user.gold}}</div>
-        <div ng-if="model.user.items">
+        <div ng-if="model.userItems">
             <li class="list-group">
                 <ul class="list-group-item"
-                    ng-repeat="item in model.user.items">{{item}}</ul>
+                    ng-repeat="item in model.userItems">
+                    <img ng-src="{{item.icon}}"/>
+                    {{item.name}} ({{item.quantity}})</ul>
             </li>
         </div>
     </div>
+
+    <div class="container-fluid" ng-if="model.buyOffers || model.sellOffers">
+        <h3>Offers</h3>
+        <div ng-if="model.buyOffers">
+            <h4>Items Bought</h4>
+            <li class="list-group">
+                <ul class="list-group-item"
+                ng-repeat="offer in model.buyOffers">
+                    {{offer}}
+                </ul>
+            </li>
+        </div>
+        <div ng-if="model.sellOffers">
+            <h4>Items Sold</h4>
+            <li class="list-group">
+                <ul class="list-group-item"
+                    ng-repeat="offer in model.sellOffers">
+                    {{offer}}
+                </ul>
+            </li>
+        </div>
+    </div>
+
     <div class="container-fluid" ng-if="model.memberInfo">
         <h3>Member Statistics</h3>
         <div>Total Level: {{model.memberInfo.totalskill}}</div>

@@ -3,7 +3,7 @@
         .module("RunescapeApp")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($location, $routeParams, userService, currentUser) {
+    function ProfileController($location, userService, itemService, offerService, currentUser) {
         var model = this;
         init();
 
@@ -17,6 +17,8 @@
             model.deleteUser = deleteUser;
             model.unregister = unregister;
             model.logout = logout;
+            initializeInventory(model.user.inventory);
+            initializeOfferLists();
             if (currentUser.roles.indexOf("MEMBER") > -1) {
                 userService
                     .findMemberInfo(currentUser.username)
@@ -24,6 +26,48 @@
                         model.memberInfo = info;
                     });
                 model.skillIdToName = skillIdToName;
+            }
+        }
+
+        function initializeInventory(itemData) {
+            if (itemData && itemData.length > 0) {
+                model.userItems = [];
+                var index;
+                for (index in itemData) {
+                    /*itemService.findItemById(itemData[index].item)
+                        .then(function (foundItem) {
+                            foundItem.quantity = itemData[index].num;
+                            model.userItems.push(foundItem);
+                        });*/
+                    itemService.findItemByIdAPI(itemData[index].item)
+                        .then(function (foundItem) {
+                            foundItem.item.quantity = itemData[index].num;
+                            model.userItems.push(foundItem.item);
+                        });
+                }
+            }
+        }
+
+        // find all the offers for which this person was a poster or responder
+        function initializeOfferLists() {
+            var index;
+            if (model.user.buys && model.user.buys.length > 0) {
+                model.buyOffers = [];
+                for (index in model.user.buys) {
+                    offerService.findOfferById(model.user.buys[index])
+                        .then(function (offerData) {
+                            model.buyOffers.push(offerData);
+                        });
+                }
+            }
+            if (model.user.sells && model.user.sells.length > 0) {
+                model.sellOffers = [];
+                for (index in model.user.sells) {
+                    offerService.findOfferById(model.user.sells[index])
+                        .then(function (offerData) {
+                           model.sellOffers.push(offerData);
+                        });
+                }
             }
         }
 

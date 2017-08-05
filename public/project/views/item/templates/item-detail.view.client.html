@@ -29,4 +29,8 @@
         <a href="#!/offer/new?item={{model.item._id}}&{{model.urlParams}}"
            class="btn btn-block btn-primary wd-surround-margin">Select item and return to offer creation</a>
     </div>
+    <div ng-if="model.user && !model.offer">
+        <a href="#!/offer/new?item={{model.item._id}}"
+           class="btn btn-block btn-primary wd-surround-margin">Create an offer with this item</a>
+    </div>
 </div>

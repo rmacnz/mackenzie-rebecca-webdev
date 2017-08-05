@@ -4,6 +4,8 @@ var offerModel = require("../model/offer/offer.model.server");
 app.post("/api/offer", createOffer)
 app.get("/api/offer/:offerId", findOfferById);
 app.get("/api/offer", findOffersByItem);
+app.get("/api/offer/poster/:userId", findOffersByPosterId);
+app.get("/api/offer/responder/:userId", findOffersByResponderId);
 app.put("/api/offer/:offerId", updateOffer);
 
 app.use(function(req, res, next) {

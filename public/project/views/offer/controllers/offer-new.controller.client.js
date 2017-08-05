@@ -32,6 +32,7 @@
                 itemService.findItemByIdAPI(itemId)
                     .then(function (itemData) {
                         model.item = itemData.item;
+                        model.item._id = model.item.id;
                         model.price = model.item.current.price;
                     });
             }
@@ -111,7 +112,7 @@
                 if (type === "BUY") {
                     return validateBuyOfferParams(num, price);
                 } else if (type === "SELL") {
-                    return validateSellOfferParams(item, num);
+                    return validateSellOfferParams(item._id, num);
                 }
             }
         }

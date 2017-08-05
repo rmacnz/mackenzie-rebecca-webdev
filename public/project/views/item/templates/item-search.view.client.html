@@ -19,6 +19,8 @@
 
     <div ng-if="model.searchResults">
         <h2>Search Results</h2>
+        <div ng-if="model.searchResults.length === 0"
+             class="alert alert-danger">There are no results.</div>
         <ul class="list-group">
             <li ng-click="model.showDetails(item.id)" ng-repeat="item in model.searchResults"
                 class="list-group-item wd-clickable">

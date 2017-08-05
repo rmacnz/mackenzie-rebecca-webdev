@@ -10,6 +10,8 @@ offerModel.findAllOffers = findAllOffers;
 offerModel.findOfferById = findOfferById;
 offerModel.findOffersByItem = findOffersByItem;
 offerModel.findActiveOffersByItem = findActiveOffersByItem;
+offerModel.findOffersByPosterId = findOffersByPosterId;
+offerModel.findOffersByResponderId = findOffersByResponderId;
 offerModel.updateOffer = updateOffer;
 offerModel.deleteOffer = deleteOffer;
 

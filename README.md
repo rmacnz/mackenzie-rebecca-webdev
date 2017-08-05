@@ -27,6 +27,5 @@ PROJECT PROBLEMS:
 - Not sure if this is related to the above issue but when I try to create an offer (and it obviously fails) it changes the URL to have "#!/profile" at the end instead of actually redirecting to #!/profile as intended
 
 TO DO:
-- Profile should display inventory of items
 - Profile should display skills in a more user friendly manner
-- Profile should display buying/selling info
+- Profile should display buying/selling info in a more user friendly manner
