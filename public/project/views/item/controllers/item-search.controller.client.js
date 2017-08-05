@@ -64,14 +64,18 @@
                 model.errormsg = null;
                 itemService
                     .findItemsByNameAPI(model.category, model.searchTerm)
-                    .then(function (items) {
-                        model.searchResults = items;
+                    .then(function (result) {
+                        model.searchResults = result.items.filter(userCanView);
                     });
             } else if (model.category) {
                 model.errormsg = "Please enter a search term.";
             } else {
                 model.errormsg = "Please select a category.";
             }
+        }
+
+        function userCanView(item) {
+            return (item.members === "false") || (model.user && model.user.roles.indexOf("MEMBER") > -1);
         }
 
         function showDetails(itemId) {

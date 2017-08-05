@@ -20,7 +20,7 @@
     <div ng-if="model.searchResults">
         <h2>Search Results</h2>
         <ul class="list-group">
-            <li ng-click="model.showDetails(item.id)" ng-repeat="item in model.searchResults.items"
+            <li ng-click="model.showDetails(item.id)" ng-repeat="item in model.searchResults"
                 class="list-group-item wd-clickable">
                 <img ng-src="{{item.icon}}" width="50px"/>
                 <div><b>Name: </b> {{item.name}}</div>

@@ -4,6 +4,13 @@ var categoryModel = require("../model/category/category.model.server");
 app.get("/api/category", findAllCategories);
 app.get("/api/category/name/:catName", findCategoryByName);
 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
 function findAllCategories(req, res) {
     categoryModel.findAllCategories()
         .then(function (results) {

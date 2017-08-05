@@ -29,9 +29,10 @@ PROJECT PROBLEMS:
 TO DO:
 - When you create an offer it should update your information to contain the offer's ID in either your buys or sells
 - When you click the buy/sell button on the offer detail page it actually buys/sells the item
+- When you buy/sell something (and complete the offer) your inventory should be updated accordingly
+
 - When you create a sell offer it should check your inventory to make sure you have that thing
 - When you create a buy offer it should check (and update) your gold supply, also it should ensure that if you are a non-member you can't buy non-member items
-- When you buy/sell something (and complete the offer) your inventory should be updated accordingly
-- When you search for items if you are a non-member then only non-member items should display
+
 - Profile should display inventory of items
 - Profile should display skills in a more user friendly manner
