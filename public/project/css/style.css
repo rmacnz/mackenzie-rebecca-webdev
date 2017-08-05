@@ -11,16 +11,12 @@
 }
 
 .wd-fixed-bot-large {
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
 
 a.wd-white-link {
     color: white;
     cursor: pointer;
-}
-
-li.list-group-item {
-    border: none;
 }
 
 div.wd-sidebar-scroll {
@@ -52,4 +48,9 @@ input.wd-checkbox-left {
 
 .wd-surround-margin {
     margin: 10px;
+}
+
+.wd-inline-box {
+    display: inline-block;
+    margin: 5px;
 }

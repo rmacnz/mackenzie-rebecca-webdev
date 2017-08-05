@@ -14,6 +14,7 @@ Assignment: https://mackenzie-rebecca-webdev.herokuapp.com/assignment/index.html
 
 PROJECT PROBLEMS:
 - When I mouse over the profile button in my header it gets a little underscore next to it for some reason. This is the most minor problem.
+- On the profile page, I am trying to load the statistics if the user is a Member. I want to display the skill icon next to each skill (see line 57 of profile.view.client.html) and I have all the files locally but I don't know how to indicate that it should display a local file instead of a URL. I feel like we accomplished this with widgets somehow but I'm not sure exactly how...
 - Category service is totally broken. Never returns anything even though there are 38 categories in there with valid ids and names
     - Temporary hack: just use an array of all known categories to find their ids/names
 - createItem (on item-detail.controller) doesn't seem to work at all so when you return to the offer you don't have any information really

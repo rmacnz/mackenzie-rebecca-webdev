@@ -8,8 +8,6 @@
             createOffer: createOffer,
             findOfferById: findOfferById,
             findOffersByItem: findOffersByItem,
-            findOffersByPosterId: findOffersByPosterId,
-            findOffersByResponderId: findOffersByResponderId,
             updateOffer: updateOffer
         };
         return api;

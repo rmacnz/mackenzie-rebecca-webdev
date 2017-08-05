@@ -24,6 +24,12 @@
                     .findMemberInfo(currentUser.username)
                     .then(function (info) {
                         model.memberInfo = info;
+                        if (!model.memberInfo.skillvalues) {
+                            model.memberInfo.skillvalues = [];
+                            for (i = 0; i < 27; i++) {
+                                model.memberInfo.skillvalues.push({id: i, level: i});
+                            }
+                        }
                     });
                 model.skillIdToName = skillIdToName;
             }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <div ng-include="'views/common/header-default.view.client.html'"></div>
 
-<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-large">
     <div class="container-fluid">
         <h3>User Information</h3>
         <div><b>Username: </b> {{model.user.username}}</div>
@@ -53,7 +53,8 @@
             <h4>Skills</h4>
             <ul class="list-group">
                 <li ng-repeat="skill in model.memberInfo.skillvalues"
-                    class="list-group-item">
+                    class="list-group-item wd-inline-box">
+                    <img href="../../../images/skillicon{{skill.id}}.png"/>
                     {{model.skillIdToName(skill.id)}}: {{skill.level}}
                 </li>
             </ul>
