@@ -65,7 +65,9 @@
                 itemService
                     .findItemsByNameAPI(model.category, model.searchTerm)
                     .then(function (result) {
-                        model.searchResults = result.items.filter(userCanView);
+                        if (result && result.items) {
+                            model.searchResults = result.items.filter(userCanView);
+                        }
                     });
             } else if (model.category) {
                 model.errormsg = "Please enter a search term.";

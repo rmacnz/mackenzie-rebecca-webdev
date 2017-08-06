@@ -27,5 +27,4 @@ PROJECT PROBLEMS:
     - It seems to be inserting something into a collection called offermodels which is weird because I specified the name of my collection in my schema as "offer". The thing it is inserting also seems to just have an ID and that's it...
 
 TO DO:
-- Profile should display skills in a more user friendly manner
 - Profile should display buying/selling info in a more user friendly manner
