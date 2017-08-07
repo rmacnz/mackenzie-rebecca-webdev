@@ -24,7 +24,8 @@
         }
 
         function findItemByIdAPI(itemId) {
-            var url = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=" + itemId;
+            /*var url = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=" + itemId;*/
+            var url = "/rsapi/item/" + itemId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

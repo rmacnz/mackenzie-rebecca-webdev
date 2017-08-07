@@ -2,6 +2,7 @@ var app = require("../../express");
 var itemModel = require("../model/item/item.model.server");
 
 app.get("/api/item/:itemid", findItemById);
+app.get("/rsapi/item/:itemid", findItemByIdAPI)
 app.post("/api/item", createItem);
 
 app.use(function(req, res, next) {
@@ -10,6 +11,8 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
+
+var http = require('http');
 
 function findItemById(req, res) {
     var itemId = req.params["itemid"];
@@ -31,4 +34,14 @@ function createItem(req, res) {
         }, function (error) {
             console.log(error);
         });
+}
+
+function findItemByIdAPI(req, res) {
+    var itemId = req.params["itemid"];
+    return http.get({
+        host: "services.runescape.com",
+        path: "/m=itemdb_rs/api/catalogue/detail.json?item=" + itemId
+    }, function (response) {
+        res.json(response);
+    });
 }
