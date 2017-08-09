@@ -3,7 +3,7 @@ mongoose.Promise = require("q").Promise;
 
 var offerSchema = mongoose.Schema({
     type: {type: String, enum:["BUY", "SELL"], required: true},
-    date: {type: Date, required: true, default: Date.now},
+    date: {type: Date, default: Date.now},
     item: {type: Number, ref:"ItemModel"},
     num: {type: Number, required: true, default: 1},
     pricePer: {type: Number, required: true},
@@ -11,3 +11,5 @@ var offerSchema = mongoose.Schema({
     responder: {type: mongoose.Schema.Types.ObjectId, ref:"ProjectUserModel"},
     completed: {type: Boolean, required: true, default: false}
 }, {collection: "offer"});
+
+module.exports = offerSchema;

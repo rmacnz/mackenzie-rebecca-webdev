@@ -24,21 +24,40 @@
 
     <div class="container-fluid" ng-if="model.buyOffers || model.sellOffers">
         <h3>Offers</h3>
-        <div ng-if="model.buyOffers">
+        <div ng-if="model.offInProg && model.offInProg.length > 0">
+            <h4>Offers in Progress</h4>
+            <li class="list-group">
+                <ul class="list-group-item"
+                    ng-repeat="offer in model.offInProg">
+                    <div><b>Type: </b> {{offer.type}}</div>
+                    <div><b>Item: </b> {{offer.item.name}}</div>
+                    <div><b>Number: </b> {{offer.num}}</div>
+                    <div><b>Price per item: </b> {{offer.pricePer}}</div>
+                    <a href="#!/offer/{{offer._id}}" class="btn btn-block btn-primary">Show Details</a>
+                </ul>
+            </li>
+        </div>
+        <div ng-if="model.buyOffers && model.buyOffer.length > 0">
             <h4>Items Bought</h4>
             <li class="list-group">
                 <ul class="list-group-item"
                 ng-repeat="offer in model.buyOffers">
-                    {{offer}}
+                    <div><b>Item: </b> {{offer.item.name}}</div>
+                    <div><b>Number: </b> {{offer.num}}</div>
+                    <div><b>Price per item: </b> {{offer.pricePer}}</div>
+                    <a href="#!/offer/{{offer._id}}" class="btn btn-block btn-primary">Show Details</a>
                 </ul>
             </li>
         </div>
-        <div ng-if="model.sellOffers">
+        <div ng-if="model.sellOffers && model.sellOffers.length > 0">
             <h4>Items Sold</h4>
             <li class="list-group">
                 <ul class="list-group-item"
                     ng-repeat="offer in model.sellOffers">
-                    {{offer}}
+                    <div><b>Item: </b> {{offer.item.name}}</div>
+                    <div><b>Number: </b> {{offer.num}}</div>
+                    <div><b>Price per item: </b> {{offer.pricePer}}</div>
+                    <a href="#!/offer/detail/{{offer._id}}" class="btn btn-block btn-primary">Show Details</a>
                 </ul>
             </li>
         </div>

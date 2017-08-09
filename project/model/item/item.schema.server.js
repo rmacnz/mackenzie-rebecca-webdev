@@ -6,3 +6,5 @@ var itemSchema = mongoose.Schema({
     name: {type: String, required: true},
     category: {type: Number, ref:"CategoryModel", required: true}
 }, {collection: "item"});
+
+module.exports = itemSchema;

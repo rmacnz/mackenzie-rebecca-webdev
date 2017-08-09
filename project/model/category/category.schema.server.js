@@ -5,3 +5,5 @@ var categorySchema = mongoose.Schema({
     _id: {type: Number, required: true},
     name: {type: String, required: true}
 }, {collection: "category"});
+
+module.exports = categorySchema;

@@ -1,9 +1,13 @@
 var app = require("../../express");
+var q = require('q');
+var http = require('http');
 var itemModel = require("../model/item/item.model.server");
 
 app.get("/api/item/:itemid", findItemById);
-app.get("/rsapi/item/:itemid", findItemByIdAPI)
 app.post("/api/item", createItem);
+
+app.get("/api/rs/item/:itemid", findItemByIdAPI);
+app.get("/api/rs/item/:category/:searchTerm", findItemByNameAPI);
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -11,8 +15,6 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
-
-var http = require('http');
 
 function findItemById(req, res) {
     var itemId = req.params["itemid"];
@@ -38,10 +40,67 @@ function createItem(req, res) {
 
 function findItemByIdAPI(req, res) {
     var itemId = req.params["itemid"];
-    return http.get({
+    runescapeFindItemById(itemId)
+        .then(function (response) {
+            res.json(response);
+            },
+        function (error) {
+            console.log(error);
+        });
+}
+
+function runescapeFindItemById(itemId) {
+    var deferred = q.defer();
+    http.get({
         host: "services.runescape.com",
         path: "/m=itemdb_rs/api/catalogue/detail.json?item=" + itemId
-    }, function (response) {
-        res.json(response);
+    }, function(response) {
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+            try {
+                body = JSON.parse(body);
+                deferred.resolve(body);
+            } catch(e) {
+                deferred.reject({error: e});
+            }
+        });
     });
+    return deferred.promise;
+}
+
+function findItemByNameAPI(req, res) {
+    var category = req.params["category"];
+    var searchTerm = req.params["searchTerm"];
+    runescapeFindItemByName(category, searchTerm)
+        .then(function (response) {
+                res.json(response);
+            },
+            function (error) {
+                console.log(error);
+            });
+}
+
+function runescapeFindItemByName(category, searchTerm) {
+    var deferred = q.defer();
+    http.get({
+        host: "services.runescape.com",
+        path: "/m=itemdb_rs/api/catalogue/items.json?category=" + category + "&alpha=" + searchTerm
+    }, function(response) {
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+            try {
+                body = JSON.parse(body);
+                deferred.resolve(body);
+            } catch(e) {
+                deferred.reject({error: e});
+            }
+        });
+    });
+    return deferred.promise;
 }

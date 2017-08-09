@@ -23,14 +23,21 @@
             </ul>
         </li>
     </div>
-    <a href="#!/search/items?{{model.urlParams}}"
+    <a href="#!/item/search?{{model.urlParams}}"
        class="btn btn-block btn-primary wd-surround-margin">Return to item search</a>
+    <div ng-if="model.offerSearch">
+        <a href="#!/offer/search?item={{model.item._id}}&{{model.urlParams}}"
+           class="btn btn-block btn-primary wd-surround-margin">
+            Select item and return to offer search</a>
+    </div>
     <div ng-if="model.user && model.offer">
         <a href="#!/offer/new?item={{model.item._id}}&{{model.urlParams}}"
-           class="btn btn-block btn-primary wd-surround-margin">Select item and return to offer creation</a>
+           class="btn btn-block btn-primary wd-surround-margin">
+            Select item and return to offer creation</a>
     </div>
     <div ng-if="model.user && !model.offer">
         <a href="#!/offer/new?item={{model.item._id}}"
-           class="btn btn-block btn-primary wd-surround-margin">Create an offer with this item</a>
+           class="btn btn-block btn-primary wd-surround-margin">
+            Create an offer with this item</a>
     </div>
 </div>

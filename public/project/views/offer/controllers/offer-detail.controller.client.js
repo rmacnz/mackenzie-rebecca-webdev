@@ -22,20 +22,8 @@
             offerService.findOfferById(idNumber)
                 .then(function (offerFound) {
                     model.offer = offerFound;
-                    initializeItemData(model.offer.item);
                     initializePosterData(model.offer.poster);
                     initializeResponderData(model.offer.responder);
-                });
-        }
-
-        function initializeItemData(itemId) {
-            /*itemService.findItemById(itemId)
-                .then(function (itemFound) {
-                    model.item = itemFound;
-                });*/
-            itemService.findItemByIdAPI(itemId)
-                .then(function (itemFound) {
-                    model.item = itemFound;
                 });
         }
 
@@ -56,15 +44,15 @@
         }
 
         function canBuy() {
-            return (model.offer.type === "SELL") && (!model.offer.completed) &&
-                    userItemMatch(model.item, model.user) &&
+            return model.offer && model.user && (model.offer.type === "SELL") && (!model.offer.completed) &&
+                    userItemMatch(model.offer.item, model.user) &&
                     (model.user.gold >= (model.offer.pricePer * model.offer.num));
         }
 
         function canSell() {
-            return (model.offer.type === "BUY") && (!model.offer.completed) &&
-                userItemMatch(model.item, model.user) &&
-                (model.user.inventory.indexOf(model.item._id) > -1);
+            return model.offer && model.user && (model.offer.type === "BUY") && (!model.offer.completed) &&
+                userItemMatch(model.offer.item, model.user) &&
+                (model.user.inventory.indexOf(model.offer.item._id) > -1);
         }
 
         function userItemMatch(item, user) {
@@ -73,7 +61,7 @@
 
         function completeOffer() {
             model.offer.responder = model.user._id;
-            model.offer.complete = true;
+            model.offer.completed = true;
             offerService.updateOffer(model.offerId, model.offer)
                 .then(function (status) {
                     updatePoster();

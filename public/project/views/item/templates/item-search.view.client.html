@@ -7,7 +7,7 @@
     <h2>Search for Items</h2>
     <select ng-model="model.category" class="form-control">
         <option ng-repeat="category in model.categories"
-                value="{{category.id}}">{{category.name}}</option>
+                value="{{category._id}}">{{category.name}}</option>
     </select>
     <input ng-model="model.searchTerm"
            class="form-control"

@@ -34,6 +34,20 @@
                     model.urlParams = model.urlParams + "&price=" + model.offer.pricePer;
                 }
             }
+            var offerSearch = $routeParams["offersearch"];
+            if (offerSearch) {
+                model.offerSearch = {
+                    type: $routeParams["type"],
+                    comp: $routeParams["comp"]
+                };
+                model.urlParams = "offersearch=true";
+                if (model.offerSearch.type) {
+                    model.urlParams = model.urlParams + "&type=" + model.offerSearch.type;
+                }
+                if (model.offerSearch.comp) {
+                    model.urlParams = model.urlParams + "&comp=" + model.offerSearch.comp;
+                }
+            }
         }
 
         function initializeItemFromAPI() {
@@ -43,6 +57,9 @@
                     model.item._id = model.item.id;
                     itemService.findItemById(model.itemId)
                         .then(function (itemDetails) {
+                            if (!itemDetails) {
+                                createItemFromAPI();
+                            }
                         }, function (error) {
                             createItemFromAPI();
                         });
@@ -50,14 +67,14 @@
         }
 
         function createItemFromAPI() {
-            /*categoryService.findCategoryByName(model.item.type)
+            categoryService.findCategoryByName(model.item.type)
                 .then(function(category) {
                     var newItem = {_id: model.itemId, name: model.item.name, category: category._id};
                     itemService.createItem(newItem)
                         .then(function (response) {
                             console.log("Added item to database from API.");
                         });
-                });*/
+                });/*
             var categories = ["Miscellaneous","Ammo", "Arrows",
                 "Bolts", "Construction materials",
                 "Construction projects", "Cooking ingredients",
@@ -83,7 +100,7 @@
                 }, function (error) {
                     console.log("Error when adding item to database");
                     console.log(error);
-                });
+                });*/
         }
     }
 })();

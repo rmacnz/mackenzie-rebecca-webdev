@@ -2,7 +2,7 @@ var app = require("../../express");
 var userModel = require("../model/user/user.model.server");
 
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var LocalAssignmentStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
@@ -49,7 +49,7 @@ app.get('/auth/facebook/callback',
 app.post("/api/logout", logout);
 app.post("/api/register", register);
 
-passport.use(new LocalStrategy(localStrategy));
+passport.use(new LocalAssignmentStrategy(localAssignmentStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
@@ -128,7 +128,7 @@ function deleteUser(req, res) {
         });
 }
 
-function localStrategy(username, password, done) {
+function localAssignmentStrategy(username, password, done) {
     userModel
         .findUserByCredentials(username, password)
         .then(

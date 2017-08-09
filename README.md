@@ -15,16 +15,14 @@ Assignment: https://mackenzie-rebecca-webdev.herokuapp.com/assignment/index.html
 PROJECT PROBLEMS:
 - When I mouse over the profile button in my header it gets a little underscore next to it for some reason. This is the most minor problem.
 - On the profile page, I am trying to load the statistics if the user is a Member. I want to display the skill icon next to each skill (see line 57 of profile.view.client.html) and I have all the files locally but I don't know how to indicate that it should display a local file instead of a URL. I feel like we accomplished this with widgets somehow but I'm not sure exactly how...
-- Category service is totally broken. Never returns anything even though there are 38 categories in there with valid ids and names
-    - Temporary hack: just use an array of all known categories to find their ids/names
-- createItem (on item-detail.controller) doesn't seem to work at all so when you return to the offer you don't have any information really
-    (ItemModel validation failed: _id: Cast to ObjectID failed for value "1897" at path "_id")
-    - Because of this I changed my ItemSchema so that the category reference is just a number rather than an Object ID but this seemed to have no effect. This makes sense since it is complaining about the item ID (which was already set to be a number), not the category ID
-    - Much Googling seems to suggest that many people have this issue when trying to FIND an item but nobody seems to have this issue when they CREATE an item...
-    - Temporary hack: just look up items in the API all the time instead of storing anything in the database
-- Same problem as above when creating an offer. Changed schema to say that item is a number, not an ObjectID but this had no effect
-    - Could not think of a temporary hack for this since offers do not exist in the API, only in my database
-    - It seems to be inserting something into a collection called offermodels which is weird because I specified the name of my collection in my schema as "offer". The thing it is inserting also seems to just have an ID and that's it...
 
 TO DO:
-- Profile should display buying/selling info in a more user friendly manner
+- Buy/sell from current offers (currently cannot find users for some reason)
+- Home page (localhost:3000)
+  - Link to project
+  - Link to assignment
+  - Link to heroku
+  - Link to github
+  - Link to youtube video tutorial for project
+- Youtube video
+- Admin should be able to create categories so that I can edit them on Heroku

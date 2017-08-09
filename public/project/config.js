@@ -45,7 +45,7 @@
                     currentUser: verifyCanEdit
                 }
             })
-            .when("/search/items", {
+            .when("/item/search", {
                 templateUrl: "views/item/templates/item-search.view.client.html",
                 controller: "ItemSearchController",
                 controllerAs: "model",
@@ -53,7 +53,7 @@
                     currentUser: findCurrentUser
                 }
             })
-            .when("/search/offers", {
+            .when("/offer/search", {
                 templateUrl: "views/offer/templates/offer-search.view.client.html",
                 controller: "OfferSearchController",
                 controllerAs: "model",
@@ -61,7 +61,7 @@
                     currentUser: findCurrentUser
                 }
             })
-            .when("/item/:itemid", {
+            .when("/item/detail/:itemid", {
                 templateUrl: "views/item/templates/item-detail.view.client.html",
                 controller: "ItemDetailController",
                 controllerAs: "model",
@@ -77,7 +77,7 @@
                     currentUser: verifyLogin
                 }
             })
-            .when("/offer/:offerid", {
+            .when("/offer/detail/:offerid", {
                 templateUrl: "views/offer/templates/offer-detail.view.client.html",
                 controller: "OfferDetailController",
                 controllerAs: "model",

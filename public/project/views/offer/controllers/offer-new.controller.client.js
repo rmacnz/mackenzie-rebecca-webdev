@@ -45,7 +45,7 @@
         }
 
         function getSearchUrl() {
-            var url = "#!/search/items?offer=true";
+            var url = "#!/item/search?offer=true";
             if (model.type) {
                 url = url + "&type=" + model.type;
             }
@@ -67,7 +67,7 @@
                     type: model.type,
                     item: model.item._id,
                     num: model.num,
-                    price: model.price
+                    pricePer: model.price
                 }
                 offerService.createOffer(offer, model.user._id)
                     .then(function (created) {

@@ -12,11 +12,11 @@
             model.user = currentUser;
             initializeUrlParams();
 
-            /*categoryService.findAllCategories()
+            categoryService.findAllCategories()
                 .then(function (categories) {
                     model.categories = categories;
-                });*/
-            model.categories = [{id: 0, name: "Miscellaneous"},  {id: 1, name: "Ammo"}, {id: 2, name: "Arrows"},
+                });
+            /*model.categories = [{id: 0, name: "Miscellaneous"},  {id: 1, name: "Ammo"}, {id: 2, name: "Arrows"},
                 {id: 3, name: "Bolts"}, {id: 4, name: "Construction materials"},
                 {id: 5, name: "Construction projects"}, {id: 6, name: "Cooking ingredients"},
                 {id: 7, name: "Costumes"}, {id: 8, name: "Crafting materials"}, {id: 9, name: "Familiars"},
@@ -32,20 +32,20 @@
                 {id: 30, name: "Range weapons"}, {id: 31, name: "Runecrafting"},
                 {id: 32, name: "Runes, spells, and teleports"}, {id: 33, name: "Seeds"},
                 {id: 34, name: "Summoning scrolls"}, {id: 35, name: "Tools and containers"},
-                {id: 36, name: "Woodcutting product"}, {id: 37, name: "Pocket items"}];
+                {id: 36, name: "Woodcutting product"}, {id: 37, name: "Pocket items"}];*/
 
             model.searchItems = searchItems;
             model.showDetails = showDetails;
         }
 
         function initializeUrlParams() {
-            var offer = $routeParams["offer"]
+            var offer = $routeParams["offer"];
             if (offer) {
                 model.offer = {
                     type: $routeParams["type"],
                     num: $routeParams["num"],
                     pricePer: $routeParams["price"]
-                }
+                };
                 model.urlParams = "offer=true";
                 if (model.offer.type) {
                     model.urlParams = model.urlParams + "&type=" + model.offer.type;
@@ -55,6 +55,20 @@
                 }
                 if (model.offer.pricePer) {
                     model.urlParams = model.urlParams + "&price=" + model.offer.pricePer;
+                }
+            }
+            var offerSearch = $routeParams["offersearch"];
+            if (offerSearch) {
+                model.offerSearch = {
+                    type: $routeParams["type"],
+                    comp: $routeParams["comp"]
+                };
+                model.urlParams = "offersearch=true";
+                if (model.offerSearch.type) {
+                    model.urlParams = model.urlParams + "&type=" + model.offerSearch.type;
+                }
+                if (model.offerSearch.comp) {
+                    model.urlParams = model.urlParams + "&comp=" + model.offerSearch.comp;
                 }
             }
         }
@@ -81,7 +95,7 @@
         }
 
         function showDetails(itemId) {
-            var url = "/item/"+itemId;
+            var url = "/item/detail/"+itemId;
             if (model.urlParams) {
                 url = url + "?" + model.urlParams;
             }

@@ -13,8 +13,7 @@
         return api;
 
         function findItemsByNameAPI(category, itemName) {
-            var url = "http://services.runescape.com/m=itemdb_rs/api/catalogue/items.json?category="
-                + category + "&alpha=" + itemName;
+            var url = "/api/rs/item/" + category + "/" + itemName;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -24,11 +23,12 @@
         }
 
         function findItemByIdAPI(itemId) {
-            /*var url = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=" + itemId;*/
-            var url = "/rsapi/item/" + itemId;
+            var url = "/api/rs/item/" + itemId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
+                }, function (error) {
+                    console.log(error);
                 });
         }
 

@@ -27,17 +27,23 @@ function findAllOffers() {
 
 // find the offer with this ID#
 function findOfferById(offerId) {
-    return offerModel.findById(offerId);
+    return offerModel.findById(offerId)
+        .populate("item")
+        .exec();
 }
 
 // find the offers with this type, and a similar item name
-function findOffersByItem(type, itemName) {
-    return offerModel.find({type: type, 'item.name':new RegExp('^'+itemName+'$', "i")});
+function findOffersByItem(type, itemId) {
+    return offerModel.find({type: type, item:itemId})
+        .populate("item")
+        .exec();
 }
 
 // find the active offers with this type and a similar item name
-function findActiveOffersByItem(type, itemName) {
-    return offerModel.find({type: type, completed: false, 'item.name':new RegExp('^'+itemName+'$', "i")});
+function findActiveOffersByItem(type, itemId) {
+    return offerModel.find({type: type, completed: false, item:itemId})
+        .populate("item")
+        .exec();
 }
 
 // update the offer with this unique ID# to have the updated data

@@ -17,6 +17,8 @@
             return $http.post("/api/offer", offer)
                 .then(function (response) {
                     return response.data;
+                }, function (error) {
+                    console.log(error);
                 })
         }
 
@@ -28,10 +30,10 @@
                 });
         }
 
-        function findOffersByItem(type, completed, itemName) {
-            var url = "/api/offer?type=" + type + "text=" + itemName;
+        function findOffersByItem(type, completed, itemId) {
+            var url = "/api/offer?type=" + type + "&item=" + itemId;
             if (!completed) {
-                url = url + "completed=" + completed;
+                url = url + "&completed=" + completed;
             }
             return $http.get(url)
                 .then(function (response) {
@@ -44,6 +46,8 @@
             return $http.put(url, offer)
                 .then(function (response) {
                     return response.data;
+                }, function (error) {
+                    console.log(error);
                 });
         }
     }

@@ -25,26 +25,36 @@
            id="search-comp" class="form-control wd-checkbox-left"/>
 
     <div>
-        <label for="search-text">Item Name</label>
-        <input ng-model="model.search.text" type="text"
-               id="search-text" class="form-control"/>
+        <label for="search-item">Item</label>
+        <input ng-if="model.search.item"
+               ng-model="model.search.item.name"
+               id="search-item" class="form-control" readonly/>
+        <input ng-if="!model.search.item" class="form-control" readonly
+               value="Please search for an item using the button below."/>
+        <a class="btn btn-primary btn-block form-control"
+           ng-href="{{model.getSearchUrl()}}">
+            Search for an item
+        </a>
     </div>
 
     <button class="btn btn-primary btn-block"
             ng-click="model.searchOffers()">
-        Search
+        Search offers
     </button>
 
     <div ng-if="model.searchResults">
         <h2>Search Results</h2>
+        <div ng-if="model.searchResults.length === 0"
+             class="alert alert-danger">There are no results.</div>
         <ul class="list-group">
-            <li ng-click="model.showDetails(offer._id)" ng-repeat="offer in model.searchResults"
+            <li ng-repeat="offer in model.searchResults"
                 class="list-group-item wd-clickable">
                 <div><b>Type: </b> {{offer.type}}</div>
-                <div><b>Item: </b> {{offer.item}}</div>
+                <div><b>Item: </b> {{offer.item.name}}</div>
                 <div><b>Number: </b> {{offer.num}}</div>
                 <div><b>Price per item: </b> {{offer.pricePer}}</div>
                 <div><b>Completed: </b> {{offer.completed}}</div>
+                <a href="#!/offer/detail/{{offer._id}}" class="btn btn-block btn-primary">Show Details</a>
             </li>
         </ul>
     </div>

@@ -49,6 +49,8 @@
             return $http.get(url)
                 .then(function(response) {
                     return response.data;
+                }, function (error) {
+                    console.log(error);
                 });
         }
 

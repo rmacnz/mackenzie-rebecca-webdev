@@ -82,6 +82,8 @@ function findUserById(req, res) {
     userModel.findUserById(userId)
         .then(function(userFound) {
             res.json(userFound);
+        }, function (error) {
+            console.log(error);
         });
 }
 

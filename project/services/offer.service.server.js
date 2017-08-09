@@ -18,6 +18,8 @@ function createOffer(req, res) {
     offerModel.createOffer(offer)
         .then(function (createdOffer) {
             res.json(createdOffer);
+        }, function (error) {
+            console.log(error);
         })
 }
 
@@ -34,15 +36,14 @@ function findOfferById(req, res) {
 function findOffersByItem(req, res) {
     var type = req.query["type"];
     var completed = req.query["completed"];
-    var category = req.query["category"];
-    var itemName = req.query["text"];
-    if (completed) {
-        offerModel.findOffersByItem(type, itemName)
+    var itemId = Number(req.query["item"]);
+    if (completed != "false") {
+        offerModel.findOffersByItem(type, itemId)
             .then(function (offerData) {
                 res.json(offerData);
             });
     } else {
-        offerModel.findActiveOffersByItem(type, itemName)
+        offerModel.findActiveOffersByItem(type, itemId)
             .then(function (offerData) {
                 res.json(offerData);
             });
@@ -55,5 +56,7 @@ function updateOffer(req, res) {
     offerModel.updateOffer(offerId, offer)
         .then(function(status) {
             res.sendStatus(status);
+        }, function (error) {
+            console.log(error);
         });
 }

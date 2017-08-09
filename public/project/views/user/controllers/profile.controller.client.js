@@ -56,13 +56,18 @@
 
         // find all the offers for which this person was a poster or responder
         function initializeOfferLists() {
+            model.offInProg = [];
             var index;
             if (model.user.buys && model.user.buys.length > 0) {
                 model.buyOffers = [];
                 for (index in model.user.buys) {
                     offerService.findOfferById(model.user.buys[index])
                         .then(function (offerData) {
-                            model.buyOffers.push(offerData);
+                            if (!offerData.completed) {
+                                model.offInProg.push(offerData);
+                            } else {
+                                model.buyOffers.push(offerData);
+                            }
                         });
                 }
             }
@@ -71,7 +76,11 @@
                 for (index in model.user.sells) {
                     offerService.findOfferById(model.user.sells[index])
                         .then(function (offerData) {
-                           model.sellOffers.push(offerData);
+                            if (!offerData.completed) {
+                                model.offInProg.push(offerData);
+                            } else {
+                                model.sellOffers.push(offerData);
+                            }
                         });
                 }
             }
