@@ -24,3 +24,12 @@ function findCategoryByName(categoryName) {
 function createCategory(category) {
     return categoryModel.create(category);
 }
+
+// edit the name of the category
+function editCategory(catId, catData) {
+    return categoryModel.update({_id: catId}, {
+        $set: {
+            name: catData.name
+        }
+    });
+}

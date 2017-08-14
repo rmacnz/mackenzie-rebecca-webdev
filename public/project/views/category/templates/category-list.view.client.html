@@ -14,8 +14,9 @@
             class="btn btn-primary btn-block">Create Category</button>
     <ul class="list-group">
         <li class="list-group-item"
-            ng-repeat="cat in model.categoryList">
-            <div>[{{cat._id}}] {{cat.name}}</div>
+            ng-repeat="cat in model.categoryList"
+            ng-click="model.editCategory(cat)">
+            <div>[{{cat._id}}] <input ng-model="cat.name" type="text" class="form-control"/></div>
         </li>
     </ul>
 </div>

@@ -13,6 +13,7 @@
             model.user = currentUser;
             model.headerTitle = "Manage Categories";
             model.createCategory = createCategory;
+            model.editCategory = editCategory;
             initializeCategories();
         }
 
@@ -32,6 +33,14 @@
                         model.displayMsg = "Successfully created category '" + model.name + "'.";
                     })
             }
+        }
+
+        function editCategory(category) {
+            categoryService.editCategory(category)
+                .then(function (response) {
+                    initializeCategories();
+                    model.displayMsg = "Successfully edited category '" + category.name + "'.";
+                })
         }
     }
 })();

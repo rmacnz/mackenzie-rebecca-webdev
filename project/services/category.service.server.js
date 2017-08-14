@@ -4,6 +4,7 @@ var categoryModel = require("../model/category/category.model.server");
 app.get("/api/category", findAllCategories);
 app.get("/api/category/name/:catName", findCategoryByName);
 app.post("/api/category", createCategory);
+app.put("/api/category/:catId", editCategory);
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -36,6 +37,17 @@ function createCategory(req, res) {
     categoryModel.createCategory(category)
         .then(function (catCreated) {
             res.json(catCreated);
+        }, function (error) {
+            console.log(error);
+        });
+}
+
+function editCategory(req, res) {
+    var categoryId = req.params["catId"];
+    var categoryData = req.body;
+    categoryModel.editCategory(categoryId, categoryData)
+        .then(function (catEdited) {
+            res.json(catEdited);
         }, function (error) {
             console.log(error);
         });

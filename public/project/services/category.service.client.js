@@ -35,5 +35,15 @@
                     console.log(error);
                 });
         }
+
+        function editCategory(category) {
+            var url = "/api/category/" + category._id;
+            return $http.put(url, category)
+                .then(function (response) {
+                    return response.data;
+                }, function (error) {
+                    console.log(error);
+                })
+        }
     }
 })();
