@@ -8,7 +8,8 @@
         var api = {
             findAllCategories: findAllCategories,
             findCategoryByName: findCategoryByName,
-            createCategory: createCategory
+            createCategory: createCategory,
+            editCategory: editCategory
         };
         return api;
 
