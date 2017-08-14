@@ -3,8 +3,8 @@ var categoryModel = require("../model/category/category.model.server");
 
 app.get("/api/category", findAllCategories);
 app.get("/api/category/name/:catName", findCategoryByName);
-app.post("/api/category", createCategory);
-app.put("/api/category/:catId", editCategory);
+app.post("/api/category", doNotAllow, createCategory);
+app.put("/api/category/:catId", doNotAllow, editCategory);
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -51,4 +51,8 @@ function editCategory(req, res) {
         }, function (error) {
             console.log(error);
         });
+}
+
+function doNotAllow(req, res, next) {
+    res.sendStatus(401);
 }
