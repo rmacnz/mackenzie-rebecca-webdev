@@ -7,6 +7,7 @@ var categoryModel = mongoose.model("CategoryModel", categorySchema);
 categoryModel.findAllCategories = findAllCategories;
 categoryModel.findCategoryByName = findCategoryByName;
 categoryModel.createCategory = createCategory;
+categoryModel.editCategory = editCategory;
 
 module.exports = categoryModel;
 
