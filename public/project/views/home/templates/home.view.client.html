@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <div class="container-fluid">
-    <h1>Project Home Page</h1>
+    <h1>Runescape Marketplace</h1>
     <a class="btn btn-primary btn-block" href="#!/login"
        ng-if="!model.user">Login</a>
     <a class="btn btn-primary btn-block" href="#!/register"
@@ -14,5 +14,9 @@
     <a class="btn btn-primary btn-block" href="#!/users"
         ng-if="model.admin">
         Manage Users
+    </a>
+    <a class="btn btn-primary btn-block" href="#!/categories"
+       ng-if="model.admin">
+        Manage Categories
     </a>
 </div>

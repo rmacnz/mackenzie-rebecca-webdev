@@ -3,14 +3,18 @@
 
 <div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
     <h2>Users</h2>
+    <div class="wd-bot-margin">
+        Click on a user to edit their information.
+    </div>
     <ul class="list-group">
         <li class="list-group-item wd-clickable"
-            ng-repeat="user in model.userList">
+            ng-repeat="user in model.userList"
+            ng-click="model.editUser(user._id)">
             <div><b>Username: </b> {{user.username}}</div>
             <div><b>Password: </b> {{user.password}}</div>
             <div><b>Buys: </b> {{user.buys.length}}</div>
             <div><b>Sells: </b> {{user.sells.length}}</div>
-            <div><b>Items: </b> {{user.items.length}}</div>
+            <div><b>Items: </b> {{user.inventory.length}}</div>
         </li>
     </ul>
 </div>

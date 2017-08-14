@@ -19,7 +19,7 @@
 
         function loginSuccess(user) {
             if (user != null) {
-                $location.url("/profile");
+                $location.url("/");
             } else {
                 loginFail("No such user");
             }

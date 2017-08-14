@@ -7,7 +7,8 @@
     function categoryService($http) {
         var api = {
             findAllCategories: findAllCategories,
-            findCategoryByName: findCategoryByName
+            findCategoryByName: findCategoryByName,
+            createCategory: createCategory
         };
         return api;
 
@@ -23,6 +24,15 @@
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
+                });
+        }
+
+        function createCategory(id, name) {
+            return $http.post("/api/category", {_id: id, name: name})
+                .then(function (response) {
+                    return response.data;
+                }, function (error) {
+                    console.log(error);
                 });
         }
     }

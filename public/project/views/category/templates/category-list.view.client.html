@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<div ng-include="'views/common/header-default.view.client.html'"></div>
+
+<div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
+
+    <div ng-if="model.displayMsg" class="alert alert-success">{{model.displayMsg}}</div>
+
+    <h2>Categories</h2>
+    <input ng-model="model.name" type="text" class="form-control"
+    placeholder="Please enter a category name"/>
+    <input ng-model="model.id" type="number" class="form-control"
+           placeholder="Please enter a unique ID#"/>
+    <button ng-click="model.createCategory()"
+            class="btn btn-primary btn-block">Create Category</button>
+    <ul class="list-group">
+        <li class="list-group-item"
+            ng-repeat="cat in model.categoryList">
+            <div>[{{cat._id}}] {{cat.name}}</div>
+        </li>
+    </ul>
+</div>

@@ -3,6 +3,7 @@ var categoryModel = require("../model/category/category.model.server");
 
 app.get("/api/category", findAllCategories);
 app.get("/api/category/name/:catName", findCategoryByName);
+app.post("/api/category", createCategory);
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -25,6 +26,16 @@ function findCategoryByName(req, res) {
     categoryModel.findCategoryByName(catName)
         .then(function (category) {
             res.json(category);
+        }, function (error) {
+            console.log(error);
+        });
+}
+
+function createCategory(req, res) {
+    var category = req.body;
+    categoryModel.createCategory(category)
+        .then(function (catCreated) {
+            res.json(catCreated);
         }, function (error) {
             console.log(error);
         });

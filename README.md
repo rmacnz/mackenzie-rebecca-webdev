@@ -19,10 +19,7 @@ PROJECT PROBLEMS:
 TO DO:
 - Buy/sell from current offers (currently cannot find users for some reason)
 - Home page (localhost:3000)
-  - Link to project
-  - Link to assignment
-  - Link to heroku
-  - Link to github
   - Link to youtube video tutorial for project
 - Youtube video
 - Admin should be able to create categories so that I can edit them on Heroku
+- Admin should be able to manage users

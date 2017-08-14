@@ -92,6 +92,14 @@
                 resolve: {
                     currentUser: verifyAdmin
                 }
+            })
+            .when("/categories", {
+                templateUrl: "views/category/templates/category-list.view.client.html",
+                controller: "CategoryListController",
+                controllerAs: "model",
+                resolve: {
+                    currentUser: verifyAdmin
+                }
             });
     }
 

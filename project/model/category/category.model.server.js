@@ -6,6 +6,7 @@ var categoryModel = mongoose.model("CategoryModel", categorySchema);
 
 categoryModel.findAllCategories = findAllCategories;
 categoryModel.findCategoryByName = findCategoryByName;
+categoryModel.createCategory = createCategory;
 
 module.exports = categoryModel;
 
@@ -17,4 +18,9 @@ function findAllCategories() {
 // find the category with this name
 function findCategoryByName(categoryName) {
     return categoryModel.findOne({name: categoryName});
+}
+
+// create a category with this information
+function createCategory(category) {
+    return categoryModel.create(category);
 }
