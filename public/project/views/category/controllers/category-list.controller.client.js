@@ -18,7 +18,7 @@
         }
 
         function createCategory() {
-            if (model.id && model.name) {
+            if (model.id != null && model.name) {
                 model.displayMsg = null;
                 categoryService.createCategory(model.id, model.name)
                     .then(function (response) {
