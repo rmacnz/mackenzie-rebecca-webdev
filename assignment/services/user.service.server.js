@@ -3,8 +3,8 @@ var userModel = require("../model/user/user.model.server");
 
 var passport = require('passport');
 var LocalAssignmentStrategy = require('passport-local').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleAssignmentStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookAssignmentStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 var googleConfig = {
@@ -52,8 +52,8 @@ app.post("/api/register", register);
 passport.use(new LocalAssignmentStrategy(localAssignmentStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+passport.use(new GoogleAssignmentStrategy(googleConfig, googleStrategy));
+passport.use(new FacebookAssignmentStrategy(facebookConfig, facebookStrategy));
 
 function createUser(req, res) {
     var user = req.body;

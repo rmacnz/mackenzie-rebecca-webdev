@@ -27,8 +27,12 @@
         function nameFail(error) {
             if (model.user.password === model.user.password_verify) {
                 //model.user = userService.createUser(model.user);
+                model.user.roles = ["USER"];
+                if (model.isAdmin) {
+                    model.user.roles.push("ADMIN");
+                }
                 userService.findMemberInfo(model.user.username)
-                    .then(foundMemberInfo, noMemberInfo);
+                    .then(foundMemberInfo, continueRegistration);
             } else {
                 model.errormsg = "Passwords did not match. Please try again."
             }
@@ -36,16 +40,12 @@
 
         function foundMemberInfo(memberInfo) {
             if (memberInfo && memberInfo.name) {
-                model.user.roles = ["USER", "MEMBER"];
-            } else {
-                model.user.roles = ["USER"];
+                model.user.roles.push("MEMBER");
             }
-            userService.register(model.user)
-                .then(createSuccess);
+            continueRegistration();
         }
 
-        function noMemberInfo(error) {
-            model.user.roles = ["USER"];
+        function continueRegistration() {
             userService.register(model.user)
                 .then(createSuccess);
         }
