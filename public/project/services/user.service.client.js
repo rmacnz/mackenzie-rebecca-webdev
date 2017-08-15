@@ -142,7 +142,7 @@
                 user.gold = user.gold - totalPrice;
             }
             user.buys.push(offerId);
-            updateUser(user._id, user);
+            return updateUser(user._id, user);
         }
 
         function updateUserCreateSell(user, itemId, numSold, offerId) {
@@ -151,7 +151,7 @@
                 user.inventory = removeFromInventory(user.inventory, numSold, itemId);
             }
             user.sells.push(offerId);
-            updateUser(user._id, user);
+            return updateUser(user._id, user);
         }
 
         function respondToSellOffer(user, totalPrice, numBought, itemId, offerId) {
@@ -161,7 +161,7 @@
                 user.inventory = addToInventory(user.inventory, numBought, itemId);
             }
             user.buys.push(offerId);
-            updateUser(user._id, user);
+            return updateUser(user._id, user);
         }
 
         function respondToBuyOffer(user, totalPrice, numSold, itemId, offerId) {
@@ -171,7 +171,7 @@
                 user.inventory = removeFromInventory(user.inventory, numSold, itemId);
             }
             user.sells.push(offerId);
-            updateUser(user._id, user);
+            return updateUser(user._id, user);
         }
 
         function updateUserBuyComplete(user, numBought, itemId) {

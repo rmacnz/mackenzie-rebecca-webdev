@@ -66,6 +66,7 @@ app.use(function(req, res, next) {
 
 function createUser(req, res) {
     var user = req.body;
+    user.items = [];
     userModel.createUser(user)
         .then(function(userCreated) {
             res.json(userCreated);
@@ -194,6 +195,7 @@ function logout(req, res) {
 function register(req, res) {
     var user = req.body;
     user.gold = 1000;
+    user.items = [];
     userModel.createUser(user)
         .then(function(userCreated) {
             req.login(userCreated, function (status) {
