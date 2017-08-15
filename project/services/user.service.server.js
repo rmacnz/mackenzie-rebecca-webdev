@@ -66,7 +66,6 @@ app.use(function(req, res, next) {
 
 function createUser(req, res) {
     var user = req.body;
-    user.roles = ["USER"];
     userModel.createUser(user)
         .then(function(userCreated) {
             res.json(userCreated);

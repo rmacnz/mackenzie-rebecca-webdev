@@ -2,7 +2,7 @@
 <div ng-include="'views/common/header-default.view.client.html'"></div>
 
 <div class="container-fluid wd-fixed-top-padding wd-fixed-bot-padding">
-    <h2>Users</h2>
+    <h2>Current Users</h2>
     <div class="wd-bot-margin">
         Click on a user to edit their information.
     </div>
@@ -17,4 +17,33 @@
             <div><b>Items: </b> {{user.inventory.length}}</div>
         </li>
     </ul>
+
+    <h2>Add a User</h2>
+    <div ng-include="'views/common/header-default.view.client.html'"></div>
+    <input placeholder="Username"
+           type="text"
+           ng-model="model.new.username"
+           class="form-control"/>
+    <input placeholder="Password"
+           type="text"
+           ng-model="model.new.password"
+           class="form-control"/>
+    <input placeholder="First Name"
+           type="text"
+           ng-model="model.new.firstName"
+           class="form-control"/>
+    <input placeholder="Last Name"
+           type="text"
+           ng-model="model.new.lastName"
+           class="form-control"/>
+    <input placeholder="Email Address"
+           type="email"
+           ng-model="model.new.email"
+           class="form-control"/>
+    <input placeholder="Starting gold"
+           type="number"
+           ng-model="model.new.gold"
+           class="form-control"/>
+    <button class="btn btn-primary btn-block"
+            ng-click="model.addUser()">Add User</button>
 </div>
