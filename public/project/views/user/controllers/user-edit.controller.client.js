@@ -23,11 +23,18 @@
             model.updateUser = updateUser;
             model.deleteUser = deleteUser;
             model.logout = logout;
+            model.removeRole = removeRole;
         }
 
 
         // update this user based on the information they entered on the profile page
         function updateUser() {
+            if (model.addAdmin) {
+                model.user.roles.push("ADMIN");
+            }
+            if (model.addMember) {
+                model.user.roles.push("MEMBER");
+            }
             userService
                 .updateUser(model.userId, model.user)
                 .then(function() {
@@ -50,6 +57,12 @@
                 .then(function() {
                     $location.url("");
                 });
+        }
+
+        // remove this role
+        function removeRole(role) {
+            var roleIndex = model.user.roles.indexOf(role);
+            model.user.roles.splice(roleIndex, 1);
         }
     }
 

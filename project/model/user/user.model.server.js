@@ -38,6 +38,8 @@ function findUserByCredentials(username, password) {
 function updateUser(userId, user) {
     return projectUserModel.update({_id: userId}, {
         $set: {
+            password: user.password,
+            roles: user.roles,
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
