@@ -44,15 +44,23 @@
         }
 
         function canBuy() {
-            return model.offer && model.user && (model.offer.type === "SELL") && (!model.offer.completed) &&
+            if (model.user && model.user.roles.indexOf("ADMIN") > -1) {
+                return (model.offer.type === "SELL") && (!model.offer.completed);
+            } else {
+                return model.offer && model.user && (model.offer.type === "SELL") && (!model.offer.completed) &&
                     userItemMatch(model.offer.item, model.user) &&
                     (model.user.gold >= (model.offer.pricePer * model.offer.num));
+            }
         }
 
         function canSell() {
-            return model.offer && model.user && (model.offer.type === "BUY") && (!model.offer.completed) &&
-                userItemMatch(model.offer.item, model.user) &&
-                (model.user.inventory.indexOf(model.offer.item._id) > -1);
+            if (model.user && model.user.roles.indexOf("ADMIN") > -1) {
+                return (model.offer.type === "BUY") && (!model.offer.completed);
+            } else {
+                return model.offer && model.user && (model.offer.type === "BUY") && (!model.offer.completed) &&
+                    userItemMatch(model.offer.item, model.user) &&
+                    (model.user.inventory.indexOf(model.offer.item._id) > -1);
+            }
         }
 
         function userItemMatch(item, user) {

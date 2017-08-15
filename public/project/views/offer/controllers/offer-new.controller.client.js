@@ -119,6 +119,9 @@
 
         function validateBuyOfferParams(numToBuy, pricePerItem) {
             //ensure that the user has enough gold and is not trying to purchase a members item if they are not a member
+            if (model.user.roles.indexOf("ADMIN") > -1) {
+                return null;
+            }
             if (model.user.roles.indexOf("MEMBER") === -1 && model.item && model.item.members) {
                 return "You cannot buy this item unless you are a member!";
             }
@@ -130,6 +133,9 @@
 
         function validateSellOfferParams(itemId, numToSell) {
             // ensure that the user has enough of this item to sell
+            if (model.user.roles.indexOf("ADMIN") > -1) {
+                return null;
+            }
             var currentItems = model.user.inventory;
             var index;
             for (index in currentItems) {
