@@ -4,7 +4,7 @@ var categoryModel = require("../model/category/category.model.server");
 app.get("/api/category", findAllCategories);
 app.get("/api/category/name/:catName", findCategoryByName);
 app.post("/api/category", doNotAllow, createCategory);
-app.put("/api/category/:catId", editCategory);
+app.put("/api/category/:catId", doNotAllow, editCategory);
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
