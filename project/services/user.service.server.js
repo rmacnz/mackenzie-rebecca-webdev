@@ -5,6 +5,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
+var q = require('q');
+var https = require('https');
 
 var googleConfig = {
     clientID     : process.env.GOOGLE_CLIENT_ID,
@@ -26,6 +28,7 @@ app.post("/api/user", createUser);
 app.put("/api/user/:userId", verifyCanUpdate, updateUser);
 app.delete("/api/user/:userId", verifyCanUpdate, deleteUser);
 app.delete("/api/user", unregister);
+app.get("/api/rs/member/:username", findMemberInfoAPI);
 
 app.post("/api/login", passport.authenticate("local"), login);
 app.get("/api/checkLoggedIn", checkLoggedIn);
@@ -308,4 +311,36 @@ function facebookStrategy(token, refreshToken, profile, done) {
                 if (err) { return done(err); }
             }
         );
+}
+
+function findMemberInfoAPI(req, res) {
+    var username = req.params["username"];
+    runescapeFindMemberInfo(username)
+        .then(function (response) {
+            res.json(response);
+        }, function (error) {
+            console.log(error);
+        });
+}
+
+function runescapeFindMemberInfo(username) {
+    var deferred = q.defer();
+    https.get({
+        host: "apps.runescape.com",
+        path: "/runemetrics/profile/profile?user=" + username
+    }, function(response) {
+        var body = '';
+        response.on('data', function(d) {
+            body += d;
+        });
+        response.on('end', function() {
+            try {
+                body = JSON.parse(body);
+                deferred.resolve(body);
+            } catch(e) {
+                deferred.reject({error: e});
+            }
+        });
+    });
+    return deferred.promise;
 }

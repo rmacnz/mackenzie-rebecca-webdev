@@ -63,15 +63,15 @@
         </div>
     </div>
 
-    <div class="container-fluid" ng-if="model.memberInfo">
+    <div class="container-fluid" ng-if="model.user.memberInfo">
         <h3>Member Statistics</h3>
-        <div>Total Level: {{model.memberInfo.totalskill}}</div>
-        <div>Total XP: {{model.memberInfo.totalxp}}</div>
-        <div>Combat Level: {{model.memberInfo.combatlevel}}</div>
+        <div>Total Level: {{model.user.memberInfo.totalSkill}}</div>
+        <div>Total XP: {{model.user.memberInfo.totalXP}}</div>
+        <div>Combat Level: {{model.user.memberInfo.combat}}</div>
         <div class="container-fluid">
             <h4>Skills</h4>
             <ul class="list-group">
-                <li ng-repeat="skill in model.memberInfo.skillvalues"
+                <li ng-repeat="skill in model.user.memberInfo.skills"
                     class="list-group-item wd-inline-box">
                     <img href="../../../images/skillicon{{skill.id}}.png"/>
                     {{model.skillIdToName(skill.id)}}: {{skill.level}}
@@ -80,9 +80,9 @@
         </div>
         <div class="container-fluid wd-bot-margin">
             <h4>Quests</h4>
-            <div>Quests Started: {{model.memberInfo.questsstarted}}</div>
-            <div>Quests Not Started: {{model.memberInfo.questsnotstarted}}</div>
-            <div>Quests Completed: {{model.memberInfo.questscomplete}}</div>
+            <div>Quests Started: {{model.user.memberInfo.questsstarted}}</div>
+            <div>Quests Not Started: {{model.user.memberInfo.questsnotstarted}}</div>
+            <div>Quests Completed: {{model.user.memberInfo.questscomplete}}</div>
         </div>
     </div>
 </div>

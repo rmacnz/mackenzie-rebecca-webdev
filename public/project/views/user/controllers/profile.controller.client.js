@@ -20,11 +20,12 @@
             initializeInventory(model.user.inventory);
             initializeOfferLists();
             if (currentUser.roles.indexOf("MEMBER") > -1) {
-                userService
+                var info = model.user.memberInfo;
+                /*userService
                     .findMemberInfo(currentUser.username)
                     .then(function (info) {
                         model.memberInfo = info;
-                    });
+                    });*/
                 model.skillIdToName = skillIdToName;
             }
         }

@@ -129,7 +129,8 @@
         }
 
         function findMemberInfo(username) {
-            return $http.get("https://apps.runescape.com/runemetrics/profile/profile?user=" + username)
+            var url = "/api/rs/member/" + username;
+            return $http.get(url)
                 .then(function(response) {
                     return response.data;
                 });

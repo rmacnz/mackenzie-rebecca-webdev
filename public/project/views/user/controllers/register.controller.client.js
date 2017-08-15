@@ -28,9 +28,6 @@
             if (model.user.password === model.user.password_verify) {
                 //model.user = userService.createUser(model.user);
                 model.user.roles = ["USER"];
-                if (model.isAdmin) {
-                    model.user.roles.push("ADMIN");
-                }
                 userService.findMemberInfo(model.user.username)
                     .then(foundMemberInfo, continueRegistration);
             } else {
@@ -41,6 +38,12 @@
         function foundMemberInfo(memberInfo) {
             if (memberInfo && memberInfo.name) {
                 model.user.roles.push("MEMBER");
+                model.user.memberInfo = {
+                    totalSkill: memberInfo.totalskill,
+                    totalXP: memberInfo.totalxp,
+                    combat: memberInfo.combatlevel,
+                    skills: memberInfo.skillvalues
+                }
             }
             continueRegistration();
         }

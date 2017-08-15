@@ -18,7 +18,16 @@ var projectUserSchema = mongoose.Schema({
     ],
     items: [
         {num: Number, item: {type: mongoose.Schema.Types.ObjectId, ref: "ItemModel"}}
-    ]
+    ],
+    memberInfo: {
+        totalSkill: Number,
+        totalXP: Number,
+        combat: Number,
+        skills: [{
+            id: Number,
+            level: Number
+        }]
+    }
 }, {collection: "projectuser"});
 
 module.exports = projectUserSchema;
