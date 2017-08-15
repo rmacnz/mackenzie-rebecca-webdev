@@ -18,7 +18,7 @@ function findAllCategories() {
 
 // find the category with this name
 function findCategoryByName(categoryName) {
-    return categoryModel.findOne({name: categoryName});
+    return categoryModel.findOne({name: categoryName.toLowerCase()});
 }
 
 // create a category with this information
