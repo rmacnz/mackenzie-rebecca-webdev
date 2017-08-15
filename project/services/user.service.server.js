@@ -23,8 +23,8 @@ app.get("/api/username", findUserByUsername);
 app.get("/api/user", isAdmin, findAllUsers);
 app.get("/api/user/creds", findUserByCredentials);
 app.post("/api/user", createUser);
-app.put("/api/user/:userId", updateUser);
-app.delete("/api/user/:userId", verifyCanDelete, deleteUser);
+app.put("/api/user/:userId", verifyCanUpdate, updateUser);
+app.delete("/api/user/:userId", verifyCanUpdate, deleteUser);
 app.delete("/api/user", unregister);
 
 app.post("/api/login", passport.authenticate("local"), login);
@@ -220,7 +220,7 @@ function isAdmin(req, res, next) {
     }
 }
 
-function verifyCanDelete(req, res, next) {
+function verifyCanUpdate(req, res, next) {
     var userId = req.params["userId"];
     if (req.isAuthenticated() &&
         (req.user.roles.indexOf("ADMIN") > -1 || req.user._doc._id.toString() === userId)) {
