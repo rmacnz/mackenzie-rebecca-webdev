@@ -148,7 +148,7 @@
         function updateUserCreateSell(user, itemId, numSold, offerId) {
             // update inventory, update sells
             if (user.roles.indexOf("ADMIN") === -1) {
-                user.inventory = removeFromInventory(user.inventory, numSold, itemId);
+                user.items = removeFromInventory(user.items, numSold, itemId);
             }
             user.sells.push(offerId);
             return updateUser(user._id, user);
@@ -158,7 +158,7 @@
             // remove gold, update inventory, update buys
             if (user.roles.indexOf("ADMIN") === -1) {
                 user.gold = user.gold - totalPrice;
-                user.inventory = addToInventory(user.inventory, numBought, itemId);
+                user.items = addToInventory(user.items, numBought, itemId);
             }
             user.buys.push(offerId);
             return updateUser(user._id, user);
@@ -168,7 +168,7 @@
             // add gold, update inventory, update sells
             if (user.roles.indexOf("ADMIN") === -1) {
                 user.gold = user.gold + totalPrice;
-                user.inventory = removeFromInventory(user.inventory, numSold, itemId);
+                user.items = removeFromInventory(user.items, numSold, itemId);
             }
             user.sells.push(offerId);
             return updateUser(user._id, user);
@@ -176,7 +176,7 @@
 
         function updateUserBuyComplete(user, numBought, itemId) {
             // update inventory (gold removal already done)
-            user.inventory = addToInventory(user.inventory, numBought, itemId);
+            user.items = addToInventory(user.items, numBought, itemId);
             updateUser(user._id, user);
         }
 
