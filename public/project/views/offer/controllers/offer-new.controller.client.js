@@ -80,7 +80,7 @@
             if (offer.type === "BUY") {
                 userService.updateUserCreateBuy(model.user, offer.num * offer.pricePer, offer._id)
                     .then(function (userUpdate) {
-                        $location.url("#!/profile");
+                        $location.url("/profile");
                     });
             } else if (offer.type === "SELL") {
                 userService.updateUserCreateSell(model.user, offer.item._id, offer.num, offer._id)

@@ -20,10 +20,6 @@ TO DO:
 - Buy/sell from current offers (currently cannot find users for some reason)
 
 - Create youtube video and link to it
-- Fill out form on Piazza
 - Add login through Google button on the front page and support for this
 
-- Remove ability to register as an admin user
-- Create accounts that the project asks for
-
-- Provide some info about how to use the site
+- Remove and refresh admin user on heroku
