@@ -21,5 +21,3 @@ TO DO:
 
 - Create youtube video and link to it
 - Add login through Google button on the front page and support for this
-
-- Remove and refresh admin user on heroku
