@@ -83,7 +83,7 @@
                         $location.url("#!/profile");
                     });
             } else if (offer.type === "SELL") {
-                userService.updateUserCreateSell(model.user)
+                userService.updateUserCreateSell(model.user, offer.item._id, offer.num, offer._id)
                     .then(function (userUpdate) {
                         $location.url("#!/profile");
                     });
