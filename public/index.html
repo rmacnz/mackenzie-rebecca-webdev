@@ -9,17 +9,133 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
 </head>
-<body>
-    <div class="container-fluid">
+<body class="wd-fixed-top-margin wd-galaxy-bg wd-text-white">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="nav navbar-brand">
+                <b>CS5610 - Web Development Home Page</b>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid text-center">
         <h1>What would you like to do?</h1>
-        <a href="/project" class="btn btn-block btn-primary">View Project: Runescape Marketplace</a>
-        <a href="/assignment" class="btn btn-block btn-primary">View latest assignment</a>
-        <a href="https://dashboard.heroku.com/apps/mackenzie-rebecca-webdev"
-           class="btn btn-block btn-primary">View App on Heroku</a>
-        <a href="https://github.com/rmacnz/mackenzie-rebecca-webdev"
-           class="btn btn-block btn-primary">View GitHub repository</a>
+        <div class="container-fluid">
+            <a href="/project" class="btn btn-block btn-default wd-semi-transparent">View Project: Runescape Marketplace</a>
+            <div class="row wd-pad20">
+                <div class="col-xs-2">
+                    <img src="./images/runescapelogo.png" class="wd-logo-img"/>
+                </div>
+                <div class="col-xs-10 text-left">
+                    <p>The Runescape Marketplace is a MEAN stack website where players of the MMORPG Runescape can go
+                        to buy and sell items from within the game. Users can register with their username from the game to
+                        create and respond to buy/sell offers with items they have access to in the game. It can also be
+                        used to search for in game items even without logging in to the site. Click this link to explore
+                        the application.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <a href="/assignment" class="btn btn-block btn-default wd-semi-transparent">View latest assignment</a>
+            <div class="row wd-pad20">
+                <div class="col-xs-10 text-left">
+                    The WebAppMaker is a MEAN stack website which allows you to create and modify simple websites.
+                    These websites can contain text, images, videos, and more. You can log in using Facebook or
+                    Google or register an account for the website with a new username. Once logged in you can
+                    view your websites and edit their pages, including adding, sorting, and editing the widgets
+                    on these pages. Click this link to view the latest update to this application.
+                </div>
+                <div class="col-xs-2">
+                    <img src="./images/webapplogo.png"
+                        class="wd-logo-img"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <a href="https://dashboard.heroku.com/apps/mackenzie-rebecca-webdev"
+               class="btn btn-block btn-default wd-semi-transparent">View App on Heroku</a>
+            <div class="row wd-pad20">
+                <div class="col-xs-2">
+                    <img src="./images/herokulogo.png" class="wd-logo-img"/>
+                </div>
+                <div class="col-xs-10 text-left">
+                    Heroku is a cloud platform that I used to host both the assignments for this course and the
+                    Runescape Marketplace application. Click this link to view my dashboard on Heroku. From there
+                    you can view my latest assignment or my project.
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <a href="https://github.com/rmacnz/mackenzie-rebecca-webdev"
+               class="btn btn-block btn-default wd-semi-transparent">View GitHub repository</a>
+            <div class="row wd-pad20">
+                <div class="col-xs-10 text-left">
+                    GitHub is a web-based version control system that I used to store the files for both the
+                    assignments for this course and the Runescape Marketplace application. Click this link to view
+                    the repository for this course, where you can see all the files and the changes that were
+                    made to them throughout the semester.
+                </div>
+                <div class="col-xs-2">
+                    <img src="./images/githublogo.png" class="wd-logo-img"/>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <div class="container-fluid text-center">
+        <h1>About Me</h1>
+        <div class="container-fluid">
+            <div class="row wd-pad20">
+                <div class="col-xs-2">
+                    <img src="./images/face.JPG" class="wd-logo-img"/>
+                </div>
+                <div class="col-xs-10 text-left">
+                    My name is Rebecca MacKenzie and I am a masters student studying computer science at Northeastern
+                    University. I graduated from Northeastern with a Bachelor of Science in Mathematics and
+                    Computer Science in May of 2016 and have been working for the university full time as a course
+                    coordinator for the freshman level computer science classes.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar wd-no-bot-marg">
+        <div class="container-fluid">
+            <div class="navbar-brand">
+                <b>Contact Me</b>
+            </div>
+            <div class="wd-navbar-contact">
+                <div>
+                    <a href="mailto:r.mackenzie@northeastern.edu"
+                       class="nav-link">
+                        <img src="./images/gmaillogo.png"
+                             class="wd-navbar-logo"/>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.linkedin.com/in/rebecca-mackenzie-16ba7b47"
+                       class="nav-link">
+                        <img src="./images/linkedinlogo.png"
+                             class="wd-navbar-logo"/>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://www.facebook.com/beccamacnz"
+                       class="nav-link">
+                        <img src="./images/facebooklogo.png"
+                             class="wd-navbar-logo"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
 </body>
 </html>

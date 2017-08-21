@@ -1,0 +1,40 @@
+.wd-galaxy-bg {
+    background-image: url("../images/stonework.jpg");
+}
+
+.wd-text-white {
+    color: #FFFFFF;
+}
+
+img.wd-logo-img {
+    width: 100px;
+}
+
+img.wd-navbar-logo {
+    width: 30px;
+}
+
+.wd-pad20 {
+    padding: 20px;
+}
+
+.wd-semi-transparent {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.wd-fixed-top-margin {
+    margin-top: 50px;
+}
+
+.wd-fixed-bot-margin {
+    margin-bottom: 60px;
+}
+
+.wd-no-bot-marg {
+    margin-bottom: 0px;
+}
+
+.wd-navbar-contact div {
+    display: inline-block;
+    padding: 10px;
+}
